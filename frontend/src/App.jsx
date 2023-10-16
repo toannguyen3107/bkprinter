@@ -1,11 +1,11 @@
 import {Routes, Route} from 'react-router-dom'
 // test
-import Test from './component/Test'
+import PageExample from './pages/PageExample'
 
 function App() {
   return (
     <Routes>
-      <Route path='/' element={<Test />} ></Route>
+      <Route path='/' element={<PageExample />} ></Route>
     </Routes>
   )
 }
