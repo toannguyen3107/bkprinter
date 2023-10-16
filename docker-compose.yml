@@ -16,7 +16,7 @@ services:
   #     - mern
   #   command: npm run start
   frontend: 
-    container_name: fontend-bookstore
+    container_name: fontend-bkprinter
     build:
       context: ./frontend
       dockerfile: Dockerfile
