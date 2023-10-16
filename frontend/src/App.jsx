@@ -1,6 +1,6 @@
 import {Routes, Route} from 'react-router-dom'
 // test
-import PageExample from './pages/PageExample'
+import PageExample from './pages/ViewHistory/PageExample'
 
 function App() {
   return (

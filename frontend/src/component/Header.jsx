@@ -22,7 +22,7 @@ const Header = () => {
                         width: '40px',
                         marginRight: '24px'
                     }}
-                    src="../../public/hcmut.png"
+                    src="/hcmut.png"
                 ></Box>
                 <Typography variant="h3" sx={{ fontSize: '20px', fontWeight: '500' }}>BKPRINTER</Typography>
 
