@@ -1,11 +1,17 @@
 import {Routes, Route} from 'react-router-dom'
 // test
-import PageExample from './pages/ViewHistory/PageExample'
-
+import Upload from './pages/Print/Upload'
+import Home from './pages/Home'
+import NoPage from './pages/NoPage'
 function App() {
   return (
     <Routes>
-      <Route path='/' element={<PageExample />} ></Route>
+      <Route path='/'  >
+        <Route index element={<Home/>}/>
+        <Route path='print' element={<Upload />}/>
+        
+        <Route path='*' element={<NoPage />}/>
+      </Route>
     </Routes>
   )
 }
