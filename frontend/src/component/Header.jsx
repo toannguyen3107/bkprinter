@@ -16,14 +16,16 @@ const Header = () => {
             }}
         >
             <Box sx={{width: "0.8", display:'flex', alignItems: 'center'}}>
-                <Box component="img"
+                <Link 
                     sx={{
                         height: '40px',
                         width: '40px',
                         marginRight: '24px'
                     }}
-                    src="/hcmut.png"
-                ></Box>
+                    href='/'
+                >
+                    <img src="/hcmut.png" alt="img logo title" style={{height: '40px', width: '40px'}} />
+                </Link>
                 <Typography variant="h3" sx={{ fontSize: '20px', fontWeight: '500' }}>BKPRINTER</Typography>
 
             </Box>
