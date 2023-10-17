@@ -12,7 +12,8 @@ import Container from "@mui/material/Container";
 import Link from "@mui/material/Link";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import logo from '/hcmut.png'
+import logo from "/hcmut.png";
+import { Avatar, Menu, Tooltip } from "@mui/material";
 
 function Copyright(props) {
   return (
@@ -105,23 +106,54 @@ export default function Dashboard() {
           >
             <MenuIcon />
           </IconButton>
-          <Box component="img" sx={{ height: 35 }} alt="Logo" src={logo} />
-          <Typography
-            variant="h6"
-            noWrap
+          <Box
             component="a"
             href="/app"
+            sx={{ flexGrow: 4, display: "flex", alignItems: "center" }}
+          >
+            <Box component="img" sx={{ height: 35 }} alt="Logo" src={logo} />
+            <Typography
+              variant="h6"
+              noWrap
+              sx={{
+                mr: 2,
+                ml: 2,
+                display: { xs: "none", md: "flex" },
+                fontWeight: 700,
+                color: "black",
+                textDecoration: "none",
+              }}
+            >
+              BK Printer
+            </Typography>
+          </Box>
+
+          <Box
             sx={{
-              mr: 2,
-              ml:2,
-              display: { xs: "none", md: "flex" },
-              fontWeight: 700,
-              color: "black",
-              textDecoration: "none",
+              flexGrow: 1,
+              display: "flex",
+              alignItems: "center",
+              maxWidth: 200,
             }}
           >
-            BK Printer
-          </Typography>
+            <Avatar alt="Profile" src="/static/images/avatar/2.jpg" />
+            <Typography
+              variant="p"
+              noWrap
+              sx={{
+                mr: 2,
+                ml: 2,
+                display: { xs: "none", md: "flex" },
+                fontWeight: 400,
+                color: "black",
+                textDecoration: "none",
+                lineClamp: 1,
+                overflow: "hidden",
+              }}
+            >
+              HO VA TEN
+            </Typography>
+          </Box>
         </Toolbar>
       </AppBar>
       <Drawer variant="permanent" open={open}>
