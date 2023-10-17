@@ -14,6 +14,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import logo from "/hcmut.png";
 import { Avatar } from "@mui/material";
+import { Outlet } from "react-router-dom";
 
 function Copyright(props) {
   return (
@@ -86,108 +87,109 @@ export default function Dashboard() {
   };
 
   return (
-    <Box sx={{ display: "flex" }}>
-      <CssBaseline />
-      <AppBar position="absolute" open={open} sx={{ background: "white" }}>
-        <Toolbar
-          sx={{
-            pr: "24px", // keep right padding when drawer closed
-          }}
-        >
-          <IconButton
-            edge="start"
-            color="black"
-            aria-label="open drawer"
-            onClick={toggleDrawer}
+      <Box sx={{ display: "flex" }}>
+        <CssBaseline />
+        <AppBar position="absolute" open={open} sx={{ background: "white" }} elevation={0}>
+          <Toolbar
             sx={{
-              marginRight: "36px",
-              ...(open && { display: "none" }),
+              pr: "24px", // keep right padding when drawer closed
             }}
           >
-            <MenuIcon />
-          </IconButton>
-          <Box
-            component="a"
-            href="/app"
-            sx={{ flexGrow: 4, display: "flex", alignItems: "center" }}
-          >
-            <Box component="img" sx={{ height: 35 }} alt="Logo" src={logo} />
-            <Typography
-              variant="h6"
-              noWrap
+            <IconButton
+              edge="start"
+              color="black"
+              aria-label="open drawer"
+              onClick={toggleDrawer}
               sx={{
-                mr: 2,
-                ml: 2,
-                display: { xs: "none", md: "flex" },
-                fontWeight: 700,
-                color: "black",
-                textDecoration: "none",
+                marginRight: "36px",
+                ...(open && { display: "none" }),
               }}
             >
-              BK Printer
-            </Typography>
-          </Box>
+              <MenuIcon />
+            </IconButton>
+            <Box
+              component="a"
+              href="/app"
+              sx={{ flexGrow: 4, display: "flex", alignItems: "center" }}
+            >
+              <Box component="img" sx={{ height: 35 }} alt="Logo" src={logo} />
+              <Typography
+                variant="h6"
+                noWrap
+                sx={{
+                  mr: 2,
+                  ml: 2,
+                  display: { xs: "none", md: "flex" },
+                  fontWeight: 700,
+                  color: "black",
+                  textDecoration: "none",
+                }}
+              >
+                BK Printer
+              </Typography>
+            </Box>
 
-          <Box
+            <Box
+              sx={{
+                flexGrow: 1,
+                display: "flex",
+                alignItems: "center",
+                maxWidth: 200,
+              }}
+            >
+              <Avatar alt="Profile" src="/static/images/avatar/2.jpg" />
+              <Typography
+                variant="p"
+                noWrap
+                sx={{
+                  mr: 2,
+                  ml: 2,
+                  display: { xs: "none", md: "flex" },
+                  fontWeight: 400,
+                  color: "black",
+                  textDecoration: "none",
+                  lineClamp: 1,
+                  overflow: "hidden",
+                }}
+              >
+                HO VA TEN
+              </Typography>
+            </Box>
+          </Toolbar>
+        </AppBar>
+        <Drawer variant="permanent" open={open}>
+          <Toolbar
             sx={{
-              flexGrow: 1,
               display: "flex",
               alignItems: "center",
-              maxWidth: 200,
+              justifyContent: "flex-end",
+              px: [1],
             }}
           >
-            <Avatar alt="Profile" src="/static/images/avatar/2.jpg" />
-            <Typography
-              variant="p"
-              noWrap
-              sx={{
-                mr: 2,
-                ml: 2,
-                display: { xs: "none", md: "flex" },
-                fontWeight: 400,
-                color: "black",
-                textDecoration: "none",
-                lineClamp: 1,
-                overflow: "hidden",
-              }}
-            >
-              HO VA TEN
-            </Typography>
-          </Box>
-        </Toolbar>
-      </AppBar>
-      <Drawer variant="permanent" open={open}>
-        <Toolbar
+            <IconButton onClick={toggleDrawer}>
+              <ChevronLeftIcon />
+            </IconButton>
+          </Toolbar>
+          <Divider />
+        </Drawer>
+        <Box
+          component="main"
           sx={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "flex-end",
-            px: [1],
+            backgroundColor: (theme) =>
+              theme.palette.mode === "light"
+                ? theme.palette.grey[100]
+                : theme.palette.grey[900],
+            flexGrow: 1,
+            height: "100vh",
+            overflow: "auto",
           }}
         >
-          <IconButton onClick={toggleDrawer}>
-            <ChevronLeftIcon />
-          </IconButton>
-        </Toolbar>
-        <Divider />
-      </Drawer>
-      <Box
-        component="main"
-        sx={{
-          backgroundColor: (theme) =>
-            theme.palette.mode === "light"
-              ? theme.palette.grey[100]
-              : theme.palette.grey[900],
-          flexGrow: 1,
-          height: "100vh",
-          overflow: "auto",
-        }}
-      >
-        <Toolbar />
-        <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-          <Copyright sx={{ pt: 4 }} />
-        </Container>
+          <Toolbar />
+          <Container maxWidth="lg" sx={{ mt: 1, mb: 4 }}>
+            <Outlet />
+            <Copyright sx={{ pt: 4 }} />
+          </Container>
+        </Box>
       </Box>
-    </Box>
   );
 }
