@@ -13,7 +13,7 @@ import Link from "@mui/material/Link";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import logo from "/hcmut.png";
-import { Avatar, Menu, Tooltip } from "@mui/material";
+import { Avatar } from "@mui/material";
 
 function Copyright(props) {
   return (
