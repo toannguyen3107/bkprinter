@@ -10,7 +10,7 @@ const PageExample = () => {
   ); 
   return (
         <Box sx={{bgcolor: '#F8F4FC', height: '100vh'}}>
-            <Header />
+            upload
         </Box>
   )
 }
