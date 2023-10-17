@@ -10,10 +10,7 @@ const PageExample = () => {
     <h1>Hello world</h1>
   ); 
   return (
-        <Box sx={{bgcolor: '#F8F4FC', height: '100vh'}}>
-            <Header />
-            <Sidebar />
-        </Box>
+      <div>upload</div>
   )
 }
 
