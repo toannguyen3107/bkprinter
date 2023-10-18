@@ -185,9 +185,9 @@ export default function Dashboard() {
           }}
         >
           <Toolbar />
-          <Container maxWidth="lg" sx={{ mt: 1, mb: 4 }}>
+          <Container maxWidth="lg" sx={{ mt: 1, mb: 4,}}>
             <Outlet />
-            <Copyright sx={{ pt: 4 }} />
+            <Copyright sx={{ pt: 4}} />
           </Container>
         </Box>
       </Box>
