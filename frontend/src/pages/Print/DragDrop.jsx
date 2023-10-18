@@ -45,7 +45,7 @@ const ModalAct = () => {
                             background: grey[700]
                         }
                     }>
-                        <Typography variant='h5' sx={{color: blue[600]}} >Tải tài liệu</Typography>
+                        <Typography variant='h5' sx={{color: blue[600], textShadow: '3px 0px 3px black'}} >Tải tài liệu</Typography>
                         <CloseIcon
                             sx={{
                                 position: 'absolute',
@@ -98,9 +98,12 @@ function DropzoneWithoutClick(props) {
                             fontSize: '2rem',
                         }}>Kéo thả tài liệu hoặc nhấn nút <i><u style={{ color: 'blue', fontSize: '1.8rem' }}>{acceptedFiles[0].path}</u></i> để tải tài liệu</p>
                     ) :
-                    (<p style={{
-                        fontSize: '2rem',
-                    }}>Kéo thả tài liệu hoặc nhấn nút <i><u>upload file</u></i> để tải tài liệu</p>)
+                    (<Typography variant='p' sx={{
+                        fontSize: {
+                            sm: '1.5rem',
+                            md: '2rem'
+                        }
+                    }}>Kéo thả tài liệu hoặc nhấn nút <i><u>upload file</u></i> để tải tài liệu</Typography>)
                 }
 
 
@@ -110,15 +113,12 @@ function DropzoneWithoutClick(props) {
             >
                 Upload file
             </Button>
-            <aside style={{
-                position: 'absolute',
-                left: '0',
-                bottom: '10%',
-                marginLeft: '2rem'
+            <Container component={'aside'} sx={{
+                position: 'relative',
             }}>
                 <h4>Files</h4>
                 <ul>{files}</ul>
-            </aside>
+            </Container>
         </Box>
     )
 }
