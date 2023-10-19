@@ -95,20 +95,20 @@ export default function DropzoneWithoutClick(props) {
                                         (
                                             <Typography variant='p' sx={{
                                                 fontSize: {
-                                                    xs: '1rem',
+                                                    xs: '0.8rem',
                                                     md: '1.5rem'
                                                 },
                                                 textAlign: 'center'
-                                            }}>Kéo thả tài liệu hoặc nhấn nút <i><u style={{
+                                            }}>Bạn đã tải <i><u style={{
                                                 color: 'blue', fontSize: {
                                                     xs: '1rem',
                                                     md: '1.5rem'
                                                 }
-                                            }}>{acceptedFiles[0].path}</u></i> để tải tài liệu</Typography>
+                                            }}>{acceptedFiles[0].path}</u></i> lên, vui lòng nhấn Next để tiếp tục</Typography>
                                         ) :
                                         (<Typography variant='p' sx={{
                                             fontSize: {
-                                                xs: '1.5rem',
+                                                xs: '1rem',
                                                 md: '2rem'
                                             },
                                             textAlign: 'center'
