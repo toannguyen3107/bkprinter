@@ -5,6 +5,7 @@ import Home from './pages/Home'
 import NoPage from './pages/NoPage'
 import Login from './pages/Login/Login'
 import Dashboard from './pages/Dashboard/Dashboard'
+import ReportRequest from './pages/Report/ReportRequest'
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,9 @@ const router = createBrowserRouter([
       {
         path: 'print',
         element:<Upload/>
+      }, {
+        path: 'report',
+        element:<ReportRequest/>
       }
     ]
   },
