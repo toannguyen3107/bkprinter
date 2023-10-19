@@ -95,21 +95,23 @@ export default function DropzoneWithoutClick(props) {
                                         (
                                             <Typography variant='p' sx={{
                                                 fontSize: {
-                                                    sm: '1.5rem',
-                                                    md: '2rem'
+                                                    xs: '1rem',
+                                                    md: '1.5rem'
                                                 },
+                                                textAlign: 'center'
                                             }}>Kéo thả tài liệu hoặc nhấn nút <i><u style={{
                                                 color: 'blue', fontSize: {
-                                                    sm: '1.5rem',
-                                                    md: '2rem'
+                                                    xs: '1rem',
+                                                    md: '1.5rem'
                                                 }
                                             }}>{acceptedFiles[0].path}</u></i> để tải tài liệu</Typography>
                                         ) :
                                         (<Typography variant='p' sx={{
                                             fontSize: {
-                                                sm: '1.5rem',
+                                                xs: '1.5rem',
                                                 md: '2rem'
-                                            }
+                                            },
+                                            textAlign: 'center'
                                         }}>Kéo thả tài liệu hoặc nhấn nút <i><u>upload file</u></i> để tải tài liệu</Typography>)
                                     }
 
@@ -128,8 +130,9 @@ export default function DropzoneWithoutClick(props) {
                                     position: 'relative',
                                     display: {
                                         xs: 'none',
-                                        sm: 'block'
-                                    }
+                                        md: 'block'
+                                    },
+                                    padding: '3px'
                                 }}>
                                     <h4>Files</h4>
                                     <ul>{files}</ul>
