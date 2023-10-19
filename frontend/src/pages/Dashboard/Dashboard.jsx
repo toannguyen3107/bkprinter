@@ -9,30 +9,30 @@ import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import Container from "@mui/material/Container";
-import Link from "@mui/material/Link";
+// import Link from "@mui/material/Link";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import logo from "/hcmut.png";
 import { Avatar } from "@mui/material";
 import { Outlet } from "react-router-dom";
 
-function Copyright(props) {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
+// function Copyright(props) {
+//   return (
+//     <Typography
+//       variant="body2"
+//       color="text.secondary"
+//       align="center"
+//       {...props}
+//     >
+//       {"Copyright © "}
+//       <Link color="inherit" href="https://mui.com/">
+//         Your Website
+//       </Link>{" "}
+//       {new Date().getFullYear()}
+//       {"."}
+//     </Typography>
+//   );
+// }
 
 const drawerWidth = 240;
 
@@ -108,8 +108,6 @@ export default function Dashboard() {
               <MenuIcon />
             </IconButton>
             <Box
-              component="a"
-              href="/app"
               sx={{ flexGrow: 4, display: "flex", alignItems: "center" }}
             >
               <Box component="img" sx={{ height: 35 }} alt="Logo" src={logo} />
@@ -187,7 +185,6 @@ export default function Dashboard() {
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 1, mb: 4,}}>
             <Outlet />
-            <Copyright sx={{ pt: 4}} />
           </Container>
         </Box>
       </Box>
