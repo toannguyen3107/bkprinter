@@ -6,9 +6,6 @@ const PageExample = () => {
   useEffect(()=>{
     document.title = 'Print | BKPRINTER'
   });
-  const Main = (
-    <h1>Hello world</h1>
-  ); 
   return (
       <MyDropzone />
   )

@@ -1,0 +1,134 @@
+[
+    {
+        "name": "máy số 1",
+        "queryPeople": 12,
+        "status": true,
+        "page": 600
+    },
+    {
+        "name": "máy số 2",
+        "queryPeople": 18,
+        "status": false,
+        "page": 450
+    },
+    {
+        "name": "máy số 3",
+        "queryPeople": 25,
+        "status": true,
+        "page": 720
+    },
+    {
+        "name": "máy số 4",
+        "queryPeople": 9,
+        "status": false,
+        "page": 320
+    },
+    {
+        "name": "máy số 5",
+        "queryPeople": 15,
+        "status": true,
+        "page": 580
+    },
+    {
+        "name": "máy số 6",
+        "queryPeople": 30,
+        "status": true,
+        "page": 890
+    },
+    {
+        "name": "máy số 7",
+        "queryPeople": 8,
+        "status": false,
+        "page": 410
+    },
+    {
+        "name": "máy số 8",
+        "queryPeople": 20,
+        "status": true,
+        "page": 710
+    },
+    {
+        "name": "máy số 9",
+        "queryPeople": 14,
+        "status": false,
+        "page": 490
+    },
+    {
+        "name": "máy số 10",
+        "queryPeople": 23,
+        "status": true,
+        "page": 670
+    },
+    {
+        "name": "máy số 11",
+        "queryPeople": 10,
+        "status": true,
+        "page": 530
+    },
+    {
+        "name": "máy số 12",
+        "queryPeople": 27,
+        "status": false,
+        "page": 580
+    },
+    {
+        "name": "máy số 13",
+        "queryPeople": 17,
+        "status": true,
+        "page": 740
+    },
+    {
+        "name": "máy số 14",
+        "queryPeople": 12,
+        "status": false,
+        "page": 360
+    },
+    {
+        "name": "máy số 15",
+        "queryPeople": 29,
+        "status": true,
+        "page": 800
+    },
+    {
+        "name": "máy số 16",
+        "queryPeople": 13,
+        "status": false,
+        "page": 420
+    },
+    {
+        "name": "máy số 17",
+        "queryPeople": 22,
+        "status": true,
+        "page": 680
+    },
+    {
+        "name": "máy số 18",
+        "queryPeople": 16,
+        "status": true,
+        "page": 730
+    },
+    {
+        "name": "máy số 19",
+        "queryPeople": 26,
+        "status": false,
+        "page": 550
+    },
+    {
+        "name": "máy số 20",
+        "queryPeople": 11,
+        "status": true,
+        "page": 490
+    },
+    {
+        "name": "máy số 21",
+        "queryPeople": 19,
+        "status": false,
+        "page": 410
+    },
+    {
+        "name": "máy số 22",
+        "queryPeople": 21,
+        "status": true,
+        "page": 620
+    }
+]
