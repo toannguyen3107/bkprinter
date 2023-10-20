@@ -44,7 +44,7 @@ const sytleBtn = {
     },
     borderRadius: '2rem',
 }
-const Config = () => {
+const Config = ({ file }) => {
     const [open, setOpen] = useState(true);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
@@ -60,16 +60,19 @@ const Config = () => {
     const [selectedColor, setSelectedCorlor] = useState('no');
     const [selectedPPS, setSelectedPPS] = useState('one');
 
-    const handleNext = () => {
+    const handleNext = ({ file }) => {
         setNext(true);
-        const sendForm = {
-            layout: selectedLayout,
-            pages: selectedPages,
-            color: selectedColor,
-            pps: selectedPPS
-        }
-        // process send to server
-        console.log(sendForm);
+
+
+        // // process send to server
+        // console.log(sendForm);
+    }
+    const sendForm = {
+        layout: selectedLayout,
+        pages: selectedPages,
+        color: selectedColor,
+        pps: selectedPPS,
+        file: file
     }
 
     return (
@@ -89,12 +92,13 @@ const Config = () => {
                     <Container sx={{ bgcolor: 'background.paper' }}>
                         <DialogTitle
                             sx={{
-                                padding: 0
+                                padding: 0,
+                                color: blue[600],
+                                 textShadow: '3px 0px 3px black',
+                                  textAlign: 'center'
                             }}
                         >
-                            <Typography variant="h5" sx={{ color: blue[600], textShadow: '3px 0px 3px black', textAlign: 'center' }}>
                                 Thiết Lập Thông Số In
-                            </Typography>
                         </DialogTitle>
                         <DialogContent>
                             <Container>
@@ -272,7 +276,7 @@ const Config = () => {
                 </Dialog>
             </div>
         ) : (
-            <ChoosePrinter />
+            <ChoosePrinter form={sendForm} />
         )
 
 
