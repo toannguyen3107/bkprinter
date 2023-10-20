@@ -5,7 +5,7 @@ import Home from './pages/Home'
 import NoPage from './pages/NoPage'
 import Login from './pages/Login/Login'
 import Dashboard from './pages/Dashboard/Dashboard'
-
+import PrinterList from './pages/PrinterList/PrinterList'
 import ReportRequest from './pages/Report/ReportRequest'
 import ChoosePrinter from './pages/Print/ChoosePrinter'
 
@@ -30,6 +30,10 @@ const router = createBrowserRouter([
       {
         path: 'test',
         element: <ChoosePrinter />
+      },
+      {
+        path: 'printerlist',
+        element: <PrinterList />
       },
     ]
   },
