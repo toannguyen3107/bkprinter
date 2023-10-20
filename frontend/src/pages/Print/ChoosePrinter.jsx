@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import data from './data.json'
-import { Button, Dialog, Container, DialogTitle, Typography, DialogContent, DialogActions, Grid, Pagination, Stack } from '@mui/material'
+import { Button, Dialog, Container, DialogTitle, Typography, DialogContent, DialogActions, Grid, Pagination, Stack, Snackbar } from '@mui/material'
 import { Link } from 'react-router-dom'
 import { blue, green, grey, red } from '@mui/material/colors'
 import LocalPrintshopIcon from '@mui/icons-material/LocalPrintshop';
@@ -54,7 +54,7 @@ const ChoosePrinter = ({ form }) => {
     setCurrPage(currPage);
   }
   const start = (currPage - 1) * itemsPerPage;
-  const end = (start) + itemsPerPage
+  const end = (start) + itemsPerPage;
 
   const [open, setOpen] = useState(true);
   const handleOpen = () => setOpen(true);
@@ -118,6 +118,7 @@ const ChoosePrinter = ({ form }) => {
                         width: '100%',
                         textAlign: 'center',
                       }}
+                      disabled={printer.status === false}
                     >
                       <Stack spacing={1} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                         <LocalPrintshopIcon sx={{ color: blue[300] }} />
@@ -145,7 +146,8 @@ const ChoosePrinter = ({ form }) => {
             gap: 3
           }}>
             <Button component={Link} variant='contained' color='error' to='/' sx={sytleBtn}>Hủy</Button>
-            <Button variant='contained' color='success' sx={sytleBtn} onClick={handleSend}>In</Button>
+            <Button variant='contained' color='success' sx={sytleBtn} onClick={() => { handleSend; }}>In</Button>
+
           </DialogActions>
         </Container>
       </Dialog>
