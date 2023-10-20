@@ -5,6 +5,7 @@ import Home from './pages/Home'
 import NoPage from './pages/NoPage'
 import Login from './pages/Login/Login'
 import Dashboard from './pages/Dashboard/Dashboard'
+import PrinterList from './pages/PrinterList/PrinterList'
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
       {
         path: 'print',
         element:<Upload/>
+      },
+      {
+        path: 'printerlist',
+        element:<PrinterList />
       }
     ]
   },
