@@ -6,7 +6,7 @@ import NoPage from './pages/NoPage'
 import Login from './pages/Login/Login'
 import Dashboard from './pages/Dashboard/Dashboard'
 import ReportRequest from './pages/Report/ReportRequest'
-
+import CHINHSUA from './pages/CHINHSUA/edit_info'
 const router = createBrowserRouter([
   {
     path: '/',
@@ -26,6 +26,9 @@ const router = createBrowserRouter([
         element:<ReportRequest/>
       }
     ]
+  },{
+    path: '/edit',
+    element:<CHINHSUA/>
   },
   {
     path: '*',

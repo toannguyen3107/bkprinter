@@ -12,6 +12,7 @@ const Home = () => {
             <Header />
         </Box>
     )
+    
 }
 
 export default Home
