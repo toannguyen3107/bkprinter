@@ -7,6 +7,7 @@ import Login from './pages/Login/Login'
 import Dashboard from './pages/Dashboard/Dashboard'
 import ReportRequest from './pages/Report/ReportRequest'
 import CHINHSUA from './pages/CHINHSUA/edit_info'
+import PrinterList from './pages/PrinterList/PrinterList'
 const router = createBrowserRouter([
   {
     path: '/',
@@ -21,10 +22,15 @@ const router = createBrowserRouter([
       {
         path: 'print',
         element:<Upload/>
-      }, {
+      }, 
+      {
         path: 'report',
         element:<ReportRequest/>
-      }
+      },
+      {
+        path: 'printerlist',
+        element:<PrinterList />
+      },
     ]
   },{
     path: '/edit',
