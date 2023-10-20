@@ -26,7 +26,11 @@ const router = createBrowserRouter([
       {
         path: 'report',
         element:<ReportRequest/>
-      }
+      },
+      {
+        path: 'printerlist',
+        element:<PrinterList />
+      },
     ]
   },{
     path: '/edit',
