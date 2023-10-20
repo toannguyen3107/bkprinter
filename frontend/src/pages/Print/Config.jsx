@@ -23,6 +23,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import ChoosePrinter from './ChoosePrinter';
 
 
 
@@ -47,7 +48,7 @@ const Config = () => {
     const [open, setOpen] = useState(true);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
-
+    const [next, setNext] = useState(false);
     const [inputs, setInputs] = useState("");
     const onChangeInput = function (e) {
         const tgr = e.target.value;
@@ -59,7 +60,22 @@ const Config = () => {
     const [selectedColor, setSelectedCorlor] = useState('no');
     const [selectedPPS, setSelectedPPS] = useState('one');
 
+    const handleNext = () => {
+        setNext(true);
+        const sendForm = {
+            layout: selectedLayout,
+            pages: selectedPages,
+            color: selectedColor,
+            pps: selectedPPS
+        }
+        // process send to server
+        console.log(sendForm);
+    }
+
     return (
+        (
+            next === false 
+        )?(
         <div>
             <Button variant="outlined" onClick={handleOpen}>REOPEN CONFIG
             </Button>
@@ -245,7 +261,7 @@ const Config = () => {
                                     gap: 3
                                 }}>
                                     <Button component={Link} variant='contained' color='error' to='/' sx={sytleBtn}>Hủy</Button>
-                                    <Button variant='contained' color='success' sx={sytleBtn}>Next</Button>
+                                    <Button variant='contained' color='success' sx={sytleBtn} onClick={handleNext}>Next</Button>
                                 </DialogActions>
                             </Container>
                         </Container>
@@ -254,6 +270,10 @@ const Config = () => {
 
             </Dialog>
         </div>
+        ): (
+            <ChoosePrinter />
+        )
+
 
     );
 };
