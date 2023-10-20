@@ -13,7 +13,6 @@ const Preview = ({ file }) => {
         }
     ];
     const [config, setConfig] = useState(false)
-    console.log(doc);
     return (
         config === false ? (
             <Box sx={
@@ -78,7 +77,7 @@ const Preview = ({ file }) => {
                 </Container>
             </Box>
         ) : (
-            <Config />
+            <Config file={file}/>
         )
     )
 }
