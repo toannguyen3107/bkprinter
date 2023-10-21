@@ -6,7 +6,7 @@ import NoPage from './pages/NoPage'
 import Login from './pages/Login/Login'
 import Dashboard from './pages/Dashboard/Dashboard'
 import ReportRequest from './pages/Report/ReportRequest'
-import CHINHSUA from './pages/CHINHSUA/edit_info'
+import Edit_info_pritner from './pages/Edit_info_printer/edit_info'
 import PrinterList from './pages/PrinterList/PrinterList'
 const router = createBrowserRouter([
   {
@@ -33,8 +33,8 @@ const router = createBrowserRouter([
       },
     ]
   },{
-    path: '/edit',
-    element:<CHINHSUA/>
+    path: '/edit_info_printer',
+    element:<Edit_info_pritner/>
   },
   {
     path: '*',
