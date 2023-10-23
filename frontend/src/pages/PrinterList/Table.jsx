@@ -77,7 +77,7 @@ export const PrinterTable = ({searchstring, rows}) => {
     })
     const emptyRows =
         page > 0 ? Math.max(0, (1 + page) - filteredRows.length) : 0;
-    if (filteredRows.length < maxRows)
+    if (filteredRows.length < maxRows*(page - 1))
       if (page >= 1) setPage(0);
     return (
       <Paper sx={{
