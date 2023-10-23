@@ -2,10 +2,10 @@ import React, {useEffect} from 'react'
 import { Box } from '@mui/material'
 import Header from '../../component/Header'
 
-const PageExample = () => {
+const EditInfoPrinter = () => {
  
   useEffect(()=>{
-    document.title = 'View History | BKPRINTER'
+    document.title = 'Edit Information Printer | BKPRINTER'
   });
   
   const Main = (
@@ -169,4 +169,4 @@ function closeMain() {
         mainElement.style.display = 'none';
     }
 }
-export default PageExample
+export default EditInfoPrinter
