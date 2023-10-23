@@ -77,8 +77,6 @@ export const PrinterTable = ({searchstring, rows}) => {
     // const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
     // Avoid a layout jump when reaching the last page with empty rows.
-    const emptyRows =
-        page > 0 ? Math.max(0, (1 + page) - rows.length) : 0;
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
@@ -89,6 +87,10 @@ export const PrinterTable = ({searchstring, rows}) => {
       }
       else return row.location.toLowerCase().includes(searchstring);
     })
+    const emptyRows =
+        page > 0 ? Math.max(0, (1 + page) - filteredRows.length) : 0;
+    if (filteredRows.length < maxRows*(page - 1))
+      if (page >= 1) setPage(0);
     return (
       <Paper sx={{
         marginTop: 1,
@@ -139,7 +141,7 @@ export const PrinterTable = ({searchstring, rows}) => {
                     <TableRow>
                         <TablePagination
                         colSpan={3}
-                        count={rows.length}
+                        count={filteredRows.length}
                         rowsPerPage={maxRows}
                         page={page}
                         rowsPerPageOptions={[]}
