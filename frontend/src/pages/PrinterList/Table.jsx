@@ -15,7 +15,6 @@ import PrintIcon from '@mui/icons-material/Print';
 import PrintDisabledIcon from '@mui/icons-material/PrintDisabled';
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
-import EditInfoPrinter from '../Edit_info_printer/edit_info';
 import { Link } from 'react-router-dom'
 
 const maxRows = 10;
@@ -61,17 +60,6 @@ function isPrintable (pages, state) {
         </Link>
     );
 }
-////////////////////////////  EDIT INFO PRINTER///////////////////////////////
-function isEdit (id) {
-   return (
-      <Link to={`/edit_info_printer`}>
-           {id}
-      </Link>
-      // <EditInfoPrinter> {id}</EditInfoPrinter>
-  );
-  }
-////////////////////////////  EDIT INFO PRINTER///////////////////////////////
-
 export const PrinterTable = ({searchstring, rows}) => {
     const [page, setPage] = React.useState(0);
     // const [rowsPerPage, setRowsPerPage] = React.useState(5);
@@ -117,14 +105,10 @@ export const PrinterTable = ({searchstring, rows}) => {
                     key={row.id}
                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                     >
-
-                      {/* ////////////////////////////  EDIT INFO PRINTER/////////////////////////////// */}
-                    <TableCell component="th" scope="rows" >
-                        {isEdit(row.id)}
+                    <TableCell component="th" scope="rows">
+                        {row.id}
                     </TableCell>
-                    {/* ////////////////////////////  EDIT INFO PRINTER/////////////////////////////// */}
-
-                    <TableCell align="left">{row.name}  </TableCell>
+                    <TableCell align="left">{row.name}</TableCell>
                     <TableCell align="left">{row.location}</TableCell>
                     <TableCell align="left">{row.state}</TableCell>
                     <TableCell align="left">{row.remainingPage}</TableCell>
