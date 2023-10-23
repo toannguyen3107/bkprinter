@@ -98,7 +98,7 @@ export const SearchBar = () => {
           </Search>
         </Toolbar>
       </AppBar>
-      <PrinterTable searchstring={searched} rows={rows} />
+      <PrinterTable searchstring={searched} rows={rows}/>
     </Box>
   );
 }
