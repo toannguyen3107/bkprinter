@@ -6,8 +6,8 @@ import data from './data.json'
 
 
 const EditInfoPrinter_tmp = (mayin_1) => {
-  console.log(mayin_1.storedStatus);
-      
+  console.log(mayin_1);
+  
   useEffect(()=>{
     // stateButtonChange();
     document.title = `${mayin_1.name} Edit Information Printer | BKPRINTER `  ;
@@ -33,7 +33,7 @@ const EditInfoPrinter_tmp = (mayin_1) => {
 
 function confirmExchange() {
     var confirmed = confirm("Bạn có chắc chắn muốn thay đổi?");
-    // console.log(mayin_1.name);
+    
     if (confirmed) {
         var propertyKey = Object.keys(mayin_1);
         for (var i = 0; i < propertyKey.length - 1; i++) {
@@ -41,11 +41,10 @@ function confirmExchange() {
             if (document.myForm[key].value !== "")
                 {mayin_1[key] = document.myForm[key].value;}
         }
-        mayin_1.storedStatus = localStorage.getItem('toggleStatus');
         
         // updateDisplay();
         // saveState();
-        // console.log(mayin_1);
+        console.log(mayin_1);
         alert("Thay đổi đã được thực hiện!");
         
         
@@ -119,12 +118,20 @@ function confirmCancel() {
     alert("Hủy đã được thực hiện!");
 }
 function closeMain() {
-    var mainElement = document.querySelector('.body-main');
-    if (mainElement) {
-        mainElement.style.display = 'none';
-    }
+  var mainElement = document.querySelector('.body-main');
+  if (mainElement) {
+      mainElement.style.display = 'none';
+  }
 }
+function changeButton(){
+  if (mayin_1.storedStatus === "ON") {
+    mayin_1.storedStatus = "OFF";
+  } else {
+    mayin_1.storedStatus = "ON";
+  }
   
+  }
+
   return (
     
         <Box sx={{bgcolor: '#F8F4FC', height: '100vh'}}>
@@ -164,8 +171,8 @@ function closeMain() {
                   <td>
                     <div className="toggle-button-cover">
                       <div className="button-cover">
-                        <div className = {`button r ${mayin_1.storedStatus}`} id="button-1">
-                        <input type="checkbox" className="checkbox" id="toggleButton"  />
+                        <div className = {`button r ${mayin_1.storedStatus}`} id="button-1"  >
+                        <input type="checkbox" className="checkbox" id="toggleButton" onClick={changeButton} />
                           <div className="knobs" />
                           <div className="layer" />
                           

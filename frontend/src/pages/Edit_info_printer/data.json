@@ -1,23 +1,20 @@
 [
     {
-        "id": 1,
+        "id": "1",
         "name": "MAY-IN-1",
         "location": "H1 - Tang 1",
-        "option": "on",
         "storedStatus": "ON"
     },
     {
-        "id": 2,
+        "id": "2",
         "name": "MAY-IN-2",
         "location": "H1 - Tang 2",
-        "option": "on",
         "storedStatus": "OFF"
     },
     {
-        "id": 3,
+        "id": "3",
         "name": "MAY-IN-3",
         "location": "H6 - Tang 1",
-        "option": "on",
         "storedStatus": "ON"
     }
     ]
