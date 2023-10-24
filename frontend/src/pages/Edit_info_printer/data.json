@@ -3,18 +3,22 @@
         "id": "1",
         "name": "MAY-IN-1",
         "location": "H1 - Tang 1",
-        "storedStatus": "ON"
+        "noPage": "1000",
+        "storedStatus": "ON"        
     },
     {
         "id": "2",
         "name": "MAY-IN-2",
         "location": "H1 - Tang 2",
+        "noPage": "1000",
         "storedStatus": "OFF"
+        
     },
     {
         "id": "3",
         "name": "MAY-IN-3",
         "location": "H6 - Tang 1",
-        "storedStatus": "ON"
+        "noPage": "1000",
+        "storedStatus": "ON"        
     }
     ]
