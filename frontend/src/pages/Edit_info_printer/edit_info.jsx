@@ -4,7 +4,7 @@ import Header from '../../component/Header'
 import data from './data.json'
 import PrintIcon from '@mui/icons-material/Print';
 import CloseIcon from '@mui/icons-material/Close';
-
+import HomeHeader from './homeHeader';
 const EditInfoPrinter_tmp = (mayin_1) => {
   console.log(mayin_1);
   
@@ -135,7 +135,7 @@ function changeButton(){
   return (
     
         <Box sx={{bgcolor: '#F8F4FC', height: '100vh'}}>
-            <Header />
+            <Header/>
             <style
       dangerouslySetInnerHTML={{
         __html:
