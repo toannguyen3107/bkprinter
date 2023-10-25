@@ -22,7 +22,7 @@ import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import PaymentsIcon from '@mui/icons-material/Payments';
 import FlagIcon from '@mui/icons-material/Flag';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
-
+import { grey } from "@mui/material/colors";
 // function Copyright(props) {
 //   return (
 //     <Typography
@@ -111,7 +111,7 @@ const item = [{
 ]
 
 export default function Dashboard() {
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = React.useState(false);
   const toggleDrawer = () => {
     setOpen(!open);
   };
@@ -223,6 +223,7 @@ export default function Dashboard() {
           <Box
             sx={{
               position: 'absolute',
+              width: '100%',
               bottom: 0,
               left: 0
             }}
@@ -230,8 +231,17 @@ export default function Dashboard() {
             <Divider />
             <ListItem disablePadding>
               <ListItemButton component={Link} to={'#'}>
-                <ListItemIcon>
-                  <ExitToAppIcon />
+                <ListItemIcon
+                >
+                  <ExitToAppIcon
+                  sx={{
+                    bgcolor: grey[700],
+                    borderRadius: '4rem',
+                    marginX: 'auto',
+                    padding:1,
+                    fontSize: '2.5rem',
+                  }}
+                  />
                 </ListItemIcon>
                 <ListItemText primary={'Đăng xuất'} />
               </ListItemButton>
