@@ -111,10 +111,26 @@ const item = [{
 ]
 
 export default function Dashboard() {
-  const [open, setOpen] = React.useState(false);
+
+  const temp = window.screen.width < 500? false: true
+
+  const [open, setOpen] = React.useState(temp);
   const toggleDrawer = () => {
     setOpen(!open);
   };
+  React.useEffect(() => {
+    console.log(window.screen.width);
+    const handler = () => {
+      if (window.screen.width < 500) {
+        setOpen(false);
+      }else{
+        setOpen(true)
+      }
+    }
+
+    window.addEventListener('resize', handler);
+    return () => { window.removeEventListener('resize', handler); }
+  }, [window.screen.width])
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -234,13 +250,13 @@ export default function Dashboard() {
                 <ListItemIcon
                 >
                   <ExitToAppIcon
-                  sx={{
-                    bgcolor: grey[700],
-                    borderRadius: '4rem',
-                    marginX: 'auto',
-                    padding:1,
-                    fontSize: '2.5rem',
-                  }}
+                    sx={{
+                      bgcolor: grey[700],
+                      borderRadius: '4rem',
+                      marginX: 'auto',
+                      padding: 1,
+                      fontSize: '2.5rem',
+                    }}
                   />
                 </ListItemIcon>
                 <ListItemText primary={'Đăng xuất'} />
