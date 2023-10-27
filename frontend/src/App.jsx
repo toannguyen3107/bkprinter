@@ -11,6 +11,15 @@ import NoPage from './pages/NoPage'
 import Login from './pages/Login/Login'
 import Dashboard from './pages/Dashboard/Dashboard'
 import ReportRequest from './pages/Report/ReportRequest'
+
+import Edit_info_pritner from './pages/Edit_info_printer/edit_info'
+import PrinterList from './pages/PrinterList/PrinterList'
+import { UserViewLog } from './pages/viewLog/User/UserViewLog'
+import { AdminViewLog } from './pages/viewLog/Admin/AdminViewLog'
+import { AllUser } from './pages/viewLog/Admin/AllUser/AllUser'
+import { FilterByName} from './pages/viewLog/Admin/FilterByName/FilterByName'
+import { FilterByPrinter } from './pages/viewLog/Admin/FilterByPrinter/FilterByPrinter'
+
 import HomePage from './pages/HomePage/HomePage'
 import { Feedback } from "./pages/Feedback";
 import { CreateTicket } from "./pages/Feedback/CreateTicket";
@@ -18,6 +27,7 @@ import { Ticket } from "./pages/Feedback/TicketList";
 import { TicketDetail } from "./pages/Feedback/TicketDetail";
 import { SampleQuest } from "./pages/Feedback/AllQuest";
 import { Bill } from "./pages/Bill";
+
 
 const router = createBrowserRouter([
   {
@@ -59,6 +69,27 @@ const router = createBrowserRouter([
         element: <Feedback />
       },
       {
+
+        path: 'UserViewLog',
+        element: <UserViewLog />
+      }, {
+        path: 'AdminViewLog',
+        element: <AdminViewLog  />,
+      }, {
+        path: 'viewAllUser',
+        element: <AllUser />
+      },{
+        path: 'FilterByName',
+        element: <FilterByName />
+      }, {
+        path: 'FilterByPrinter',
+        element: <FilterByPrinter />
+      }
+    ]
+  },{
+    path: '/edit_info_printer',
+    element:<Edit_info_pritner/>
+
         path: 'create-ticket',
         element: <CreateTicket />
       },
@@ -79,6 +110,7 @@ const router = createBrowserRouter([
         element: <Bill />
       }
     ],
+
   },
   {
     path: "/edit_info_printer",
