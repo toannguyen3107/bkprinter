@@ -8,6 +8,11 @@ import Dashboard from './pages/Dashboard/Dashboard'
 import ReportRequest from './pages/Report/ReportRequest'
 import Edit_info_pritner from './pages/Edit_info_printer/edit_info'
 import PrinterList from './pages/PrinterList/PrinterList'
+import { UserViewLog } from './pages/viewLog/User/UserViewLog'
+import { AdminViewLog } from './pages/viewLog/Admin/AdminViewLog'
+import { AllUser } from './pages/viewLog/Admin/AllUser/AllUser'
+import { FilterByName} from './pages/viewLog/Admin/FilterByName/FilterByName'
+import { FilterByPrinter } from './pages/viewLog/Admin/FilterByPrinter/FilterByPrinter'
 const router = createBrowserRouter([
   {
     path: '/',
@@ -31,6 +36,22 @@ const router = createBrowserRouter([
         path: 'printerlist',
         element:<PrinterList />
       },
+      {
+        path: 'UserViewLog',
+        element: <UserViewLog />
+      }, {
+        path: 'AdminViewLog',
+        element: <AdminViewLog  />,
+      }, {
+        path: 'viewAllUser',
+        element: <AllUser />
+      },{
+        path: 'FilterByName',
+        element: <FilterByName />
+      }, {
+        path: 'FilterByPrinter',
+        element: <FilterByPrinter />
+      }
     ]
   },{
     path: '/edit_info_printer',

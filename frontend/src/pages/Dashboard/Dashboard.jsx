@@ -102,7 +102,7 @@ const item = [{
 }, {
   icon: <ChangeHistoryIcon />,
   name: 'Lịch sử In',
-  link: '#'
+  link: '/app/UserViewLog'
 }, {
   icon: <FlagIcon />,
   name: 'Phản Hồi',
