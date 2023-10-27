@@ -22,7 +22,8 @@ import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import PaymentsIcon from '@mui/icons-material/Payments';
 import FlagIcon from '@mui/icons-material/Flag';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
-import { grey } from "@mui/material/colors";
+import { grey, blue, } from "@mui/material/colors";
+import { useLocation } from "react-router-dom";
 // function Copyright(props) {
 //   return (
 //     <Typography
@@ -111,8 +112,10 @@ const item = [{
 ]
 
 export default function Dashboard() {
+  // location page
+  const location = useLocation();
 
-  const temp = window.screen.width < 500? false: true
+  const temp = window.screen.width < 500 ? false : true
 
   const [open, setOpen] = React.useState(temp);
   const toggleDrawer = () => {
@@ -123,7 +126,7 @@ export default function Dashboard() {
     const handler = () => {
       if (window.screen.width < 500) {
         setOpen(false);
-      }else{
+      } else {
         setOpen(true)
       }
     }
@@ -228,10 +231,14 @@ export default function Dashboard() {
             {item.map((obj, idx) => (
               <ListItem key={idx} disablePadding>
                 <ListItemButton component={Link} to={obj.link}>
-                  <ListItemIcon>
+                  <ListItemIcon sx={{
+                     color:  location.pathname === obj.link ? blue[500] : grey[900] 
+                  }}>
                     {obj.icon}
                   </ListItemIcon>
-                  <ListItemText primary={obj.name} />
+                  <ListItemText primary={obj.name} sx={{
+                     color:  location.pathname === obj.link ? blue[500] : grey[900] 
+                  }} />
                 </ListItemButton>
               </ListItem>
             ))}
