@@ -1,9 +1,12 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 // test
-import Home from "./pages/Home";
 import Overall from "./pages/Report/Overall";
 import Details from "./pages/Report/Details";
-import Upload from './pages/Print/Upload';
+
+import Edit_info_pritner from "./pages/Edit_info_printer/edit_info";
+import PrinterList from "./pages/PrinterList/PrinterList";
+import Upload from './pages/Print/Upload'
+import Home from './pages/Home'
 import NoPage from './pages/NoPage'
 import Login from './pages/Login/Login'
 import Dashboard from './pages/Dashboard/Dashboard'
