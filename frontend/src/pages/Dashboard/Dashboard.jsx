@@ -98,7 +98,7 @@ const item = [{
 }, {
   icon: <PaymentsIcon />,
   name: 'Hóa Đơn',
-  link: '#'
+  link: '/app/bill'
 }, {
   icon: <ChangeHistoryIcon />,
   name: 'Lịch sử In',
@@ -106,7 +106,7 @@ const item = [{
 }, {
   icon: <FlagIcon />,
   name: 'Phản Hồi',
-  link: '#'
+  link: '/app/contact'
 }
 ]
 

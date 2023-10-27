@@ -12,6 +12,12 @@ import ReportRequest from './pages/Report/ReportRequest'
 import Edit_info_pritner from './pages/Edit_info_printer/edit_info'
 import PrinterList from './pages/PrinterList/PrinterList'
 import HomePage from './pages/HomePage/HomePage'
+import { Feedback } from "./pages/Feedback";
+import { CreateTicket } from "./pages/Feedback/CreateTicket";
+import { Ticket } from "./pages/Feedback/TicketList";
+import { TicketDetail } from "./pages/Feedback/TicketDetail";
+import { SampleQuest } from "./pages/Feedback/AllQuest";
+import { Bill } from "./pages/Bill";
 
 const router = createBrowserRouter([
   {
@@ -48,6 +54,30 @@ const router = createBrowserRouter([
         path: "printerlist",
         element: <PrinterList />,
       },
+      {
+        path: 'contact',
+        element: <Feedback />
+      },
+      {
+        path: 'create-ticket',
+        element: <CreateTicket />
+      },
+      {
+        path: 'ticket',
+        element: <Ticket />
+      },
+      {
+        path: 'ticket-view/:id',
+        element: <TicketDetail />
+      },
+      {
+        path: 'sample-ticket',
+        element: <SampleQuest/>
+      },
+      {
+        path: 'bill',
+        element: <Bill />
+      }
     ],
   },
   {
