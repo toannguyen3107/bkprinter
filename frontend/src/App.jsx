@@ -8,6 +8,8 @@ import Dashboard from './pages/Dashboard/Dashboard'
 import ReportRequest from './pages/Report/ReportRequest'
 import Edit_info_pritner from './pages/Edit_info_printer/edit_info'
 import PrinterList from './pages/PrinterList/PrinterList'
+import HomePage from './pages/HomePage/HomePage'
+
 const router = createBrowserRouter([
   {
     path: '/',
@@ -35,6 +37,10 @@ const router = createBrowserRouter([
   },{
     path: '/edit_info_printer',
     element:<Edit_info_pritner/>
+  },
+  {
+    path: '/homepage',
+    element:<HomePage />
   },
   {
     path: '*',
