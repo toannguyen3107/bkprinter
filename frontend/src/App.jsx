@@ -52,6 +52,10 @@ const router = createBrowserRouter([
           },
         ],
       },
+      {
+        path: "printerlist",
+        element: <PrinterList />,
+      },
     ],
   },
   {
