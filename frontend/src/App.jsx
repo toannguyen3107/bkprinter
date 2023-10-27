@@ -6,6 +6,8 @@ import NoPage from './pages/NoPage'
 import Login from './pages/Login/Login'
 import Dashboard from './pages/Dashboard/Dashboard'
 import ReportRequest from './pages/Report/ReportRequest'
+import Overall from './pages/Report/Overall'
+import Details from './pages/Report/Details'
 
 const router = createBrowserRouter([
   {
@@ -23,7 +25,18 @@ const router = createBrowserRouter([
         element:<Upload/>
       }, {
         path: 'report',
-        element:<ReportRequest/>
+        element:<ReportRequest/>,
+        children: [
+          
+          {
+            path: 'overall',
+            element:<Overall/>
+          },
+          {
+            path: 'details',
+            element:<Details/>
+          }
+        ]
       }
     ]
   },
