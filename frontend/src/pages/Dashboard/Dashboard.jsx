@@ -10,7 +10,7 @@ import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import Container from "@mui/material/Container";
 import { Link } from 'react-router-dom'
-import { List, ListItem, ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
+import { List, ListItem, ListItemButton, ListItemIcon, ListItemText, Popover } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import logo from "/hcmut.png";
@@ -114,26 +114,43 @@ const item = [{
 export default function Dashboard() {
   // location page
   const location = useLocation();
-
-  const temp = window.screen.width < 500 ? false : true
-
-  const [open, setOpen] = React.useState(temp);
-  const toggleDrawer = () => {
-    setOpen(!open);
+  // status drawer
+  const startStatus = window.screen.width >= 900 ? true : false;
+  const [open, setOpen] = React.useState(startStatus);
+  const toggleDrawer = (event) => {
+    if (window.screen.width >= 900) {
+      setOpen(!open);
+    } else {
+      setOpen(false);
+      setAnchorEl(event.currentTarget);
+    }
   };
+  // POP menu
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handlePop = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+  const openPop = Boolean(anchorEl);
+  const popmenu = openPop ? 'simple-popover' : undefined;
+  // re-check popup is show?
   React.useEffect(() => {
-    console.log(window.screen.width);
     const handler = () => {
-      if (window.screen.width < 500) {
-        setOpen(false);
+      if (window.screen.width >= 900) {
+        setOpen(true);
+        handleClose();
       } else {
-        setOpen(true)
+        setOpen(false);
       }
     }
 
     window.addEventListener('resize', handler);
     return () => { window.removeEventListener('resize', handler); }
-  }, [window.screen.width])
+  }, [window.screen.width]);
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -147,11 +164,23 @@ export default function Dashboard() {
           <IconButton
             edge="start"
             color="black"
-            aria-label="open drawer"
+            aria-label="open dashboard"
+            aria-describedby={popmenu}
             onClick={toggleDrawer}
             sx={{
-              marginRight: "36px",
+              marginRight: {
+                md: '36px'
+              },
+              marginLeft: {
+                md: '1rem',
+                xs: 0
+              },
               ...(open && { display: "none" }),
+              position: {
+                md: 'static',
+                xs: 'absolute'
+              },
+              right: '1rem', // it willn't show, if the width screen is greater than 900px (md).
             }}
           >
             <MenuIcon />
@@ -179,7 +208,10 @@ export default function Dashboard() {
           <Box
             sx={{
               flexGrow: 1,
-              display: "flex",
+              display: {
+                md: 'flex',
+                xs: 'none'
+              },
               alignItems: "center",
               maxWidth: 200,
             }}
@@ -204,7 +236,14 @@ export default function Dashboard() {
           </Box>
         </Toolbar>
       </AppBar>
+      {/* default */}
       <Drawer variant="permanent" open={open}
+        sx={{
+          display: {
+            md: 'block',
+            xs: 'none'
+          }
+        }}
       >
         <Toolbar
           sx={{
@@ -232,12 +271,12 @@ export default function Dashboard() {
               <ListItem key={idx} disablePadding>
                 <ListItemButton component={Link} to={obj.link}>
                   <ListItemIcon sx={{
-                     color:  location.pathname === obj.link ? blue[500] : grey[900] 
+                    color: location.pathname === obj.link ? blue[500] : grey[900]
                   }}>
                     {obj.icon}
                   </ListItemIcon>
                   <ListItemText primary={obj.name} sx={{
-                     color:  location.pathname === obj.link ? blue[500] : grey[900] 
+                    color: location.pathname === obj.link ? blue[500] : grey[900]
                   }} />
                 </ListItemButton>
               </ListItem>
@@ -273,6 +312,74 @@ export default function Dashboard() {
         </Box>
 
       </Drawer>
+      {/* for the device < 900 */}
+      <Box>
+        <Popover
+          id={popmenu}
+          open={openPop}
+          anchorEl={anchorEl}
+          onClose={handleClose}
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'left',
+          }}
+        >
+          <List
+          >
+            <ListItem disablePadding>
+              <ListItemButton sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: "center",
+              }}>
+                <ListItemIcon >
+                  <Avatar alt="Profile" src="/static/images/avatar/2.jpg" sx={{
+                    margin: 'auto'
+                  }} />
+                </ListItemIcon>
+                <ListItemText primary={'HO VA TEN'} />
+              </ListItemButton>
+            </ListItem>
+            {item.map((obj, idx) => (
+              <Box>
+                <Divider />
+                <ListItem key={idx} disablePadding>
+                  <ListItemButton component={Link} to={obj.link} onClick={handleClose}>
+                    <ListItemIcon sx={{
+                      color: location.pathname === obj.link ? blue[500] : grey[900]
+                    }}>
+                      {obj.icon}
+                    </ListItemIcon>
+                    <ListItemText primary={obj.name} sx={{
+                      color: location.pathname === obj.link ? blue[500] : grey[900]
+                    }} />
+                  </ListItemButton>
+                </ListItem>
+              </Box>
+            ))}
+            <Divider />
+            <ListItem disablePadding>
+              <ListItemButton component={Link} to={'#'}>
+                <ListItemIcon
+                >
+                  <ExitToAppIcon
+                    sx={{
+                      bgcolor: grey[700],
+                      borderRadius: '4rem',
+                      marginX: 'auto',
+                      padding: 1,
+                      fontSize: '2.5rem',
+                    }}
+                  />
+                </ListItemIcon>
+                <ListItemText primary={'Đăng xuất'} />
+              </ListItemButton>
+            </ListItem>
+          </List>
+        </Popover>
+      </Box>
+
       <Box
         component="main"
         sx={{
