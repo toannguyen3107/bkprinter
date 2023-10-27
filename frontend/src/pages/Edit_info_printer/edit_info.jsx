@@ -3,7 +3,7 @@ import { Box } from '@mui/material'
 import data from './data.json'
 import PrintIcon from '@mui/icons-material/Print';
 import CloseIcon from '@mui/icons-material/Close';
-import HomeHeader from './homeHeader';
+// import HomeHeader from './homeHeader';
 const EditInfoPrinter_tmp = (mayin_1) => {
   console.log(mayin_1);
   
