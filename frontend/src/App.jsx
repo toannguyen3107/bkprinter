@@ -11,9 +11,6 @@ import NoPage from './pages/NoPage'
 import Login from './pages/Login/Login'
 import Dashboard from './pages/Dashboard/Dashboard'
 import ReportRequest from './pages/Report/ReportRequest'
-
-import Edit_info_pritner from './pages/Edit_info_printer/edit_info'
-import PrinterList from './pages/PrinterList/PrinterList'
 import { UserViewLog } from './pages/viewLog/User/UserViewLog'
 import { AdminViewLog } from './pages/viewLog/Admin/AdminViewLog'
 import { AllUser } from './pages/viewLog/Admin/AllUser/AllUser'
@@ -84,12 +81,7 @@ const router = createBrowserRouter([
       }, {
         path: 'FilterByPrinter',
         element: <FilterByPrinter />
-      }
-    ]
-  },{
-    path: '/edit_info_printer',
-    element:<Edit_info_pritner/>
-
+      }, {
         path: 'create-ticket',
         element: <CreateTicket />
       },
@@ -110,7 +102,6 @@ const router = createBrowserRouter([
         element: <Bill />
       }
     ],
-
   },
   {
     path: "/edit_info_printer",
