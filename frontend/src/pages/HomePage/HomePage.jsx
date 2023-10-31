@@ -1,10 +1,16 @@
 import React from "react";
-import { Typography, Box } from "@mui/material";
+import { Typography, Box, Grid, Paper, Container } from "@mui/material";
+import { styled } from '@mui/material/styles';
 import background from "./background.png";
 import footer from "./footer.png";
 import logo from "./logo.png";
 import logofooter from "./logofooter.png";
 import { Link } from 'react-router-dom';
+import WavingHandIcon from '@mui/icons-material/WavingHand';
+import InfoIcon from '@mui/icons-material/Info';
+import MenuBookIcon from '@mui/icons-material/MenuBook';
+import FacebookIcon from '@mui/icons-material/Facebook';
+import MailIcon from '@mui/icons-material/Mail';
 import './HomePage.css';
 
 
@@ -14,9 +20,10 @@ const Navbar = () => {
             alignItems: "center",
             display: "flex",
             margin: "0px 40px 0px 40px",
+            height: "70px",
         }}>
             <Link to="/homepage" onClick={() => window.location.reload()} >
-                <img src={logo} alt="logo" width={"40px"} height={"40px"} />
+                <img src={logo} alt="logo" width={"50px"} height={"50px"} />
             </Link>
             <Typography sx={{
                 fontFamily: "Inknut Antiqua", 
@@ -40,7 +47,7 @@ const Navbar = () => {
         </Box>
     )
 }
-const Content = () => {
+const Title = () => {
     return (
         <Box sx={{
             backgroundImage: `url(${background})`,
@@ -48,8 +55,10 @@ const Content = () => {
             backgroundAttachment: "center center",
             width: "100%",
             height: "100vh",
-            backgroundSize: "cover",
+            maxHeight: "800px",
+            backgroundSize: "100% 100%",
             display: "block",
+            margineBottom: "60px",
         }}>
             <Box sx={{
                 textAlign: "center",
@@ -93,36 +102,90 @@ const Footer = () => {
             backgroundRepeat: "no-repeat",
             backgroundSize: "100% 100%",
             width: "100%",
-            height: "300px",
+            height: "199px",
             position: "absolute",
-            bottom: "0"
+            bottom: "0",
         }}>
             <Box sx={{
-                margin: "20px 20px 20px 20px",
+                margin: "20px 20px 20px 50px",
                 display: "flex",
-                textAlign: "center",
                 fontSize: "16px",
                 color: "white",
-                lineHeight: "30px"
+                lineHeight: "30px",
+                textAlign: "left",
             }}>
                 <Box sx={{
                     width: "33.33%",
                 }}>
-                    <Typography style={{fontWeight: "bold"}}>HỆ THỐNG IN ẤN TẬP TRUNG</Typography>
-                    <img src={logofooter} alt="logo" width={"33%"}/>
+                    <Typography style={{fontWeight: "bold",  textAlign: "left",}}>HỆ THỐNG IN ẤN TẬP TRUNG</Typography>
+                    <Box sx={{marginLeft: "0%"}}><img src={logofooter} alt="logo" width={"100px"} /></Box>
                 </Box>
                 <Box sx={{
-                    width: "33.33%"
+                    width: "33.33%",
                 }}>
                     <Typography style={{fontWeight: "bold"}}>WEBSITE</Typography>
+                    <Link href="/homepage" onClick={() => window.location.reload()} ><p style={{color: "white"}}>BKPrinter</p></Link>
                 </Box>
                 <Box sx={{
-                    width: "33.33%"
+                    width: "33.33%",
                 }}>
                     <Typography style={{fontWeight: "bold"}}>CONTACT</Typography>
+                    <div style={{display: "flex", alignItems: "center"}}><FacebookIcon />Facebook: </div>
+                    <div style={{display: "flex", alignItems: "center"}}><MailIcon />Mail: </div>
                 </Box>
             </Box>
         </Box>
+    )
+}
+const Item = styled(Paper)(({ theme }) => ({
+    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+    ...theme.typography.body2,
+    padding: theme.spacing(1),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+    height: "100%"
+  }));
+const textStyled = {
+    textAlign: "left",
+    margin: "10px 10px 10px 10px",
+    color: "black",
+}
+const Infomation = () => {
+    return (
+            <Grid container columnSpacing={3} sx={{
+                marginTop: "20px",
+            }}>
+                <Grid item xs={4}>
+                    <Item>
+                        <WavingHandIcon />
+                        <h4>GIỚI THIỆU</h4>
+                        <Typography style={textStyled}>
+                            Đây là website cung cấp dịch vụ in ấn thông minh được tạo ra bởi 7 sinh viên của trường ĐH Bách Khoa
+                            TP HCM.
+                        </Typography>
+                    </Item>
+                </Grid>
+                <Grid item xs={4}>
+                    <Item>
+                        <InfoIcon />
+                        <h4>THÔNG BÁO</h4>
+                        <Typography style={textStyled}>
+                            Website chính thức mở beta vào ngày 1/11/2023.
+                        </Typography>
+                    </Item>
+                </Grid>
+                <Grid item xs={4}>
+                    <Item>
+                        <MenuBookIcon />
+                        <h4>HƯỚNG DẪN</h4>
+                        <Typography style={textStyled}>
+                           <p> 1. Trước khi in các bạn phải đăng nhập.</p>
+                           <p> 2. Vào mục "Tải tài liệu" để tải tài liệu cần in. </p>
+                           <p> 3. Tùy chỉnh trang in theo ý muốn và nhấn nút in. </p>
+                        </Typography>
+                    </Item>
+                </Grid>
+            </Grid>
     )
 }
 const HomePage = () => {
@@ -134,10 +197,11 @@ const HomePage = () => {
             left: "5%",
             width: "90%",
             backgroundColor: "#F8F4FC",
-            height: "2000px"
+            height: "1100px"
         }}>
             <Navbar />
-            <Content />
+            <Title />
+            <Infomation />
             <Footer />
         </Box>
     )
