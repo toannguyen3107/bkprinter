@@ -57,7 +57,6 @@ const Title = () => {
             height: "100vh",
             maxHeight: "800px",
             backgroundSize: "100% 100%",
-            display: "block",
             margineBottom: "60px",
         }}>
             <Box sx={{
@@ -153,7 +152,8 @@ const textStyled = {
 const Infomation = () => {
     return (
             <Grid container columnSpacing={3} sx={{
-                marginTop: "20px",
+                marginTop: "40px",
+                marginBottom: "240px"
             }}>
                 <Grid item xs={4}>
                     <Item>
@@ -197,11 +197,11 @@ const HomePage = () => {
             left: "5%",
             width: "90%",
             backgroundColor: "#F8F4FC",
-            height: "1100px"
+            // height: "200vh"
         }}>
-            <Navbar />
-            <Title />
-            <Infomation />
+            <Navbar  />
+            <Title  />
+            <Infomation  />
             <Footer />
         </Box>
     )
