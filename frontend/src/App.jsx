@@ -5,26 +5,25 @@ import Details from "./pages/Report/Details";
 
 import Edit_info_pritner from "./pages/Edit_info_printer/edit_info";
 import PrinterList from "./pages/PrinterList/PrinterList";
-import Upload from './pages/Print/Upload'
-import Home from './pages/Home'
-import NoPage from './pages/NoPage'
-import Login from './pages/Login/Login'
-import Dashboard from './pages/Dashboard/Dashboard'
-import ReportRequest from './pages/Report/ReportRequest'
-import { UserViewLog } from './pages/viewLog/User/UserViewLog'
-import { AdminViewLog } from './pages/viewLog/Admin/AdminViewLog'
-import { AllUser } from './pages/viewLog/Admin/AllUser/AllUser'
-import { FilterByName} from './pages/viewLog/Admin/FilterByName/FilterByName'
-import { FilterByPrinter } from './pages/viewLog/Admin/FilterByPrinter/FilterByPrinter'
+import Upload from "./pages/Print/Upload";
+import Home from "./pages/Home";
+import NoPage from "./pages/NoPage";
+import Login from "./pages/Login/Login";
+import Dashboard from "./pages/Dashboard/Dashboard";
+import ReportRequest from "./pages/Report/ReportRequest";
+import { UserViewLog } from "./pages/viewLog/User/UserViewLog";
+import { AdminViewLog } from "./pages/viewLog/Admin/AdminViewLog";
+import { AllUser } from "./pages/viewLog/Admin/AllUser/AllUser";
+import { FilterByName } from "./pages/viewLog/Admin/FilterByName/FilterByName";
+import { FilterByPrinter } from "./pages/viewLog/Admin/FilterByPrinter/FilterByPrinter";
 
-import HomePage from './pages/HomePage/HomePage'
+import HomePage from "./pages/HomePage/HomePage";
 import { Feedback } from "./pages/Feedback";
 import { CreateTicket } from "./pages/Feedback/CreateTicket";
 import { Ticket } from "./pages/Feedback/TicketList";
 import { TicketDetail } from "./pages/Feedback/TicketDetail";
 import { SampleQuest } from "./pages/Feedback/AllQuest";
 import { Bill } from "./pages/Bill";
-
 
 const router = createBrowserRouter([
   {
@@ -62,45 +61,49 @@ const router = createBrowserRouter([
         element: <PrinterList />,
       },
       {
-        path: 'contact',
-        element: <Feedback />
+        path: "contact",
+        element: <Feedback />,
       },
       {
-
-        path: 'UserViewLog',
-        element: <UserViewLog />
-      }, {
-        path: 'AdminViewLog',
-        element: <AdminViewLog  />,
-      }, {
-        path: 'viewAllUser',
-        element: <AllUser />
-      },{
-        path: 'FilterByName',
-        element: <FilterByName />
-      }, {
-        path: 'FilterByPrinter',
-        element: <FilterByPrinter />
-      }, {
-        path: 'create-ticket',
-        element: <CreateTicket />
+        path: "UserViewLog",
+        element: <UserViewLog />,
       },
       {
-        path: 'ticket',
-        element: <Ticket />
+        path: "AdminViewLog",
+        element: <AdminViewLog />,
       },
       {
-        path: 'ticket-view/:id',
-        element: <TicketDetail />
+        path: "viewAllUser",
+        element: <AllUser />,
       },
       {
-        path: 'sample-ticket',
-        element: <SampleQuest/>
+        path: "FilterByName",
+        element: <FilterByName />,
       },
       {
-        path: 'bill',
-        element: <Bill />
-      }
+        path: "FilterByPrinter",
+        element: <FilterByPrinter />,
+      },
+      {
+        path: "create-ticket",
+        element: <CreateTicket />,
+      },
+      {
+        path: "ticket",
+        element: <Ticket />,
+      },
+      {
+        path: "ticket-view/:id",
+        element: <TicketDetail />,
+      },
+      {
+        path: "sample-ticket",
+        element: <SampleQuest />,
+      },
+      {
+        path: "bill",
+        element: <Bill />,
+      },
     ],
   },
   {
@@ -108,8 +111,8 @@ const router = createBrowserRouter([
     element: <Edit_info_pritner />,
   },
   {
-    path: '/homepage',
-    element:<HomePage />
+    path: "/homepage",
+    element: <HomePage />,
   },
   {
     path: "*",
