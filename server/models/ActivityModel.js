@@ -2,14 +2,8 @@ import mongoose from "mongoose";
 
 const activitySchema = new mongoose.Schema(
   {
-    user: {
-      type: mongoose.Types.ObjectId,
-      ref: "User",
-    },
-    printer: {
-      type: mongoose.Types.ObjectId,
-      ref: "Printer",
-    },
+    userId: Number,
+    printerId: String,
     document: String,
     price: Number,
     status: {
