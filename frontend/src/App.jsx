@@ -1,5 +1,6 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 // test
+
 import Overall from "./pages/Report/Overall";
 import Details from "./pages/Report/Details";
 
@@ -8,7 +9,11 @@ import PrinterList from "./pages/PrinterList/PrinterList";
 import Upload from "./pages/Print/Upload";
 import Home from "./pages/Home";
 import NoPage from "./pages/NoPage";
-import Login from "./pages/Login/Login";
+import ChooseRole from './pages/Login/ChooseRole'
+import Printer_List from './pages/Printer_Management/Printer_List'
+import Login_for_user from './pages/Login/Login_for_user'
+import Login_for_admin from './pages/Login/Login_for_admin'
+import ChangePassword from './pages/Login/ChangePassword'
 import Dashboard from "./pages/Dashboard/Dashboard";
 import ReportRequest from "./pages/Report/ReportRequest";
 import { UserViewLog } from "./pages/viewLog/User/UserViewLog";
@@ -31,8 +36,17 @@ const router = createBrowserRouter([
     element: <Home />,
   },
   {
-    path: "/login",
-    element: <Login />,
+    path: '/login',
+    element:<ChooseRole />, 
+  }, {
+    path: '/login_user',
+    element: <Login_for_user />
+  }, {
+    path: '/login_admin',
+    element: <Login_for_admin />
+  }, {
+    path: '/change_password',
+    element: <ChangePassword />
   },
   {
     path: "/app",
@@ -57,8 +71,12 @@ const router = createBrowserRouter([
         ],
       },
       {
-        path: "printerlist",
+        path: "printer_list",
         element: <PrinterList />,
+      },
+      {
+        path: 'printer_management',
+        element:<Printer_List />
       },
       {
         path: "contact",
