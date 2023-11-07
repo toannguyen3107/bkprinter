@@ -3,7 +3,7 @@ import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Box,
   Checkbox,
@@ -21,6 +21,9 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { Link, Outlet } from "react-router-dom";
 import ReportNav from "./ReportNav";
+import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc'
+dayjs.extend(utc);
 
 const ReportRequest = () => {
   const [open, setOpen] = useState(false);
@@ -34,16 +37,28 @@ const ReportRequest = () => {
   };
 
   const [option, setOption] = useState("lastWeek");
-  const [startDate, setStartDate] = useState(new Date("August 19, 1975 23:15:30"));
-  const [endDate, setEndDate] = useState(new Date("August 19, 1975 23:15:30"));
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
+  const [controlledStartDate, setControlledStartDate] = useState(null);
+  const [controlledEndDate, setControlledEndDate] = useState(null);
+  useEffect(() => {
+    setEndDate(dayjs());
+    const newStart = dayjs();
+    newStart.subtract(7, 'd')
+    newStart.hour(0);
+    newStart.minute(0);
+    newStart.second(0);
+    setStartDate(newStart);
+  }, []);
 
   const handleOption = (event) => {
-    setOption(event.target.value);
+    const newOption = event.target.value;
+    setOption(newOption);
   };
 
   const [reportOption, setReportOption] = useState({
     overall: true,
-    details: true,
+    details: false,
   });
 
   const { overall, details } = reportOption;
@@ -56,16 +71,33 @@ const ReportRequest = () => {
     });
   };
 
-  const [reportDate, setReportDate] = useState(
-    new Date("August 19, 1975 23:15:30")
-  );
+  const [reportDate, setReportDate] = useState(null);
 
-  const [sOverall, setSOverall] = useState(true);
-  const [sDetails, setSDetails] = useState(true);
+  const [sOverall, setSOverall] = useState(null);
+  const [sDetails, setSDetails] = useState(null);
 
   const handleSubmit = () => {
+    if (option === "lastWeek") {
+      const newEnd = dayjs().endOf("d");
+      setEndDate(newEnd);
+      const newStart = dayjs().subtract(7, "d").startOf("d");
+      setStartDate(newStart);
+      console.log(newStart);
+    }
+    if (option === "lastMonth") {
+      const newEnd = dayjs().endOf('d');
+      setEndDate(newEnd);
+      const newStart = dayjs().subtract(30, "d").startOf('d');
+      setStartDate(newStart);
+    }
+    if (option === "custom") {
+      const newEnd = dayjs(controlledEndDate).endOf("d");
+      setEndDate(newEnd);
+      const newStart = dayjs(controlledStartDate).startOf("d");
+      setStartDate(newStart);
+    }
     handleClose();
-    setReportDate(new Date());
+    setReportDate(dayjs().format('DD/MM/YYYY hh:mm:ss A'));
     setSOverall(overall);
     setSDetails(details);
   };
@@ -107,13 +139,13 @@ const ReportRequest = () => {
                   <DemoContainer components={["DatePicker", "DatePicker"]}>
                     <DatePicker
                       label="Ngày bắt đầu"
-                      value={startDate}
-                      onChange={(newValue) => setStartDate(newValue)}
+                      value={controlledStartDate}
+                      onChange={(newValue) => { setControlledStartDate(newValue)}}
                     />
                     <DatePicker
                       label="Ngày kết thúc"
-                      value={endDate}
-                      onChange={(newValue) => setEndDate(newValue)}
+                      value={controlledEndDate}
+                      onChange={(newValue) => setControlledEndDate(newValue)}
                     />
                   </DemoContainer>
                 </LocalizationProvider>
@@ -155,16 +187,26 @@ const ReportRequest = () => {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Hủy</Button>
-          <Button variant="contained" onClick={handleSubmit} >
+          <Button variant="contained" onClick={handleSubmit}>
             <Box>
-              <Link to={overall ? "overall" : "details"}> <span style={{color:'white'}}>Tạo báo cáo</span></Link>
+              <Link to={overall ? "overall" : "details"}>
+                {" "}
+                <span style={{ color: "white" }}>Tạo báo cáo</span>
+              </Link>
             </Box>
           </Button>
         </DialogActions>
       </Dialog>
       {reportDate && (
-        <Box sx={{backgroundColor:'#fff', width:'100%',height:'100%', mt:1}}>
-          <ReportNav option={{sOverall,sDetails}} reportDate={reportDate} startDate={startDate} endDate={ endDate} />
+        <Box
+          sx={{ backgroundColor: "#fff", width: "100%", height: "100%", mt: 1 }}
+        >
+          <ReportNav
+            option={{ sOverall, sDetails }}
+            reportDate={reportDate}
+            startDate={startDate.$d}
+            endDate={endDate.$d}
+          />
           <Outlet />
         </Box>
       )}
