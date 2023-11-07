@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import { blue, green, grey, red } from '@mui/material/colors'
 import LocalPrintshopIcon from '@mui/icons-material/LocalPrintshop';
 
-const sytleBtn = {
+const styleBtn = {
   fontSize: {
     xs: '0.8rem',
     sm: '1rem',
@@ -145,8 +145,8 @@ const ChoosePrinter = ({ form }) => {
             justifyContent: 'center',
             gap: 3
           }}>
-            <Button component={Link} variant='contained' color='error' to='/' sx={sytleBtn}>Hủy</Button>
-            <Button variant='contained' color='success' sx={sytleBtn} onClick={() => { handleSend; }}>In</Button>
+            <Button component={Link} variant='contained' color='error' to='/' sx={styleBtn}>Hủy</Button>
+            <Button variant='contained' color='success' sx={styleBtn} onClick={() => { handleSend; }}>In</Button>
 
           </DialogActions>
         </Container>
