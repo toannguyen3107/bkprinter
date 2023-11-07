@@ -6,7 +6,7 @@ import PrinterList from "./pages/PrinterList/PrinterList";
 import Upload from "./pages/Print/Upload";
 import Home from "./pages/Home";
 import NoPage from "./pages/NoPage";
-import Login from "./pages/Login/Login";
+// import Login from "./pages/Login/Login";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import ReportRequest from "./pages/Report/ReportRequest";
 import { UserViewLog } from "./pages/viewLog/User/UserViewLog";
@@ -32,10 +32,10 @@ const router = createBrowserRouter([
     path: "/",
     element: <Home />,
   },
-  {
-    path: "/login",
-    element: <Login />,
-  },
+  // {
+  //   path: "/login",
+  //   element: <Login />,
+  // },
   {
     path: "/app",
     element: isAdmin? <DashboardAdmin /> : <Dashboard />,
