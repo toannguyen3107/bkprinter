@@ -1,6 +1,11 @@
 import React from "react";
 import { Typography, Box, Grid, Paper, Container } from "@mui/material";
-import { styled } from '@mui/material/styles';
+import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
+import AspectRatio from '@mui/joy/AspectRatio';
 import background from "./background.png";
 import footer from "./footer.png";
 import logo from "./logo.png";
@@ -11,85 +16,124 @@ import InfoIcon from '@mui/icons-material/Info';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import MailIcon from '@mui/icons-material/Mail';
-import './HomePage.css';
 
+const theme = createTheme();
 
-const Navbar = () => {
+theme.typography.h5 = {
+    fontSize: '0.7rem',
+    '@media (min-width:600px)': {
+      fontSize: '0.9rem',
+    },
+    [theme.breakpoints.up('md')]: {
+      fontSize: '1rem',
+    },
+  };
+
+theme.typography.h4 = {
+    fontSize: '1rem',
+    '@media (min-width:600px)': {
+      fontSize: '1.2rem',
+    },
+    [theme.breakpoints.up('md')]: {
+      fontSize: '2rem',
+    },
+  };
+
+theme.typography.h3 = {
+  fontSize: '1.2rem',
+  '@media (min-width:600px)': {
+    fontSize: '1.5rem',
+  },
+  [theme.breakpoints.up('md')]: {
+    fontSize: '2.5rem',
+  },
+};
+
+theme.typography.h2 = {
+    fontSize: '1.5rem',
+    '@media (min-width:600px)': {
+      fontSize: '2rem',
+    },
+    [theme.breakpoints.up('md')]: {
+      fontSize: '3rem',
+    },
+  };
+const ButtonAppBar = () => {
     return (
-        <Box sx={{
-            alignItems: "center",
-            display: "flex",
-            margin: "0px 40px 0px 40px",
-            height: "70px",
-        }}>
-            <Link to="/homepage" onClick={() => window.location.reload()} >
-                <img src={logo} alt="logo" width={"50px"} height={"50px"} />
-            </Link>
-            <Typography sx={{
-                fontFamily: "Inknut Antiqua", 
-                fontWeight: "400", 
-                lineHeight: "normal", 
-                fontSize: "30px",
-                marginLeft: "10px",
-                marginRight: "auto"
-                }}>
-                    <Link to="/homepage" onClick={() => window.location.reload()} >BKPrinter</Link>
+      <Box sx={{ flexGrow: 1 }}>
+        <AppBar position="fixed" sx={{height: '70px', backgroundColor: 'white'}}>
+          <Toolbar>
+            <IconButton
+              size="large"
+              edge="start"
+              color="inherit"
+              aria-label="menu"
+              sx={{ mr: 2 }}
+              onClick={() => window.location.reload()}
+            >
+                <Link to="/homepage" >
+                    <img src={logo} alt="logo" width={'50px'} height={'50px'} />
+                </Link>
+            </IconButton>
+            <Typography variant="h6" component="div" sx={{ flexGrow: 1, color: 'black'}}>
+              BKPrinter
             </Typography>
-            <Link to="/login" className="login-link">
-                <Typography sx={{
-                    color: "#0A89FE",
-                    fontFamily: "Inria Sans",
-                    fontSize: "20px",
-                    fontWeight: "400",
-                }}>Đăng nhập
-                </Typography>
-            </Link>
-        </Box>
-    )
-}
+            <Button color="inherit"><Link to='/login'>Đăng nhập</Link></Button>
+          </Toolbar>
+        </AppBar>
+      </Box>
+    );
+  };
+
 const Title = () => {
     return (
-        <Box sx={{
-            backgroundImage: `url(${background})`,
-            backgroundRepeat: "no-repeat",
-            backgroundAttachment: "center center",
-            width: "100%",
-            height: "100vh",
-            maxHeight: "800px",
-            backgroundSize: "100% 100%",
-            margineBottom: "60px",
+        <AspectRatio ratio="16/7" sx={{
+            width: '100%',
+            marginBottom: "0px",
+            marginTop: '70px',
         }}>
             <Box sx={{
-                textAlign: "center",
-                position: "relative",
-                top: "30%",
-                width: "100%"
+                backgroundImage: `url(${background})`,
+                backgroundRepeat: "no-repeat",
+                backgroundAttachment: "center center",
+                backgroundSize: "100% 100%",
             }}>
-                <Typography style={{
-                    color: "#045FE8",
-                    textAlign: "center",
-                    fontFamily: "Roboto, sans-serif",
-                    fontSize: "32px",
-                    fontWeight: "800",
-                    textShadow: "-1px 0 #ffffff, 0 1px #fff, 1px 0 #ffffff, 0 -1px #ffffff",
-                    animationDelay: "0.7s",
-                    letterSpacing: "2px",
-                    lineHeight: "48px",
-                    marginBottom: "20px",
-                }}>HỆ THỐNG IN ẤN TẬP TRUNG </Typography>
-                <Typography style={{
-                    fontSize: "52px",
-                    color: "#2196f3",
-                    letterSpacing: "1px",
-                    fontWeight: "600",
-                    textTransform: "uppercase",
-                    fontFamily: "Roboto, sans-serif",
-                    textShadow: "-1px 0 #ffffff, 0 1px #fff, 1px 0 #ffffff, 0 -1px #ffffff",
-                    animationDelay: "1.1s",
+                <Box sx={{
+                    paddingTop: '15%',
+                    width: "100%",
+                    height: "100%",
+                }}>
+                    <ThemeProvider theme={theme}>
+                        <Typography variant="h3" style={{
+                            color: "#045FE8",
+                            textAlign: "center",
+                            fontFamily: "Roboto, sans-serif",
+                            fontWeight: "800",
+                            textShadow: "-1px 0 #ffffff, 0 1px #fff, 1px 0 #ffffff, 0 -1px #ffffff",
+                            animationDelay: "0.7s",
+                            letterSpacing: "2px",
+                            marginBottom: "1%",
+                        }}>HỆ THỐNG IN ẤN TẬP TRUNG </Typography>
+                        <Typography variant="h2" style={{
+                            // fontSize: {
+                            //     lg: "52px",
+                            //     md: "52px",
+                            //     xs: "20px",
+                            // },
+                            color: "#2196f3",
+                            letterSpacing: "1px",
+                            fontWeight: "600",
+                            textTransform: "uppercase",
+                            fontFamily: "Roboto, sans-serif",
+                            textShadow: "-1px 0 #ffffff, 0 1px #fff, 1px 0 #ffffff, 0 -1px #ffffff",
+                            animationDelay: "1.1s",
+                            textAlign: 'center',
 
-                }}>BKPRINTER</Typography>            
+                        }}>BKPRINTER</Typography>            
+                    </ThemeProvider>
+                </Box>
             </Box>
-        </Box>
+        </AspectRatio>
     )
 }
 const Footer = () => {
@@ -106,32 +150,34 @@ const Footer = () => {
             bottom: "0",
         }}>
             <Box sx={{
-                margin: "20px 20px 20px 50px",
+                margin: "20px 1% 20px 2%",
                 display: "flex",
                 fontSize: "16px",
                 color: "white",
                 lineHeight: "30px",
                 textAlign: "left",
-            }}>
+            }}> 
+            <ThemeProvider theme={theme}>
                 <Box sx={{
                     width: "33.33%",
                 }}>
-                    <Typography style={{fontWeight: "bold",  textAlign: "left",}}>HỆ THỐNG IN ẤN TẬP TRUNG</Typography>
+                    <Typography variant="h5" style={{fontWeight: "bold",  textAlign: "left",}}>HỆ THỐNG IN ẤN TẬP TRUNG</Typography>
                     <Box sx={{marginLeft: "0%"}}><img src={logofooter} alt="logo" width={"100px"} /></Box>
                 </Box>
                 <Box sx={{
                     width: "33.33%",
                 }}>
-                    <Typography style={{fontWeight: "bold"}}>WEBSITE</Typography>
+                    <Typography variant="h5" style={{fontWeight: "bold"}}>WEBSITE</Typography>
                     <Link href="/homepage" onClick={() => window.location.reload()} ><p style={{color: "white"}}>BKPrinter</p></Link>
                 </Box>
                 <Box sx={{
                     width: "33.33%",
                 }}>
-                    <Typography style={{fontWeight: "bold"}}>CONTACT</Typography>
-                    <div style={{display: "flex", alignItems: "center"}}><FacebookIcon />Facebook: </div>
-                    <div style={{display: "flex", alignItems: "center"}}><MailIcon />Mail: </div>
+                    <Typography variant="h5" style={{fontWeight: "bold"}}>CONTACT</Typography>
+                    <Typography variant="h5" style={{display: "flex", alignItems: "center"}}><FacebookIcon />Facebook: </Typography>
+                    <Typography variant="h5" style={{display: "flex", alignItems: "center"}}><MailIcon />Mail: </Typography>
                 </Box>
+                </ThemeProvider>
             </Box>
         </Box>
     )
@@ -146,8 +192,9 @@ const Item = styled(Paper)(({ theme }) => ({
   }));
 const textStyled = {
     textAlign: "left",
-    margin: "10px 10px 10px 10px",
+    margin: "0px 10px 0px 10px",
     color: "black",
+    fontWeight: 'normal',
 }
 const Infomation = () => {
     return (
@@ -158,31 +205,35 @@ const Infomation = () => {
                 <Grid item xs={4}>
                     <Item>
                         <WavingHandIcon />
-                        <h4>GIỚI THIỆU</h4>
-                        <Typography style={textStyled}>
-                            Đây là website cung cấp dịch vụ in ấn thông minh được tạo ra bởi 7 sinh viên của trường ĐH Bách Khoa
-                            TP HCM.
-                        </Typography>
+                        <ThemeProvider theme={theme}>
+                            <Typography variant="h5">GIỚI THIỆU</Typography>
+                            <Typography variant="h5" style={textStyled}>
+                                Đây là website cung cấp dịch vụ in ấn thông minh được tạo ra bởi 7 sinh viên của trường ĐH Bách Khoa
+                                TP HCM.
+                            </Typography>
+                        </ThemeProvider>
                     </Item>
                 </Grid>
                 <Grid item xs={4}>
                     <Item>
                         <InfoIcon />
-                        <h4>THÔNG BÁO</h4>
-                        <Typography style={textStyled}>
-                            Website chính thức mở beta vào ngày 1/11/2023.
-                        </Typography>
+                        <ThemeProvider theme={theme}>
+                            <Typography variant="h5">THÔNG BÁO</Typography>
+                            <Typography variant="h5" style={textStyled}>
+                                Website chính thức mở beta vào ngày 1/11/2023.
+                            </Typography>
+                        </ThemeProvider>
                     </Item>
                 </Grid>
                 <Grid item xs={4}>
                     <Item>
-                        <MenuBookIcon />
-                        <h4>HƯỚNG DẪN</h4>
-                        <Typography style={textStyled}>
-                           <p> 1. Trước khi in các bạn phải đăng nhập.</p>
-                           <p> 2. Vào mục "Tải tài liệu" để tải tài liệu cần in. </p>
-                           <p> 3. Tùy chỉnh trang in theo ý muốn và nhấn nút in. </p>
-                        </Typography>
+                        <ThemeProvider theme={theme}>
+                            <MenuBookIcon />
+                            <Typography variant="h5">HƯỚNG DẪN</Typography>
+                            <Typography variant='h5' style={textStyled}> 1. Trước khi in các bạn phải đăng nhập.</Typography>
+                            <Typography variant='h5' style={textStyled}> 2. Vào mục "Tải tài liệu" để tải tài liệu cần in. </Typography>
+                            <Typography variant='h5' style={textStyled}> 3. Tùy chỉnh trang in theo ý muốn và nhấn nút in. </Typography>
+                        </ThemeProvider>
                     </Item>
                 </Grid>
             </Grid>
@@ -199,7 +250,7 @@ const HomePage = () => {
             backgroundColor: "#F8F4FC",
             // height: "200vh"
         }}>
-            <Navbar  />
+            <ButtonAppBar />
             <Title  />
             <Infomation  />
             <Footer />
