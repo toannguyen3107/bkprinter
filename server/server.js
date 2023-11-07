@@ -3,7 +3,7 @@ import morgan from "morgan";
 import * as dotenv from "dotenv";
 dotenv.config({ path: "../.env" });
 import mongoose from "mongoose";
-import userRouter from './routes/userRouter.js';
+// import userRouter from './routes/userRouter.js';
 import printerRouter from './routes/printerRouter.js';
 
 const app = express();
@@ -13,7 +13,7 @@ if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
 }
 
-app.use('/api/users', userRouter);
+// app.use('/api/users', userRouter);
 app.use('/api/printers', printerRouter);
 
 app.use("*", (req, res) => {
