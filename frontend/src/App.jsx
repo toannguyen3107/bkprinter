@@ -4,7 +4,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Overall from "./pages/Report/Overall";
 import Details from "./pages/Report/Details";
 
-import Edit_info_pritner from "./pages/Edit_info_printer/edit_info";
+import Edit_info_printer from "./pages/Edit_info_printer/edit_info";
 import PrinterList from "./pages/PrinterList/PrinterList";
 import Upload from "./pages/Print/Upload";
 import Home from "./pages/Home";
@@ -126,7 +126,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/edit_info_printer",
-    element: <Edit_info_pritner />,
+    element: <Edit_info_printer />,
   },
   {
     path: "/homepage",
