@@ -4,14 +4,14 @@ import data from './data.json'
 import PrintIcon from '@mui/icons-material/Print';
 import CloseIcon from '@mui/icons-material/Close';
 // import HomeHeader from './homeHeader';
-const EditInfoPrinter_tmp = (mayin_1) => {
-  console.log(mayin_1);
+const EditInfoPrinter_tmp = ({mayin_1}) => {
+  console.log( mayin_1);
   
-  useEffect(()=>{
-    // stateButtonChange();
-    document.title = `${mayin_1.name} Edit Information Printer | BKPRINTER `  ;
+  // useEffect(()=>{
+  //   // stateButtonChange();
+  //   document.title = `${mayin_1.name} Edit Information Printer | BKPRINTER `  ;
     
-  },[mayin_1.id]);
+  // },[mayin_1.id]);
   
   // Lưu trạng thái ban đầu
 // var originalState = JSON.stringify(mayin_1);
@@ -204,11 +204,11 @@ function changeButton(){
   )
 
 }
-const EditInfoPrinter = () => {
+// const EditInfoPrinter = () => {
   
-  return (
-    <div > {EditInfoPrinter_tmp (data[0])} </div>
-    // <EditInfoPrinter_tmp mayin_1 = {data[0]} /> 
-  )
-}
-export default EditInfoPrinter
+//   return (
+//     <div > {EditInfoPrinter_tmp (data[0])} </div>
+//     // <EditInfoPrinter_tmp mayin_1 = {data[0]} /> 
+//   )
+// }
+export default EditInfoPrinter_tmp
