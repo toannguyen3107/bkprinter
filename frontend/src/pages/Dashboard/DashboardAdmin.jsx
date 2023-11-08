@@ -89,25 +89,21 @@ const Drawer = styled(MuiDrawer, {
 }));
 const item = [{
   icon: <PrintIcon />,
-  name: 'In Tài Liệu',
-  link: '/app/print'
+  name: 'Quan Lý máy in',
+  link: 'edit_info_printer'
 },
 {
   icon: <RemoveRedEyeIcon />,
-  name: 'Xem Máy In',
-  link: '/app/printerlist'
+  name: 'Lịch Sử In',
+  link: 'AdminViewLog'
 }, {
   icon: <PaymentsIcon />,
-  name: 'Hóa Đơn',
-  link: '/app/bill'
+  name: 'Báo Cáo',
+  link: 'report'
 }, {
   icon: <ChangeHistoryIcon />,
-  name: 'Lịch sử In',
-  link: '/app/UserViewLog'
-}, {
-  icon: <FlagIcon />,
-  name: 'Phản Hồi',
-  link: '/app/contact'
+  name: 'Xem Phản Hồi',
+  link: '#'
 }
 ]
 
@@ -115,10 +111,10 @@ export default function Dashboard() {
   // location page
   const location = useLocation();
   // status drawer
-  const startStatus = window.screen.width >= 600 ? true : false;
+  const startStatus = window.screen.width >= 900 ? true : false;
   const [open, setOpen] = React.useState(startStatus);
   const toggleDrawer = (event) => {
-    if (window.screen.width >= 600) {
+    if (window.screen.width >= 900) {
       setOpen(!open);
     } else {
       setOpen(false);
@@ -140,7 +136,7 @@ export default function Dashboard() {
   // re-check popup is show?
   React.useEffect(() => {
     const handler = () => {
-      if (window.screen.width >= 600) {
+      if (window.screen.width >= 900) {
         setOpen(true);
         handleClose();
       } else {
@@ -149,9 +145,7 @@ export default function Dashboard() {
     }
 
     window.addEventListener('resize', handler);
-    return () => {
-      window.removeEventListener('resize', handler);
-    }
+    return () => { window.removeEventListener('resize', handler); }
   }, [window.screen.width]);
 
   return (
@@ -170,7 +164,6 @@ export default function Dashboard() {
             aria-describedby={popmenu}
             onClick={toggleDrawer}
             sx={{
-
               marginRight: {
                 md: '36px'
               },
@@ -180,7 +173,7 @@ export default function Dashboard() {
               },
               ...(open && { display: "none" }),
               position: {
-                sm: 'static',
+                md: 'static',
                 xs: 'absolute'
               },
               right: '1rem', // it willn't show, if the width screen is greater than 900px (md).
@@ -243,7 +236,7 @@ export default function Dashboard() {
       <Drawer variant="permanent" open={open}
         sx={{
           display: {
-            sm: 'block',
+            md: 'block',
             xs: 'none'
           }
         }}
@@ -272,7 +265,7 @@ export default function Dashboard() {
           >
             {item.map((obj, idx) => (
               <ListItem key={idx} disablePadding>
-                <ListItemButton key={idx} component={Link} to={obj.link}>
+                <ListItemButton component={Link} to={obj.link}>
                   <ListItemIcon sx={{
                     color: location.pathname === obj.link ? blue[500] : grey[900]
                   }}>
@@ -327,7 +320,8 @@ export default function Dashboard() {
             horizontal: 'left',
           }}
         >
-          <List>
+          <List
+          >
             <ListItem disablePadding>
               <ListItemButton sx={{
                 display: 'flex',
@@ -360,8 +354,25 @@ export default function Dashboard() {
                 </ListItem>
               </div>
             ))}
+            <Divider />
+            <ListItem disablePadding>
+              <ListItemButton component={Link} to={'#'}>
+                <ListItemIcon
+                >
+                  <ExitToAppIcon
+                    sx={{
+                      bgcolor: grey[700],
+                      borderRadius: '4rem',
+                      marginX: 'auto',
+                      padding: 1,
+                      fontSize: '2.5rem',
+                    }}
+                  />
+                </ListItemIcon>
+                <ListItemText primary={'Đăng xuất'} />
+              </ListItemButton>
+            </ListItem>
           </List>
-
         </Popover>
       </Box>
 
