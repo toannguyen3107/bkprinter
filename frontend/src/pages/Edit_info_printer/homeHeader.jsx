@@ -3,6 +3,8 @@ import React from 'react'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Typography from '@mui/material/Typography';
 import Avatar from '@mui/material/Avatar';
+import EditInfoPrinter_tmp from './edit_info'
+import data from './data.json'
 const HomeHeader = () => {
     return (
         <Box component="header"
@@ -141,5 +143,12 @@ const HomeHeader = () => {
         
     )
 }
-
-export default HomeHeader
+const EditInfoPrinter = () => {
+    // console.log(data[0].id)
+    return (
+    
+      <EditInfoPrinter_tmp mayin_1 = {data[0]} /> 
+    )
+  }
+export default EditInfoPrinter
+// export default HomeHeader
