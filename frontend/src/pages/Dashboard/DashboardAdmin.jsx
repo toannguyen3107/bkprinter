@@ -338,9 +338,9 @@ export default function Dashboard() {
               </ListItemButton>
             </ListItem>
             {item.map((obj, idx) => (
-              <Box>
+              <div key={idx}> {/* Add a unique key to the wrapping div */}
                 <Divider />
-                <ListItem key={idx} disablePadding>
+                <ListItem disablePadding>
                   <ListItemButton component={Link} to={obj.link} onClick={handleClose}>
                     <ListItemIcon sx={{
                       color: location.pathname === obj.link ? blue[500] : grey[900]
@@ -352,7 +352,7 @@ export default function Dashboard() {
                     }} />
                   </ListItemButton>
                 </ListItem>
-              </Box>
+              </div>
             ))}
             <Divider />
             <ListItem disablePadding>
