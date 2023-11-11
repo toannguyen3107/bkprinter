@@ -5,133 +5,51 @@ import PrintIcon from '@mui/icons-material/Print';
 import CloseIcon from '@mui/icons-material/Close';
 // import HomeHeader from './homeHeader';
 const EditInfoPrinter_tmp = ({mayin_1}) => {
-  console.log( mayin_1);
-  
-  // useEffect(()=>{
-  //   // stateButtonChange();
-  //   document.title = `${mayin_1.name} Edit Information Printer | BKPRINTER `  ;
+    console.log( mayin_1);
     
-  // },[mayin_1.id]);
-  
-  // Lưu trạng thái ban đầu
-// var originalState = JSON.stringify(mayin_1);
 
-// // Hàm để lưu trạng thái vào Local Storage
-// function saveState() {
-//     localStorage.setItem('mayin_1', JSON.stringify(mayin_1));
-// }
-
-// // Hàm để khôi phục trạng thái từ Local Storage
-// function restoreState() {
-//     var savedState = localStorage.getItem('mayin_1');
-//     if (savedState) {
-//         mayin_1 = JSON.parse(savedState);
-//         updateDisplay();
-//     }
-// }
-
-function confirmExchange() {
-    var confirmed = confirm("Bạn có chắc chắn muốn thay đổi?");
-    
-    if (confirmed) {
-        var propertyKey = Object.keys(mayin_1);
-        for (var i = 0; i < propertyKey.length - 1; i++) {
-            var key = propertyKey[i];
-            if (document.myForm[key].value !== "")
-                {mayin_1[key] = document.myForm[key].value;}
+    function confirmExchange() {
+        var confirmed = confirm("Bạn có chắc chắn muốn thay đổi?");
+        
+        if (confirmed) {
+            var propertyKey = Object.keys(mayin_1);
+            for (var i = 0; i < propertyKey.length - 1; i++) {
+                var key = propertyKey[i];
+                if (document.myForm[key].value !== "")
+                    {mayin_1[key] = document.myForm[key].value;}
+            }
+            console.log(mayin_1);
+            alert("Thay đổi đã được thực hiện!");
+        } else {
+            alert("Thay đổi không được thực hiện.");
         }
-        
-        // updateDisplay();
-        // saveState();
-        console.log(mayin_1);
-        alert("Thay đổi đã được thực hiện!");
-        
-        
-    } else {
-        alert("Thay đổi không được thực hiện.");
-        // Khôi phục trạng thái ban đầu nếu người dùng nhấn "Hủy"
-        // mayin_1 = JSON.parse(originalState);
-        // updateDisplay();
     }
-}
-  // function stateButtonChange(){
-  //   var toggleButton = document.getElementById('toggleButton');
 
-  //   var button1Elements = document.querySelectorAll('#button-1 .knobs,  #button-1 .layer ');
-  // // Tắt hiệu ứng chuyển đổi cho các phần tử liên quan đến #button-1
-  //   button1Elements.forEach(function(element) {
-  //   element.style.transition = '0s ease all';
-  //   })
-    
+    // Gọi hàm restoreState() để khôi phục trạng thái đã lưu khi trang được tải
+    window.onload = function () {
+        // restoreState();
+        // stateButtonChange();
+    };
 
-  //   if (mayin_1.storedStatus === 'OFF') {
-  //   toggleButton.checked = true;
-  //   }
+    function confirmCancel() {
+        // Thực hiện hành động hủy ở đây
+        alert("Hủy đã được thực hiện!");
+    }
+    function closeMain() {
+      var mainElement = document.querySelector('.body-main');
+      if (mainElement) {
+          mainElement.style.display = 'none';
+      }
+    }
+    function changeButton(){
+      if (mayin_1.storedStatus === "ON") {
+        mayin_1.storedStatus = "OFF";
+      } else {
+        mayin_1.storedStatus = "ON";
+      }
+    }
 
-  //   toggleButton.addEventListener('change', function() {
-  //   if (toggleButton.checked) {
-  //       localStorage.setItem('toggleStatus', 'OFF');
-  //   } else {
-  //       localStorage.setItem('toggleStatus', 'ON');
-  //   }
-  //   });
-  // }
-// function updateDisplay() {
-//   // console.log(mayin_1.name);
-//     var id_may_in = document.getElementById("id-may-in");
-//     var ten_may_in = document.getElementById("ten-may-in");
-//     var vi_tri_may_in = document.getElementById("vi-tri-may-in");
-//     var toggleButton = document.getElementById('toggleButton');
-
-//     var button1Elements = document.querySelectorAll('#button-1 .knobs,  #button-1 .layer ');
-//   // Tắt hiệu ứng chuyển đổi cho các phần tử liên quan đến #button-1
-//     button1Elements.forEach(function(element) {
-//     element.style.transition = '0s ease all';
-//     })
-    
-
-//     if (mayin_1.storedStatus === 'OFF') {
-//     toggleButton.checked = true;
-//     }
-
-//     toggleButton.addEventListener('change', function() {
-//     if (toggleButton.checked) {
-//         localStorage.setItem('toggleStatus', 'OFF');
-//     } else {
-//         localStorage.setItem('toggleStatus', 'ON');
-//     }
-//     });
-//     id_may_in.textContent = "ID: " + mayin_1.id;
-//     ten_may_in.textContent = "Tên: " + mayin_1.name;
-//     vi_tri_may_in.textContent = "Vị trí: " + mayin_1.location;
-// }
-
-// Gọi hàm restoreState() để khôi phục trạng thái đã lưu khi trang được tải
-window.onload = function () {
-    // restoreState();
-    // stateButtonChange();
-};
-
-function confirmCancel() {
-    // Thực hiện hành động hủy ở đây
-    alert("Hủy đã được thực hiện!");
-}
-function closeMain() {
-  var mainElement = document.querySelector('.body-main');
-  if (mainElement) {
-      mainElement.style.display = 'none';
-  }
-}
-function changeButton(){
-  if (mayin_1.storedStatus === "ON") {
-    mayin_1.storedStatus = "OFF";
-  } else {
-    mayin_1.storedStatus = "ON";
-  }
-  
-  }
-
-  return (
+    return (
     
         <Box sx={{bgcolor: '#F8F4FC', height: '40rem', width: '100%'}}>
             
@@ -204,11 +122,5 @@ function changeButton(){
   )
 
 }
-// const EditInfoPrinter = () => {
-  
-//   return (
-//     <div > {EditInfoPrinter_tmp (data[0])} </div>
-//     // <EditInfoPrinter_tmp mayin_1 = {data[0]} /> 
-//   )
-// }
+
 export default EditInfoPrinter_tmp

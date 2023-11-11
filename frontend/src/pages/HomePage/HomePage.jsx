@@ -71,14 +71,14 @@ const ButtonAppBar = () => {
               sx={{ mr: 2 }}
               onClick={() => window.location.reload()}
             >
-                <Link to="/homepage" >
+                <Link to="/" >
                     <img src={logo} alt="logo" width={'50px'} height={'50px'} />
                 </Link>
             </IconButton>
             <Typography variant="h6" component="div" sx={{ flexGrow: 1, color: 'black'}}>
               BKPrinter
             </Typography>
-            <Button color="inherit"><Link to='/login'>Đăng nhập</Link></Button>
+            <Button color="inherit"><Link to='/role'>Đăng nhập</Link></Button>
           </Toolbar>
         </AppBar>
       </Box>

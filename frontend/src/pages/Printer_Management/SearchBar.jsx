@@ -6,6 +6,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
+import { Button, Modal } from '@mui/material';
 import data from "./data.json";
 import { PrinterTable } from "./Table";
 
@@ -86,6 +87,12 @@ export const SearchBar = () => {
           >
             DANH SÁCH MÁY IN
           </Typography>
+          <Button
+            variant='contained'
+            
+          >
+            Thêm máy in  
+          </Button>  
           <Search>
             <SearchIconWrapper>
               <SearchIcon />

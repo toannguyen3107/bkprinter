@@ -3,11 +3,15 @@ import Overall from "./pages/Report/Overall";
 import Details from "./pages/Report/Details";
 
 import Edit_info_printer from "./pages/Edit_info_printer/edit_info";
+import Printer_List from "./pages/Printer_Management/Printer_List";
 import PrinterList from "./pages/PrinterList/PrinterList";
 import Upload from "./pages/Print/Upload";
 import Home from "./pages/Home";
 import NoPage from "./pages/NoPage";
 // import Login from "./pages/Login/Login";
+import ChooseRole from "./pages/Login/ChooseRole";
+import Login from "./pages/Login/Login";
+import ChangePassword from "./pages/Login/ChangePassword";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import ReportRequest from "./pages/Report/ReportRequest";
 import { UserViewLog } from "./pages/viewLog/User/UserViewLog";
@@ -25,18 +29,24 @@ import { Bill } from "./pages/Bill";
 
 import DashboardAdmin from "./pages/Dashboard/DashboardAdmin";
 
-
-const isAdmin = true; // admin or user?
+const isAdmin = true
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <HomePage />,
   },
-  // {
-  //   path: "/login",
-  //   element: <Login />,
-  // },
+  {
+    path: "/role",
+    element: <ChooseRole />,
+  },
+  {
+    path: "/login",
+    element: <Login />,
+  },{
+    path: "/ChangePassword",
+    element: <ChangePassword />,
+  },
   {
     path: "/app",
     element: isAdmin? <DashboardAdmin /> : <Dashboard />,
@@ -72,8 +82,8 @@ const router = createBrowserRouter([
         ],
       },
       {
-        path: "edit_info_printer",
-        element: <Edit_info_printer />,
+        path: "manage_printer",
+        element: <Printer_List />,
       },
     ]:[
       {

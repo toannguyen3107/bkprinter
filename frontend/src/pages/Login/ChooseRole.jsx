@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState } from 'react';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import Grid from '@mui/material/Grid';
@@ -10,6 +11,7 @@ import logo from "/hcmut.png";
 import { grey } from "@mui/material/colors";
 
 const defaultTheme = createTheme();
+
 
 const ChooseRole = () => {
     return (
@@ -35,20 +37,20 @@ const ChooseRole = () => {
                         ĐĂNG NHẬP VỚI VAI TRÒ
                     </Typography>
                     <Button
-                        href='./login_user'
-                        type="submit"
+                        href='login'
                         fullWidth
                         variant="outlined"
                         sx={{ mt: 3, mb: 2 }}
+                        //onClick={handleSetUser} 
                     >
                         Cán bộ/Sinh viên trường ĐH Bách khoa
                     </Button>
                     <Button
-                        href='./login_admin'
-                        type="submit"
+                        href='login'
                         fullWidth
                         variant="outlined"
                         sx={{ mb: 2 }}
+                        //onClick={handleSetAdmin} 
                     >
                         Quản trị hệ thống
                     </Button>
@@ -57,5 +59,7 @@ const ChooseRole = () => {
         </ThemeProvider>
     )
 }
+
+//export let admin = isAdmin
 
 export default ChooseRole

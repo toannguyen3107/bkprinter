@@ -89,8 +89,8 @@ const Drawer = styled(MuiDrawer, {
 }));
 const item = [{
   icon: <PrintIcon />,
-  name: 'Quan Lý máy in',
-  link: 'edit_info_printer'
+  name: 'Quản lí máy in',
+  link: 'manage_printer'
 },
 {
   icon: <RemoveRedEyeIcon />,

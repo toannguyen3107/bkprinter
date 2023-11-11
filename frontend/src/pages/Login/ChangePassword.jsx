@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState, useRef, useCallback, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import Grid from '@mui/material/Grid';
@@ -10,9 +10,11 @@ import Modal from '@mui/material/Modal';
 import { Link } from 'react-router-dom';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import logo from "/hcmut.png";
-import Password from './Password';
-import { Alert } from '@mui/material';
-import { grey } from "@mui/material/colors";
+import { Alert, TextField } from '@mui/material';
+import IconButton from '@mui/material/IconButton';
+import InputAdornment from '@mui/material/InputAdornment';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
 const defaultTheme = createTheme();
 
@@ -29,79 +31,97 @@ const style = {
   textAlign: 'center'
 };
 
-function ChildModal() {
-  const [openChild, setOpenChild] = useState(false);
-  const handleOpenChild = () => {
-    setOpenChild(true);
-    setOpen(false);
-  };
-
-  return (
-    <React.Fragment>
-      <Button
-        onClick={handleOpenChild}
-        variant="contained"
-        sx={{ mt: 3, mb: 2, width: 150 }}
-      >
-        Xác nhận
-      </Button>
-      <Modal
-        open={openChild}
-        aria-labelledby="child-modal-title"
-        aria-describedby="child-modal-description"
-      >
-        <Box sx={{ ...style, width: 400 }}>
-          <h2 id="child-modal-title">Đổi mật khẩu thành công</h2>
-          <p id="child-modal-description">
-            Nhấn OK để quay về trang đăng nhập.
-          </p>
-          <Link to='/login_user'>
-            <Button
-              variant="contained"
-              sx={{ mt: 3, mb: 2, width: 150 }}
-            >
-              OK
-            </Button>
-          </Link>
-        </Box>
-      </Modal>
-    </React.Fragment>
-  );
-}
 
 const ChangePassword = () => {
-  const [openModal, setOpenModal] = useState(false);
-  const handleCloseModal = () => setOpenModal(false);
+  const [firstModal, setFirstModal] = useState(false);
+  const [secondModal, setSecondModal] = useState(false);
+  const openFirstModal = () => {
+    setFirstModal(true);
+  };
 
-  const [passwords, setPasswords] = useState({
-    old_password: '',
-    new_password: '',
-    confirm_password: '',
-  });
+  const closeFirstModal = () => {
+    setFirstModal(false);
+  };
+
+  const openSecondModal = () => {
+    setSecondModal(true);
+  };
+
+  const [showOldPassword, setShowOldPassword] = useState(false)
+  const [oldPassword, setOldPassword] = useState('')
+
+  const [showNewPassword, setShowNewPassword] = useState(false)
+  const [newPassword, setNewPassword] = useState('')
+
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false)
+  const [confirmPassword, setConfirmPassword] = useState('')
+
+  const handleToggleOldPassword = () => {
+      setShowOldPassword(!showOldPassword);
+      if (oldPasswordInputRef.current) {
+          oldPasswordInputRef.current.focus();
+          requestAnimationFrame(() => {
+              oldPasswordInputRef.current.setSelectionRange(oldPassword.length, oldPassword.length);
+          });
+      }
+  }
+
+  const handleToggleNewPassword = () => {
+    setShowNewPassword(!showNewPassword);
+    if (newPasswordInputRef.current) {
+        newPasswordInputRef.current.focus();
+        requestAnimationFrame(() => {
+            newPasswordInputRef.current.setSelectionRange(newPassword.length, newPassword.length);
+        });
+    }
+  }
+
+  const handleToggleConfirmPassword = () => {
+    setShowConfirmPassword(!showConfirmPassword);
+    if (confirmPasswordInputRef.current) {
+        confirmPasswordInputRef.current.focus();
+        requestAnimationFrame(() => {
+            confirmPasswordInputRef.current.setSelectionRange(confirmPassword.length, confirmPassword.length);
+        });
+    }
+  }
+
+  const oldPasswordInputRef = useRef()
+  const newPasswordInputRef = useRef()
+  const confirmPasswordInputRef = useRef()
+    
+  useEffect(() => {
+      if (oldPassword.inputRef) {
+          oldPassword.inputRef.current = oldPasswordInputRef.current;
+      }
+  }, [oldPassword.inputRef]);
+
+  useEffect(() => {
+    if (newPassword.inputRef) {
+        newPassword.inputRef.current = newPasswordInputRef.current;
+    }
+  }, [newPassword.inputRef]);
+
+  useEffect(() => {
+    if (confirmPassword.inputRef) {
+        confirmPassword.inputRef.current = confirmPasswordInputRef.current;
+    }
+  }, [confirmPassword.inputRef]);
 
   const [error, setError] = useState(null);
-  //const newPassInputRef = useRef(null);
-
-  // const handlePasswordChange = (name, value) => {
-  //   setPasswords((prevPasswords) => ({
-  //     ...prevPasswords,
-  //     [name]: value,
-  //   }));
-  //   setError(null)
-  // };
 
   const handleComparePasswords = () => {
-    const { old_password, new_password, confirm_password } = passwords;
-    console.log(old_password)
-    console.log(new_password)
-    console.log(confirm_password)
-    if (new_password === old_password) {
+    // const { old_password, new_password, confirm_password } = passwords;
+    // console.log(old_password)
+    // console.log(new_password)
+    // console.log(confirm_password)
+    if (newPassword === oldPassword) {
       setError('Mật khẩu mới không được trùng với mật khẩu cũ.');
-    } else if (new_password !== confirm_password) {
+    } else if (newPassword !== confirmPassword) {
       setError('Xác nhận mật khẩu không khớp!');
     } else {
       setError(null);
-      setOpenModal(true);
+      openFirstModal();
     }
   };
 
@@ -123,13 +143,73 @@ const ChangePassword = () => {
             Thay đổi mật khẩu
           </Typography>
           <Box component="form" noValidate sx={{ mt: 1 }}>
-            <Password name="old_password" lable="Mật khẩu cũ"/>
-            <Password name="new_password" lable="Mật khẩu mới" />
-            <Password name="confirm_password" lable="Xác nhận mật khẩu" />
+          <TextField
+                value={oldPassword}
+                margin="normal"
+                required
+                fullWidth
+                name='oldPassword'
+                label='Mật khẩu cũ'
+                type={showOldPassword ? 'text' : 'password'}
+                id='oldPassword'
+                onChange={(e) => setOldPassword(e.target.value)}
+                InputProps={{
+                    endAdornment: (
+                        <InputAdornment position="end">
+                            <IconButton onClick={handleToggleOldPassword} edge="end">
+                                {showOldPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
+                            </IconButton>
+                        </InputAdornment>
+                    ),
+                }}
+                inputRef={oldPasswordInputRef}
+            />
+            <TextField
+                value={newPassword}
+                margin="normal"
+                required
+                fullWidth
+                name='newPassword'
+                label='Mật khẩu mới'
+                type={showNewPassword ? 'text' : 'password'}
+                id='newPassword'
+                onChange={(e) => setNewPassword(e.target.value)}
+                InputProps={{
+                    endAdornment: (
+                        <InputAdornment position="end">
+                            <IconButton onClick={handleToggleNewPassword} edge="end">
+                                {showNewPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
+                            </IconButton>
+                        </InputAdornment>
+                    ),
+                }}
+                inputRef={newPasswordInputRef}
+            />
+            <TextField
+                value={confirmPassword}
+                margin="normal"
+                required
+                fullWidth
+                name='confirmPassword'
+                label='Xác nhận mật khẩu'
+                type={showConfirmPassword ? 'text' : 'password'}
+                id='confirmPassword'
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                InputProps={{
+                    endAdornment: (
+                        <InputAdornment position="end">
+                            <IconButton onClick={handleToggleConfirmPassword} edge="end">
+                                {showConfirmPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
+                            </IconButton>
+                        </InputAdornment>
+                    ),
+                }}
+                inputRef={confirmPasswordInputRef}
+            />
             <Grid container>
               <Grid item xs>
                 <Button
-                  href='./login_user'
+                  href='./login'
                   type="submit"
                   variant="outlined"
                   sx={{ mt: 3, mb: 2, ml: 4, width: 100 }}
@@ -146,8 +226,8 @@ const ChangePassword = () => {
                   Thay đổi
                 </Button>
                 <Modal
-                  open={openModal}
-                  onClose={handleCloseModal}
+                  open={firstModal}
+                  onClose={closeFirstModal}
                   aria-labelledby="modal-modal-title"
                   aria-describedby="modal-modal-description"
                 >
@@ -155,7 +235,43 @@ const ChangePassword = () => {
                     <Typography sx={{ mt: 2 }}>
                       Xác nhận thay đổi mật khẩu?
                     </Typography>
-                    <ChildModal />
+                    <Button
+                      onClick={closeFirstModal}
+                      variant="outlined"
+                      sx={{ mt: 3, mb: 2, mr: 2, width: 110 }}
+                    >
+                      Hủy
+                    </Button>
+                    <Button
+                      onClick={() => {
+                        closeFirstModal();
+                        openSecondModal();
+                      }}
+                      variant="contained"
+                      sx={{ mt: 3, mb: 2, ml: 2, width: 110 }}
+                    >
+                      Xác nhận
+                    </Button>
+                  </Box>
+                </Modal>
+                <Modal
+                  open={secondModal}
+                  aria-labelledby="child-modal-title"
+                  aria-describedby="child-modal-description"
+                >
+                  <Box sx={{ ...style, width: 400 }}>
+                    <h2 id="child-modal-title">Đổi mật khẩu thành công</h2>
+                    <p id="child-modal-description">
+                      Nhấn OK để quay về trang đăng nhập.
+                    </p>
+                    <Link to='/login'>
+                      <Button
+                        variant="contained"
+                        sx={{ mt: 3, mb: 2, width: 150 }}
+                      >
+                        OK
+                      </Button>
+                    </Link>
                   </Box>
                 </Modal>
               </Grid>
