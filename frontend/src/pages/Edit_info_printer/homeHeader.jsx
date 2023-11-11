@@ -144,10 +144,10 @@ const HomeHeader = () => {
     )
 }
 const EditInfoPrinter = () => {
-    // console.log(data[0].id)
+    
     return (
     
-      <EditInfoPrinter_tmp mayin_1 = {data[0]} /> 
+     <EditInfoPrinter_tmp mayin_1 = {data[0]}/> 
     )
   }
 export default EditInfoPrinter

@@ -1,4 +1,4 @@
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Overall from "./pages/Report/Overall";
 import Details from "./pages/Report/Details";
 

@@ -5,8 +5,30 @@ import PrintIcon from '@mui/icons-material/Print';
 import CloseIcon from '@mui/icons-material/Close';
 // import HomeHeader from './homeHeader';
 const EditInfoPrinter_tmp = ({mayin_1}) => {
-    console.log( mayin_1 );
+  console.log( mayin_1);
+  
+  // useEffect(()=>{
+  //   // stateButtonChange();
+  //   document.title = `${mayin_1.name} Edit Information Printer | BKPRINTER `  ;
     
+  // },[mayin_1.id]);
+  
+  // Lưu trạng thái ban đầu
+// var originalState = JSON.stringify(mayin_1);
+
+// // Hàm để lưu trạng thái vào Local Storage
+// function saveState() {
+//     localStorage.setItem('mayin_1', JSON.stringify(mayin_1));
+// }
+
+// // Hàm để khôi phục trạng thái từ Local Storage
+// function restoreState() {
+//     var savedState = localStorage.getItem('mayin_1');
+//     if (savedState) {
+//         mayin_1 = JSON.parse(savedState);
+//         updateDisplay();
+//     }
+// }
 
     function confirmExchange() {
         var confirmed = confirm("Bạn có chắc chắn muốn thay đổi?");
