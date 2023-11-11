@@ -83,7 +83,7 @@ const router = createBrowserRouter([
       },
       {
         path: "manage_printer",
-        element: <Printer_List />,
+        element: <Edit_info_printer />,
       },
     ]:[
       {

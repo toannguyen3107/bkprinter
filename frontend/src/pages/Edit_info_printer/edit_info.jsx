@@ -5,7 +5,7 @@ import PrintIcon from '@mui/icons-material/Print';
 import CloseIcon from '@mui/icons-material/Close';
 // import HomeHeader from './homeHeader';
 const EditInfoPrinter_tmp = ({mayin_1}) => {
-    console.log( mayin_1);
+    console.log( mayin_1 );
     
 
     function confirmExchange() {
