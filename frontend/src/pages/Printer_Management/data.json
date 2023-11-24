@@ -1,13 +1,6 @@
 {
   "Printers": [
     {
-      "id": 3,
-      "name": "MAY-IN-3",
-      "location": "H6 - Tang 1",
-      "state": "Off",
-      "remainingPage": 500
-    },
-    {
       "id": 4,
       "name": "MAY-IN-4",
       "location": "H3 - Tang 1",
@@ -230,6 +223,13 @@
       "location": "H3",
       "state": "Off",
       "remainingPage": "1000"
+    },
+    {
+      "id": "cniFS9e",
+      "name": "",
+      "location": "",
+      "state": "Off",
+      "remainingPage": ""
     }
   ]
 }
