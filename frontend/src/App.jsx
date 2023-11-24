@@ -1,8 +1,8 @@
- import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Overall from "./pages/Report/Overall";
 import Details from "./pages/Report/Details";
 
-import Edit_info_printer from "./pages/Edit_info_printer/edit_info";
+import Edit_info_printer from "./pages/Edit_info_printer/homeHeader";
 import Printer_List from "./pages/Printer_Management/Printer_List";
 import PrinterList from "./pages/PrinterList/PrinterList";
 import Upload from "./pages/Print/Upload";
@@ -83,6 +83,10 @@ const router = createBrowserRouter([
       },
       {
         path: "manage_printer",
+        element: <Printer_List />,
+      },
+      {
+        path: "edit_printer",
         element: <Edit_info_printer />,
       },
     ]:[

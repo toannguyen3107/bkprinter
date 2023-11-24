@@ -12,11 +12,15 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
+import ToggleOnIcon from '@mui/icons-material/ToggleOn';
+import ToggleOffIcon from '@mui/icons-material/ToggleOff';
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import { Modal, Typography, Button } from '@mui/material';
 
 const maxRows = 10;
+const printerApi = "http://localhost:3001/Printers"
 
 function TablePaginationActions(props) {
     const theme = useTheme();
@@ -63,8 +67,24 @@ const style = {
   textAlign: 'center'
 };
 
+function PrinterStatus(status) {
+  const [state, setState] = React.useState(status)
+  if (state === "On") {
+    return (
+      <ToggleOnIcon color='success' onClick={() => {
+        setState("Off")
+      }}/>
+    )
+  } else {
+    return (
+      <ToggleOffIcon color='error' onClick={() => {
+        setState("On")
+      }}/>
+    )  
+  }
+}
 
-function deletePrinter(name) {
+function deletePrinter(id) {
     const [firstModal, setFirstModal] = React.useState(false);
     const [secondModal, setSecondModal] = React.useState(false);
     const openFirstModal = () => {
@@ -82,10 +102,23 @@ function deletePrinter(name) {
     const closeSecondModal = () => {
       setSecondModal(false);
     };
+    
+    const handleDeletePrinter = () => {
+      var options = {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        }
+      }
+      fetch(printerApi + '/' + id, options)
+        .then(response => response.json())
+        .then(function() {})
+    }
 
     const handleDelete = () => {
       closeFirstModal()
       openSecondModal()
+      handleDeletePrinter()
     }
     return (
         <div>
@@ -98,7 +131,7 @@ function deletePrinter(name) {
             >
                 <Box sx={style}>
                     <Typography sx={{ mt: 2 }}>
-                        Bạn muốn xóa máy in {name} chứ?
+                        Bạn muốn xóa máy in số {id} chứ?
                     </Typography>
                     <Button
                       onClick={closeFirstModal}
@@ -124,7 +157,7 @@ function deletePrinter(name) {
             >
               <Box sx={{ ...style, width: 400 }}>
                 <p id="child-modal-description">
-                  Máy in {name} đã được xóa.
+                  Máy in số {id} đã được xóa.
                 </p>
                 <Button
                   onClick={closeSecondModal}
@@ -153,6 +186,9 @@ export const PrinterTable = ({searchstring, rows}) => {
       }
       else return row.location.toLowerCase().includes(searchstring);
     })
+
+
+
     const emptyRows =
         page > 0 ? Math.max(0, (1 + page) - filteredRows.length) : 0;
     if (filteredRows.length < maxRows*(page - 1))
@@ -171,8 +207,8 @@ export const PrinterTable = ({searchstring, rows}) => {
                         <TableCell>ID</TableCell>
                         <TableCell align="left" style={{width: 200}}>Name</TableCell>
                         <TableCell align="left" style={{width: 200}}>Location</TableCell>
-                        <TableCell align="left" style={{width: 200}}>State</TableCell>
                         <TableCell align="left" style={{width: 200}}>Remaining Page</TableCell>
+                        <TableCell align="left" style={{width: 200}}>State</TableCell>
                         <TableCell align="left"></TableCell>
                     </TableRow>
                 </TableHead>
@@ -188,9 +224,10 @@ export const PrinterTable = ({searchstring, rows}) => {
                         </TableCell>
                         <TableCell align="left">{row.name}</TableCell>
                         <TableCell align="left">{row.location}</TableCell>
-                        <TableCell align="left">{row.state}</TableCell>
                         <TableCell align="left">{row.remainingPage}</TableCell>
-                        <TableCell align="left">{deletePrinter(row.name)}</TableCell>
+                        <TableCell align="left">{PrinterStatus(row.state)}</TableCell>
+                        <TableCell align="left"><EditIcon /></TableCell>
+                        <TableCell align="left">{deletePrinter(row.id)}</TableCell>
                     </TableRow>
                 ))}
                  {emptyRows > 0 && (

@@ -5,7 +5,7 @@ import PrintIcon from '@mui/icons-material/Print';
 import CloseIcon from '@mui/icons-material/Close';
 // import HomeHeader from './homeHeader';
 const EditInfoPrinter_tmp = ({mayin_1}) => {
-  console.log( mayin_1);
+  //console.log( mayin_1);
   
   // useEffect(()=>{
   //   // stateButtonChange();
@@ -117,7 +117,8 @@ const EditInfoPrinter_tmp = ({mayin_1}) => {
                 </tr>
                 <tr className="tbflex" >
                   <td >
-                    <span style={{fontSize: '1rem'}}>Trạng thái:</span> </td>
+                    <span style={{fontSize: '1rem'}}>Trạng thái:</span> 
+                  </td>
                   <td>
                     <div className="toggle-button-cover">
                       <div className="button-cover">
@@ -125,7 +126,6 @@ const EditInfoPrinter_tmp = ({mayin_1}) => {
                         <input type="checkbox" className="checkbox" id="toggleButton" onClick={changeButton} />
                           <div className="knobs" />
                           <div className="layer" />
-                          
                         </div>
                       </div>
                     </div>
