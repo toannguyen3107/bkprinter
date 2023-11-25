@@ -85,12 +85,14 @@ function PrinterStatus(status) {
     )  
   }
 }
-function editPrinter(row){
+function editPrinter(id){
+  console.log(data.Printers[id]);
   return (
+    
     <Link
       to={{
         pathname: '/app/edit_printer',
-        state: { mayin_1: row },
+        state: { mayin_1: data.Printers[id] },
       }}
       
     >
@@ -242,7 +244,7 @@ export const PrinterTable = ({searchstring, rows}) => {
                         <TableCell align="left">{row.remainingPage}</TableCell>
                         <TableCell align="left">{PrinterStatus(row.state)}</TableCell>
                         <TableCell align="left">
-                          {editPrinter(row)}
+                          {editPrinter(row.id)}
                         
                         </TableCell>
                         <TableCell align="left">{deletePrinter(row.id)}</TableCell>

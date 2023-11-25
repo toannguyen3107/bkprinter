@@ -4,14 +4,14 @@
         "name": "MAY-IN-1",
         "location": "H1 - Tang 1",
         "remainingPage": "1000",
-        "state": "ON"        
+        "state": "On"        
     },
     {
         "id": "2",
         "name": "MAY-IN-2",
         "location": "H1 - Tang 2",
         "remainingPage": "1000",
-        "state": "OFF"
+        "state": "Off"
         
     },
     {
@@ -19,7 +19,7 @@
         "name": "MAY-IN-3",
         "location": "H6 - Tang 1",
         "remainingPage": "1000",
-        "state": "ON"        
+        "state": "On"        
     },
     {
         "id": 4,
