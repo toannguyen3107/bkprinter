@@ -4,232 +4,232 @@
         "id": 4,
         "name": "MAY-IN-4",
         "location": "H3 - Tang 1",
-        "state": "Off",
-        "remainingPage": 0
+        "remainingPage": 0,
+        "state": "Off"
       },
       {
         "id": 5,
         "name": "MAY-IN-5",
         "location": "H2 - Tang 1",
-        "state": "On",
-        "remainingPage": 1000
+        "remainingPage": 1000,
+        "state": "On"
       },
       {
         "id": 6,
         "name": "MAY-IN-6",
         "location": "H6 - Tang 2",
-        "state": "On",
-        "remainingPage": 1000
+        "remainingPage": 1000,
+        "state": "On"
       },
       {
         "id": 7,
         "name": "MAY-IN-1",
         "location": "H1 - Tang 1",
-        "state": "On",
-        "remainingPage": 1000
+        "remainingPage": 1000,
+        "state": "On"
       },
       {
         "id": 8,
         "name": "MAY-IN-2",
         "location": "H1 - Tang 2",
-        "state": "On",
-        "remainingPage": 900
+        "remainingPage": 900,
+        "state": "On"
       },
       {
         "id": 9,
         "name": "MAY-IN-3",
         "location": "H6 - Tang 1",
-        "state": "Off",
-        "remainingPage": 500
+        "remainingPage": 500,
+        "state": "Off"
       },
       {
         "id": 10,
         "name": "MAY-IN-4",
         "location": "H3 - Tang 1",
-        "state": "Off",
-        "remainingPage": 0
+        "remainingPage": 0,
+        "state": "Off"
       },
       {
         "id": 11,
         "name": "MAY-IN-5",
         "location": "H2 - Tang 1",
-        "state": "On",
-        "remainingPage": 1000
+        "remainingPage": 1000,
+        "state": "On"
       },
       {
         "id": 12,
         "name": "MAY-IN-6",
         "location": "H6 - Tang 2",
-        "state": "On",
-        "remainingPage": 1000
+        "remainingPage": 1000,
+        "state": "On"
       },
       {
         "id": 13,
         "name": "MAY-IN-1",
         "location": "H1 - Tang 1",
-        "state": "On",
-        "remainingPage": 1000
+        "remainingPage": 1000,
+        "state": "On"
       },
       {
         "id": 14,
         "name": "MAY-IN-2",
         "location": "H1 - Tang 2",
-        "state": "On",
-        "remainingPage": 900
+        "remainingPage": 900,
+        "state": "On"
       },
       {
         "id": 15,
         "name": "MAY-IN-3",
         "location": "H6 - Tang 1",
-        "state": "Off",
-        "remainingPage": 500
+        "remainingPage": 500,
+        "state": "Off"
       },
       {
         "id": 16,
         "name": "MAY-IN-4",
         "location": "H3 - Tang 1",
-        "state": "Off",
-        "remainingPage": 0
+        "remainingPage": 0,
+        "state": "Off"
       },
       {
         "id": 17,
         "name": "MAY-IN-5",
         "location": "H2 - Tang 1",
-        "state": "On",
-        "remainingPage": 1000
+        "remainingPage": 1000,
+        "state": "On"
       },
       {
         "id": 18,
         "name": "MAY-IN-6",
         "location": "H6 - Tang 2",
-        "state": "On",
-        "remainingPage": 1000
+        "remainingPage": 1000,
+        "state": "On"
       },
       {
         "id": 19,
         "name": "MAY-IN-1",
         "location": "H1 - Tang 1",
-        "state": "On",
-        "remainingPage": 1000
+        "remainingPage": 1000,
+        "state": "On"
       },
       {
         "id": 20,
         "name": "MAY-IN-2",
         "location": "H1 - Tang 2",
-        "state": "On",
-        "remainingPage": 900
+        "remainingPage": 900,
+        "state": "On"
       },
       {
         "id": 21,
         "name": "MAY-IN-3",
         "location": "H6 - Tang 1",
-        "state": "Off",
-        "remainingPage": 500
+        "remainingPage": 500,
+        "state": "Off"
       },
       {
         "id": 22,
         "name": "MAY-IN-4",
         "location": "H3 - Tang 1",
-        "state": "Off",
-        "remainingPage": 0
+        "remainingPage": 0,
+        "state": "Off"
       },
       {
         "id": 23,
         "name": "MAY-IN-5",
         "location": "H2 - Tang 1",
-        "state": "On",
-        "remainingPage": 1000
+        "remainingPage": 1000,
+        "state": "On"
       },
       {
         "id": 24,
         "name": "MAY-IN-6",
         "location": "H6 - Tang 2",
-        "state": "On",
-        "remainingPage": 1000
+        "remainingPage": 1000,
+        "state": "On"
       },
       {
         "id": "25",
         "name": "Thang",
         "location": "H1",
-        "state": "On",
-        "remainingPage": "30"
+        "remainingPage": "30",
+        "state": "On"
       },
       {
         "id": "26",
         "name": "Thang",
         "location": "H1",
-        "state": "Off",
-        "remainingPage": "30"
+        "remainingPage": "30",
+        "state": "Off"
       },
       {
         "id": "gfdcdXt",
         "name": "",
         "location": "",
-        "state": "Off",
-        "remainingPage": ""
+        "remainingPage": "",
+        "state": "Off"
       },
       {
         "id": "snSJ7wj",
         "name": "",
         "location": "",
-        "state": "Off",
-        "remainingPage": ""
+        "remainingPage": "",
+        "state": "Off"
       },
       {
         "id": "dl3UuWJ",
         "name": "",
         "location": "",
-        "state": "Off",
-        "remainingPage": ""
+        "remainingPage": "",
+        "state": "Off"
       },
       {
         "id": "ErcZyHB",
         "name": "",
         "location": "",
-        "state": "Off",
-        "remainingPage": ""
+        "remainingPage": "",
+        "state": "Off"
       },
       {
         "id": "oFUb2Dh",
         "name": "",
         "location": "",
-        "state": "Off",
-        "remainingPage": ""
+        "remainingPage": "",
+        "state": "Off"
       },
       {
         "id": "4gBMLak",
         "name": "",
         "location": "",
-        "state": "Off",
-        "remainingPage": ""
+        "remainingPage": "",
+        "state": "Off"
       },
       {
         "id": "30",
         "name": "Thang",
         "location": "H1",
-        "state": "On",
-        "remainingPage": "300"
+        "remainingPage": "300",
+        "state": "On"
       },
       {
         "id": "50",
         "name": "",
         "location": "",
-        "state": "Off",
-        "remainingPage": ""
+        "remainingPage": "",
+        "state": "Off"
       },
       {
         "id": "1",
         "name": "Máy in 1",
         "location": "H3",
-        "state": "Off",
-        "remainingPage": "1000"
+        "remainingPage": "1000",
+        "state": "Off"
       },
       {
         "id": "cniFS9e",
         "name": "",
         "location": "",
-        "state": "Off",
-        "remainingPage": ""
+        "remainingPage": "",
+        "state": "Off"
       }
     ]
   }
