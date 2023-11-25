@@ -4,7 +4,9 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Typography from '@mui/material/Typography';
 import Avatar from '@mui/material/Avatar';
 import EditInfoPrinter from './edit_info'
-import data from './data.json'
+import data from './data.json';
+import { useParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 const HomeHeader = () => {
     return (
         <Box component="header"
@@ -136,11 +138,15 @@ const HomeHeader = () => {
     )
 }
 const EditInfoPrinterrr = () => {
-    
-    return (
-    
-     <EditInfoPrinter mayin_1 = {data[0]} /> 
-    )
+    const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const id = searchParams.get('id');
+
+  console.log(id);
+  const index = data.Printers.findIndex(printer => printer.id == id);
+  return (
+    <EditInfoPrinter mayin_1={data.Printers[index]} />
+  );
   }
 export default EditInfoPrinterrr
 // export default HomeHeader

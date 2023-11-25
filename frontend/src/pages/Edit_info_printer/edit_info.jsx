@@ -38,10 +38,11 @@ const EditInfoPrinter = ({mayin_1}) => {
             var propertyKey = Object.keys(mayin_1);
             for (var i = 0; i < propertyKey.length - 1; i++) {
                 var key = propertyKey[i];
-                if (document.myForm[key].value !== "")
-                    {mayin_1[key] = document.myForm[key].value;}
+                if (document.myForm[key].value != "")
+                    {mayin_1[key] = document.myForm[key].value;
+                      console.log(mayin_1);}
             }
-            console.log(mayin_1);
+            
             alert("Thay đổi đã được thực hiện!");
         } else {
             alert("Thay đổi không được thực hiện.");
@@ -141,8 +142,16 @@ const EditInfoPrinter = ({mayin_1}) => {
                 </tr>
               </tbody></table>
             <div className="mysubmit">
-              <input className="btn-submit" type="submit" value="Hủy" onClick={confirmCancel} />
-              <input className="btn-submit btn-submit-change" type="submit" value="Thay đổi" onClick={confirmExchange} />
+              <input className="btn-submit" value="Hủy"
+              type="button"  
+              // type="submit"  
+              // onClick={confirmCancel} 
+              />
+              <input className="btn-submit btn-submit-change" value="Thay đổi" 
+              type="button"
+              // type="submit" 
+              // onClick={confirmExchange} 
+              />
             </div>
           </form>
         </div>
