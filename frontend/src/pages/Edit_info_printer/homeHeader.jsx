@@ -3,7 +3,7 @@ import React from 'react'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Typography from '@mui/material/Typography';
 import Avatar from '@mui/material/Avatar';
-import EditInfoPrinter_tmp from './edit_info'
+import EditInfoPrinter from './edit_info'
 import data from './data.json'
 const HomeHeader = () => {
     return (
@@ -135,12 +135,12 @@ const HomeHeader = () => {
         </Box>
     )
 }
-const EditInfoPrinter = () => {
+const EditInfoPrinterrr = () => {
     
     return (
     
-     <EditInfoPrinter_tmp mayin_1 = {data[0]} /> 
+     <EditInfoPrinter mayin_1 = {data[0]} /> 
     )
   }
-export default EditInfoPrinter
+export default EditInfoPrinterrr
 // export default HomeHeader

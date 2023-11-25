@@ -18,7 +18,9 @@ import ToggleOffIcon from '@mui/icons-material/ToggleOff';
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import { Modal, Typography, Button } from '@mui/material';
-
+import EditInfoPrinter from '../Edit_info_printer/edit_info'
+import data from "./data.json";
+import { Link } from 'react-router-dom'
 const maxRows = 10;
 const printerApi = "http://localhost:3001/Printers"
 
@@ -83,7 +85,20 @@ function PrinterStatus(status) {
     )  
   }
 }
-
+function editPrinter(row){
+  return (
+    <Link
+      to={{
+        pathname: '/app/edit_printer',
+        state: { mayin_1: row },
+      }}
+      
+    >
+      <EditIcon />
+    </Link>
+  );
+  
+}
 function deletePrinter(id) {
     const [firstModal, setFirstModal] = React.useState(false);
     const [secondModal, setSecondModal] = React.useState(false);
@@ -226,7 +241,10 @@ export const PrinterTable = ({searchstring, rows}) => {
                         <TableCell align="left">{row.location}</TableCell>
                         <TableCell align="left">{row.remainingPage}</TableCell>
                         <TableCell align="left">{PrinterStatus(row.state)}</TableCell>
-                        <TableCell align="left"><EditIcon /></TableCell>
+                        <TableCell align="left">
+                          {editPrinter(row)}
+                        
+                        </TableCell>
                         <TableCell align="left">{deletePrinter(row.id)}</TableCell>
                     </TableRow>
                 ))}

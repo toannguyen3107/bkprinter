@@ -3,22 +3,29 @@
         "id": "1",
         "name": "MAY-IN-1",
         "location": "H1 - Tang 1",
-        "noPage": "1000",
-        "storedStatus": "ON"        
+        "remainingPage": "1000",
+        "state": "ON"        
     },
     {
         "id": "2",
         "name": "MAY-IN-2",
         "location": "H1 - Tang 2",
-        "noPage": "1000",
-        "storedStatus": "OFF"
+        "remainingPage": "1000",
+        "state": "OFF"
         
     },
     {
         "id": "3",
         "name": "MAY-IN-3",
         "location": "H6 - Tang 1",
-        "noPage": "1000",
-        "storedStatus": "ON"        
+        "remainingPage": "1000",
+        "state": "ON"        
+    },
+    {
+        "id": 4,
+        "name": "MAY-IN-4",
+        "location": "H3 - Tang 1",
+        "state": "Off",
+        "remainingPage": 0
     }
     ]

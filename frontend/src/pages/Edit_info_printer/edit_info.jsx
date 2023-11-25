@@ -3,9 +3,10 @@ import { Box } from '@mui/material'
 import data from './data.json'
 import PrintIcon from '@mui/icons-material/Print';
 import CloseIcon from '@mui/icons-material/Close';
+import { Link } from 'react-router-dom'
 // import HomeHeader from './homeHeader';
-const EditInfoPrinter_tmp = ({mayin_1}) => {
-  //console.log( mayin_1);
+const EditInfoPrinter = ({mayin_1}) => {
+  console.log( mayin_1);
   
   // useEffect(()=>{
   //   // stateButtonChange();
@@ -58,16 +59,20 @@ const EditInfoPrinter_tmp = ({mayin_1}) => {
         alert("Hủy đã được thực hiện!");
     }
     function closeMain() {
-      var mainElement = document.querySelector('.body-main');
-      if (mainElement) {
-          mainElement.style.display = 'none';
-      }
+      // var mainElement = document.querySelector('.body-main');
+      // if (mainElement) {
+      //     mainElement.style.display = 'none';
+      // }
+      return (
+        <Link to="/app/manage_printer">
+            
+        </Link>);
     }
     function changeButton(){
-      if (mayin_1.storedStatus === "ON") {
-        mayin_1.storedStatus = "OFF";
+      if (mayin_1.state === "ON") {
+        mayin_1.state = "OFF";
       } else {
-        mayin_1.storedStatus = "ON";
+        mayin_1.state = "ON";
       }
     }
 
@@ -85,10 +90,13 @@ const EditInfoPrinter_tmp = ({mayin_1}) => {
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
         <div className="body-main">
           <form className="main" name="myForm">
-            <CloseIcon
+          <Link to="/app/manage_printer">
+          <CloseIcon
               className='close-icon'
               onClick={closeMain}
             />
+          </Link>;
+            
             <div className="btn-info">
               <PrintIcon
               className="info-icon"
@@ -109,11 +117,11 @@ const EditInfoPrinter_tmp = ({mayin_1}) => {
                 </tr>
                 <tr className="tbflex">
                 <td id="vi-tri-may-in" style={{fontSize: '1rem'}}>Vị trí: {mayin_1.location}</td>
-                  <td><input className="input-change" type="text" name="noPage" placeholder="Vị trí mới" style={{height: '2rem', fontSize: '1rem'}} /></td>
+                  <td><input className="input-change" type="text" name="location" placeholder="Vị trí mới" style={{height: '2rem', fontSize: '1rem'}} /></td>
                 </tr>
                 <tr className="tbflex">
-                <td id="so-giay" style={{fontSize: '1rem'}}>Số giấy: {mayin_1.noPage}</td>
-                  <td><input className="input-change" type="text" name="location" placeholder="Số giấy mới" style={{height: '2rem', fontSize: '1rem'}} /></td>
+                <td id="so-giay" style={{fontSize: '1rem'}}>Số giấy: {mayin_1.remainingPage}</td>
+                  <td><input className="input-change" type="text" name="remainingPage" placeholder="Số giấy mới" style={{height: '2rem', fontSize: '1rem'}} /></td>
                 </tr>
                 <tr className="tbflex" >
                   <td >
@@ -122,7 +130,7 @@ const EditInfoPrinter_tmp = ({mayin_1}) => {
                   <td>
                     <div className="toggle-button-cover">
                       <div className="button-cover">
-                        <div className = {`button r ${mayin_1.storedStatus}`} id="button-1"  >
+                        <div className = {`button r ${mayin_1.state}`} id="button-1"  >
                         <input type="checkbox" className="checkbox" id="toggleButton" onClick={changeButton} />
                           <div className="knobs" />
                           <div className="layer" />
@@ -145,4 +153,4 @@ const EditInfoPrinter_tmp = ({mayin_1}) => {
 
 }
 
-export default EditInfoPrinter_tmp
+export default EditInfoPrinter

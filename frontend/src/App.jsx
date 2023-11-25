@@ -26,7 +26,7 @@ import { Ticket } from "./pages/Feedback/TicketList";
 import { TicketDetail } from "./pages/Feedback/TicketDetail";
 import { SampleQuest } from "./pages/Feedback/AllQuest";
 import { Bill } from "./pages/Bill";
-
+import EditInfoPrinterrr from "./pages/Edit_info_printer/homeHeader";
 import DashboardAdmin from "./pages/Dashboard/DashboardAdmin";
 
 const isAdmin = true
@@ -87,7 +87,7 @@ const router = createBrowserRouter([
       },
       {
         path: "edit_printer",
-        element: <Edit_info_printer />,
+        element: <EditInfoPrinterrr />,
       },
     ]:[
       {
