@@ -8,13 +8,6 @@
       "remainingPage": 0
     },
     {
-      "id": 5,
-      "name": "MAY-IN-5",
-      "location": "H2 - Tang 1",
-      "state": "On",
-      "remainingPage": 1000
-    },
-    {
       "id": 6,
       "name": "MAY-IN-6",
       "location": "H6 - Tang 2",
@@ -226,6 +219,13 @@
     },
     {
       "id": "cniFS9e",
+      "name": "",
+      "location": "",
+      "state": "Off",
+      "remainingPage": ""
+    },
+    {
+      "id": "-9MpyqH",
       "name": "",
       "location": "",
       "state": "Off",

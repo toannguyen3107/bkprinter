@@ -137,7 +137,7 @@ function deletePrinter(id) {
     }
     return (
         <div>
-            <DeleteIcon onClick={openFirstModal}/>
+            <DeleteIcon onClick={openFirstModal} sx={{cursor: "pointer"}}/>
             <Modal
                 open={firstModal}
                 onClose={closeFirstModal}
