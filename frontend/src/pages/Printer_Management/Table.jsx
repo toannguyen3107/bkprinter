@@ -21,6 +21,7 @@ import { Modal, Typography, Button } from '@mui/material';
 import EditInfoPrinter from '../Edit_info_printer/edit_info'
 import data from "./data.json";
 import { Link } from 'react-router-dom'
+import EditInfoPrinterrr from '../Edit_info_printer/homeHeader';
 const maxRows = 10;
 const printerApi = "http://localhost:3001/Printers"
 
@@ -85,18 +86,24 @@ function PrinterStatus(status) {
     )  
   }
 }
-function editPrinter(row){
-  return (
-    <Link
-      to={{
-        pathname: '/app/edit_printer',
-        state: { mayin_1: row },
-      }}
+function editPrinter(id){
+  console.log(data.Printers[id]);
+  // return (
+    
+  //   <Link
+  //     to={{
+  //       pathname: '/app/edit_printer',
+  //       state: { mayin_1: data.Printers[id] },
+  //     }}
       
-    >
-      <EditIcon />
-    </Link>
+  //   >
+  //     <EditIcon />
+  //   </Link>
+  // );
+  return (
+    <EditIcon onClick={() => window.location.href = `/app/edit_printer?id=${id}`} />
   );
+  
   
 }
 function deletePrinter(id) {
@@ -242,7 +249,7 @@ export const PrinterTable = ({searchstring, rows}) => {
                         <TableCell align="left">{row.remainingPage}</TableCell>
                         <TableCell align="left">{PrinterStatus(row.state)}</TableCell>
                         <TableCell align="left">
-                          {editPrinter(row)}
+                          {editPrinter(row.id)}
                         
                         </TableCell>
                         <TableCell align="left">{deletePrinter(row.id)}</TableCell>
