@@ -1,10 +1,7 @@
 import { Router } from "express";
-import { createActivity, getAllActivities } from "../controllers/activityController";
+import { createActivity, getAllActivities, getAllActivitiesByDate } from "../controllers/activityController.js";
 const router = Router();
 
-router.route("/").get(getAllActivities);
-router
-  .route("/:id")
-  .get(getAllActivities).post(createActivity);
+router.route("/").get(getAllActivities).post(createActivity);
 
 export default router;

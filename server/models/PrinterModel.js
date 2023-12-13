@@ -3,7 +3,12 @@ import mongoose from "mongoose";
 const printerSchema = new mongoose.Schema(
   {
     printerId: String,
-    location: String,
+    location: {
+      campus: { type: String },
+      building: { type: String },
+      room: { type: String },
+    },
+    isColorPrinter:Boolean,
     pagesRemaining: Number,
     model: String,
     make: String,

@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 
 const ReportNav = ({ option, reportDate, startDate, endDate }) => {
   const { sOverall, sDetails } = option;
+  
   return (
     <Box
       sx={{

@@ -3,18 +3,21 @@ import morgan from "morgan";
 import * as dotenv from "dotenv";
 dotenv.config({ path: "../.env" });
 import mongoose from "mongoose";
-// import userRouter from './routes/userRouter.js';
-import printerRouter from './routes/printerRouter.js';
+import userRouter from "./routes/userRouter.js";
+import printerRouter from "./routes/printerRouter.js";
+import activityRouter from "./routes/activityRouter.js";
 
 const app = express();
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
 }
 
-// app.use('/api/users', userRouter);
-app.use('/api/printers', printerRouter);
+app.use("/api/users", userRouter);
+app.use("/api/printers", printerRouter);
+app.use("/api/activities", activityRouter);
 
 app.use("*", (req, res) => {
   res.status(404).json({ message: "not found" });

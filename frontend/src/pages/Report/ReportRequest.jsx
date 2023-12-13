@@ -21,8 +21,8 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { Link, Outlet } from "react-router-dom";
 import ReportNav from "./ReportNav";
-import dayjs from 'dayjs';
-import utc from 'dayjs/plugin/utc'
+import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
 dayjs.extend(utc);
 
 const ReportRequest = () => {
@@ -39,12 +39,12 @@ const ReportRequest = () => {
   const [option, setOption] = useState("lastWeek");
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
-  const [controlledStartDate, setControlledStartDate] = useState(null);
-  const [controlledEndDate, setControlledEndDate] = useState(null);
+  const [controlledStartDate, setControlledStartDate] = useState(dayjs());
+  const [controlledEndDate, setControlledEndDate] = useState(dayjs());
   useEffect(() => {
     setEndDate(dayjs());
     const newStart = dayjs();
-    newStart.subtract(7, 'd')
+    newStart.subtract(7, "d");
     newStart.hour(0);
     newStart.minute(0);
     newStart.second(0);
@@ -85,9 +85,9 @@ const ReportRequest = () => {
       console.log(newStart);
     }
     if (option === "lastMonth") {
-      const newEnd = dayjs().endOf('d');
+      const newEnd = dayjs().endOf("d");
       setEndDate(newEnd);
-      const newStart = dayjs().subtract(30, "d").startOf('d');
+      const newStart = dayjs().subtract(30, "d").startOf("d");
       setStartDate(newStart);
     }
     if (option === "custom") {
@@ -97,7 +97,7 @@ const ReportRequest = () => {
       setStartDate(newStart);
     }
     handleClose();
-    setReportDate(dayjs().format('DD/MM/YYYY hh:mm:ss A'));
+    setReportDate(dayjs().format("DD/MM/YYYY hh:mm:ss A"));
     setSOverall(overall);
     setSDetails(details);
   };
@@ -138,11 +138,15 @@ const ReportRequest = () => {
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <DemoContainer components={["DatePicker", "DatePicker"]}>
                     <DatePicker
+                      disableFuture
                       label="Ngày bắt đầu"
                       value={controlledStartDate}
-                      onChange={(newValue) => { setControlledStartDate(newValue)}}
+                      onChange={(newValue) => {
+                        setControlledStartDate(newValue);
+                      }}
                     />
                     <DatePicker
+                      disableFuture
                       label="Ngày kết thúc"
                       value={controlledEndDate}
                       onChange={(newValue) => setControlledEndDate(newValue)}
@@ -183,19 +187,23 @@ const ReportRequest = () => {
               />
             </FormGroup>
             {error && <FormHelperText>Chọn định dạng báo cáo</FormHelperText>}
+            <DialogActions>
+              <Button onClick={handleClose}>Hủy</Button>
+              <Button
+                disabled={error}
+                variant="contained"
+                onClick={handleSubmit}
+              >
+                <Box>
+                  <Link to={overall ? "overall" : "details"}>
+                    {" "}
+                    <span style={{ color: "white" }}>Tạo báo cáo</span>
+                  </Link>
+                </Box>
+              </Button>
+            </DialogActions>
           </FormControl>
         </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>Hủy</Button>
-          <Button variant="contained" onClick={handleSubmit}>
-            <Box>
-              <Link to={overall ? "overall" : "details"}>
-                {" "}
-                <span style={{ color: "white" }}>Tạo báo cáo</span>
-              </Link>
-            </Box>
-          </Button>
-        </DialogActions>
       </Dialog>
       {reportDate && (
         <Box
