@@ -6,10 +6,12 @@ import mongoose from "mongoose";
 import userRouter from "./routes/userRouter.js";
 import printerRouter from "./routes/printerRouter.js";
 import activityRouter from "./routes/activityRouter.js";
+import cors from 'cors';
 
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cors());
 
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));

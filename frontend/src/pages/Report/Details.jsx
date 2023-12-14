@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 
-const Details = () => {
+const Details = (data) => {
   const [options, setOptions] = useState([]);
   const [option, setOption] = useState("");
   const [location, setLocation] = useState();

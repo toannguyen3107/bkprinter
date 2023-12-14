@@ -1,9 +1,9 @@
 import { Box, Button, Divider, Grid, Stack } from "@mui/material";
 import { NavLink } from "react-router-dom";
 
-const ReportNav = ({ option, reportDate, startDate, endDate }) => {
+const ReportNav = ({ option, reportDate, startDate, endDate}) => {
   const { sOverall, sDetails } = option;
-  
+
   return (
     <Box
       sx={{
@@ -31,7 +31,6 @@ const ReportNav = ({ option, reportDate, startDate, endDate }) => {
                   : { color: "#000" }
               }
               to="overall"
-              
             >
               Tổng thể
             </NavLink>
@@ -59,10 +58,8 @@ const ReportNav = ({ option, reportDate, startDate, endDate }) => {
             Lưu
           </Button>
         </Stack>
-        <p
-          style={{ marginLeft: "auto", color: "#636363", fontSize: "13px" }}
-        >
-          Thời gian tạo {reportDate.toLocaleString("en-GB")}
+        <p style={{ marginLeft: "auto", color: "#636363", fontSize: "13px" }}>
+          Thời gian tạo: {reportDate.toLocaleString("en-GB")}
         </p>
       </Grid>
       <Divider sx={{ mt: 1 }} />

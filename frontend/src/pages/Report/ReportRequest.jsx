@@ -23,6 +23,7 @@ import { Link, Outlet } from "react-router-dom";
 import ReportNav from "./ReportNav";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
+import customFetch from "../../../../server/utils/customFetch";
 dayjs.extend(utc);
 
 const ReportRequest = () => {
@@ -41,6 +42,27 @@ const ReportRequest = () => {
   const [endDate, setEndDate] = useState(null);
   const [controlledStartDate, setControlledStartDate] = useState(dayjs());
   const [controlledEndDate, setControlledEndDate] = useState(dayjs());
+  const [data, setData] = useState([]);
+  const [freq, setFreq] = useState([]);
+  const [printer, setPrinter] = useState(0);
+  const [location,setLocation]=useState([])
+
+  const fetchData = async (start, end) => {
+    const response = await customFetch(
+      `/activities?startDate=${start.toISOString()}&endDate=${end.toISOString()}&timestamp=false`
+    );
+    setData(response.data.activities);
+    setPrinter(response.data.totalPrinter);
+    setLocation(response.data.location)
+  };
+
+  const fetchFreq = async (start, end) => {
+    const response = await customFetch(
+      `/activities?startDate=${start.toISOString()}&endDate=${end.toISOString()}&timestamp=true`
+    );
+    setFreq(response.data.activities);
+  };
+
   useEffect(() => {
     setEndDate(dayjs());
     const newStart = dayjs();
@@ -77,29 +99,45 @@ const ReportRequest = () => {
   const [sDetails, setSDetails] = useState(null);
 
   const handleSubmit = () => {
+    let start = dayjs();
+    let end = dayjs();
     if (option === "lastWeek") {
-      const newEnd = dayjs().endOf("d");
-      setEndDate(newEnd);
-      const newStart = dayjs().subtract(7, "d").startOf("d");
-      setStartDate(newStart);
-      console.log(newStart);
+      end = dayjs().endOf("d");
+      setEndDate(end);
+      start = dayjs().subtract(7, "d").startOf("d");
+      setStartDate(start);
     }
     if (option === "lastMonth") {
-      const newEnd = dayjs().endOf("d");
-      setEndDate(newEnd);
-      const newStart = dayjs().subtract(30, "d").startOf("d");
-      setStartDate(newStart);
+      end = dayjs().endOf("d");
+      setEndDate(end);
+      start = dayjs().subtract(30, "d").startOf("d");
+      setStartDate(start);
     }
     if (option === "custom") {
-      const newEnd = dayjs(controlledEndDate).endOf("d");
-      setEndDate(newEnd);
-      const newStart = dayjs(controlledStartDate).startOf("d");
-      setStartDate(newStart);
+      end = dayjs(controlledEndDate).endOf("d");
+      setEndDate(end);
+      start = dayjs(controlledStartDate).startOf("d");
+      setStartDate(start);
     }
     handleClose();
     setReportDate(dayjs().format("DD/MM/YYYY hh:mm:ss A"));
     setSOverall(overall);
     setSDetails(details);
+
+    fetchData(start.$d, end.$d);
+    if (data) {
+      fetchFreq(start.$d, end.$d);
+      
+      setFreq(
+        [...freq].sort((a, b) => {
+          const dateA = new Date(a.date);
+          const dateB = new Date(b.date);
+
+          return dateA - dateB;
+        })
+      );
+      console.log(freq);
+    }
   };
 
   return (
@@ -193,6 +231,7 @@ const ReportRequest = () => {
                 disabled={error}
                 variant="contained"
                 onClick={handleSubmit}
+                type="submit"
               >
                 <Box>
                   <Link to={overall ? "overall" : "details"}>
@@ -205,19 +244,27 @@ const ReportRequest = () => {
           </FormControl>
         </DialogContent>
       </Dialog>
-      {reportDate && (
-        <Box
-          sx={{ backgroundColor: "#fff", width: "100%", height: "100%", mt: 1 }}
-        >
-          <ReportNav
-            option={{ sOverall, sDetails }}
-            reportDate={reportDate}
-            startDate={startDate.$d}
-            endDate={endDate.$d}
-          />
-          <Outlet />
-        </Box>
-      )}
+      {reportDate &&
+        (data.length > 0 ? (
+          <Box
+            sx={{
+              backgroundColor: "#fff",
+              width: "100%",
+              height: "100%",
+              mt: 1,
+            }}
+          >
+            <ReportNav
+              option={{ sOverall, sDetails }}
+              reportDate={reportDate}
+              startDate={startDate.$d}
+              endDate={endDate.$d}
+            />
+            <Outlet context={{data,freq,printer,location}} />
+          </Box>
+        ) : (
+          <Box>Không tồn tại dữ liệu để báo cáo</Box>
+        ))}
     </div>
   );
 };
