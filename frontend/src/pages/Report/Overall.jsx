@@ -7,9 +7,6 @@ import { useOutletContext } from "react-router-dom";
 
 const Overall = () => {
   const { data, freq, printer, location } = useOutletContext();
-  console.log("gg");
-  console.log(data);
-  console.log(freq);
 
   const countConfig = {
     series: [
