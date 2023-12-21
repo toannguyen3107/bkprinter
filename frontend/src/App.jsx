@@ -28,8 +28,20 @@ import { SampleQuest } from "./pages/Feedback/AllQuest";
 import { Bill } from "./pages/Bill";
 import EditInfoPrinterrr from "./pages/Edit_info_printer/homeHeader";
 import DashboardAdmin from "./pages/Dashboard/DashboardAdmin";
+import axios from 'axios';
+// import { useState } from "react";
 
-const isAdmin = true
+let isAdmin = false;
+
+axios.post('http://localhost:5001/api/login/checkrole',{
+  Headers: {
+    Authorization: localStorage.getItem('accessToken')
+  }
+}).then((res) => {
+  console.log(res.data.role);
+  if(res.data.role == 'admin') {isAdmin = true;}
+  else if(res.data.role == 'user') {isAdmin = false;}
+}).catch((err) => console.error(err));
 
 const router = createBrowserRouter([
   {
