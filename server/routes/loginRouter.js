@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { checkRole, login } from '../controllers/loginController.js'; // Import the checkRole function
-import { authenticateToken} from '../middleware/authMiddleware.js';
+import  authenticateToken from '../middleware/authMiddleware.js';
 
 const router = Router();
 
