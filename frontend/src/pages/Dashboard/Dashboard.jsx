@@ -24,6 +24,7 @@ import FlagIcon from '@mui/icons-material/Flag';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import { grey, blue, } from "@mui/material/colors";
 import { useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 // function Copyright(props) {
 //   return (
 //     <Typography
@@ -112,6 +113,7 @@ const item = [{
 ]
 
 export default function Dashboard() {
+  const navigate = useNavigate();
   // location page
   const location = useLocation();
   // status drawer
@@ -130,6 +132,14 @@ export default function Dashboard() {
 
   const handlePop = (event) => {
     setAnchorEl(event.currentTarget);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('accessToken');
+    // setMessage('Logged out');
+    
+    // Redirect to the login page
+    navigate('/login');
   };
 
   const handleClose = () => {
@@ -295,7 +305,7 @@ export default function Dashboard() {
           >
             <Divider />
             <ListItem disablePadding>
-              <ListItemButton component={Link} to={'#'}>
+              <ListItemButton  onClick={handleLogout}>
                 <ListItemIcon
                 >
                   <ExitToAppIcon

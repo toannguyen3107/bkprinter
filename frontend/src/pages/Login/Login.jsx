@@ -13,30 +13,43 @@ import IconButton from '@mui/material/IconButton';
 import InputAdornment from '@mui/material/InputAdornment';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios'; // Import axios
+
 
 const defaultTheme = createTheme();
 
 const Login = () => {
-    const [showPassword, setShowPassword] = React.useState(false)
-    const [password, setPassword] = React.useState('')
+  const [showPassword, setShowPassword] = React.useState(false);
+  const [password, setPassword] = React.useState('');
+  const [username, setUsername] = React.useState('');
+  const [message, setMessage] = React.useState('');
 
-    const handleTogglePassword = () => {
-        setShowPassword(!showPassword);
-        if (passwordInputRef.current) {
-            passwordInputRef.current.focus();
-            requestAnimationFrame(() => {
-                passwordInputRef.current.setSelectionRange(password.length, password.length);
-            });
-        }
+  const navigate  = useNavigate(); 
+
+  const handleTogglePassword = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.post('http://localhost:5001/api/login', {
+        email: username,
+        password,
+      });
+
+      localStorage.setItem('accessToken', response.data.accessToken);
+      // Assuming your backend sends a response with a success message
+
+      setMessage(`Logged in as ${username}`);
+      navigate('/app');
+    } catch (error) {
+      // Handle authentication error
+      setMessage('Login failed. Check your credentials.');
     }
-
-    const passwordInputRef = React.useRef()
-      
-    React.useEffect(() => {
-        if (password.inputRef) {
-            password.inputRef.current = passwordInputRef.current;
-        }
-    }, [password.inputRef]);
+  };
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -54,7 +67,7 @@ const Login = () => {
           <Typography component="h1" variant="h5">
             Đăng nhập
           </Typography>
-          <Box component="form" noValidate sx={{ mt: 1 }}>
+          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
             <TextField
               margin="normal"
               required
@@ -63,30 +76,30 @@ const Login = () => {
               label="Tên đăng nhập"
               name="user_name"
               autoFocus
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
             />
             <TextField
-                value={password}
-                margin="normal"
-                required
-                fullWidth
-                name='password'
-                label='Mật khẩu'
-                type={showPassword ? 'text' : 'password'}
-                id='password'
-                onChange={(e) => setPassword(e.target.value)}
-                InputProps={{
-                    endAdornment: (
-                        <InputAdornment position="end">
-                            <IconButton onClick={handleTogglePassword} edge="end">
-                                {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
-                            </IconButton>
-                        </InputAdornment>
-                    ),
-                }}
-                inputRef={passwordInputRef}
+              value={password}
+              margin="normal"
+              required
+              fullWidth
+              name='password'
+              label='Mật khẩu'
+              type={showPassword ? 'text' : 'password'}
+              id='password'
+              onChange={(e) => setPassword(e.target.value)}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton onClick={handleTogglePassword} edge="end">
+                      {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
             />
             <Button
-              href='./app'
               type="submit"
               fullWidth
               variant="contained"
@@ -106,6 +119,9 @@ const Login = () => {
                 </Link>
               </Grid>
             </Grid>
+            <Typography variant="body2" color="error">
+              {message}
+            </Typography>
           </Box>
         </Box>
       </Container>
@@ -113,4 +129,4 @@ const Login = () => {
   );
 }
 
-export default Login
+export default Login;
