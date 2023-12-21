@@ -29,20 +29,36 @@ import { Bill } from "./pages/Bill";
 import EditInfoPrinterrr from "./pages/Edit_info_printer/homeHeader";
 import DashboardAdmin from "./pages/Dashboard/DashboardAdmin";
 import axios from 'axios';
-// import { useState } from "react";
+import { useState, useEffect } from "react";
 
-let isAdmin = false;
 
-axios.post('http://localhost:5001/api/login/checkrole',{
-  Headers: {
-    Authorization: localStorage.getItem('accessToken')
-  }
-}).then((res) => {
-  console.log(res.data.role);
-  if(res.data.role == 'admin') {isAdmin = true;}
-  else if(res.data.role == 'user') {isAdmin = false;}
-}).catch((err) => console.error(err));
 
+function App() {
+  const [isAdmin,setIsAdmin] = useState(false);
+
+  useEffect(() => {
+    const fetchUserRole = async () => {
+      try {
+        const response = await axios.get('http://localhost:5001/api/login/checkrole', {
+          headers: {
+            Authorization: localStorage.getItem('accessToken')
+          }
+        });
+
+        const role = response.data.role;
+
+        if (role === 'admin') {
+          setIsAdmin(true);
+        } else if (role === 'user') {
+          setIsAdmin(false);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchUserRole();
+  }, []);
 const router = createBrowserRouter([
   {
     path: "/",
@@ -145,8 +161,6 @@ const router = createBrowserRouter([
     element: <NoPage />,
   },
 ]);
-
-function App() {
   return <RouterProvider router={router} />;
 }
 

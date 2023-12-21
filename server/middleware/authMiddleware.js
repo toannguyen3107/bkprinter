@@ -4,7 +4,7 @@ import { StatusCodes } from 'http-status-codes';
 
 const accessTokenSecret = 'secret'; // Replace with your actual secret key
 
-export const authenticateToken = (req, res, next) => {
+const authenticateToken = (req, res, next) => {
   const token = req.header('Authorization');
 
   if (!token) {
@@ -20,3 +20,5 @@ export const authenticateToken = (req, res, next) => {
     next();
   });
 };
+
+export default authenticateToken;

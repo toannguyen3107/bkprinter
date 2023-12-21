@@ -6,12 +6,12 @@ import {
   getUser,
   updateUser,
 } from "../controllers/userController.js";
-import { authenticateToken } from "../middleware/authMiddleware.js";
+import  authenticateToken  from "../middleware/authMiddleware.js";
 
 
 const router = Router();
 
-router.use(authenticateToken);
+// router.use(authenticateToken);
 
 router.route("/").get(getAllUsers).post(createUser);
 router.route("/:id").get(getUser).patch(updateUser).delete(deleteUser);
