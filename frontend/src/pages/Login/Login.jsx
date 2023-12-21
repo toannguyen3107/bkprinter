@@ -44,7 +44,7 @@ const Login = () => {
       // Assuming your backend sends a response with a success message
 
       setMessage(`Logged in as ${username}`);
-      navigate('/app');
+      window.location.href = '/app';
     } catch (error) {
       // Handle authentication error
       setMessage('Login failed. Check your credentials.');
