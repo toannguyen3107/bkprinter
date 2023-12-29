@@ -6,6 +6,7 @@ jwt format: header.payload.signature
     userID: user._id,
     role: user.role
 }
+- signature = "secret
 ```
 ```
     user
