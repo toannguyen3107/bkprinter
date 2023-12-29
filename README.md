@@ -3,10 +3,10 @@
 ```
 jwt format: header.payload.signature
 - payload {
-    userID: user._id,
+    userID: user.userId,
     role: user.role
 }
-- signature = "secret
+- signature = "secret"
 ```
 ```
     user

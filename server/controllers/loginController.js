@@ -14,7 +14,7 @@ const login = async (req, res) => {
 
         if (user) {
             // Generate an access token
-            const accessToken = jwt.sign({ username: user._id, role: user.role }, accessTokenSecret);
+            const accessToken = jwt.sign({ username: user.userId, role: user.role }, accessTokenSecret);
 
             res.json({
                 accessToken
