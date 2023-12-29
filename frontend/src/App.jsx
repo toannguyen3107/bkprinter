@@ -41,7 +41,7 @@ function App() {
       try {
         const response = await axios.get('http://localhost:5001/api/login/checkrole', {
           headers: {
-            Authorization: localStorage.getItem('accessToken')
+            Authorization: sessionStorage.getItem('accessToken')
           }
         });
 

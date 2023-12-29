@@ -40,7 +40,7 @@ const Login = () => {
         password,
       });
 
-      localStorage.setItem('accessToken', response.data.accessToken);
+      sessionStorage.setItem('accessToken', response.data.accessToken);
       // Assuming your backend sends a response with a success message
 
       setMessage(`Logged in as ${username}`);
