@@ -2,7 +2,11 @@ import mongoose from "mongoose";
 
 const printerSchema = new mongoose.Schema(
   {
-    printerId: String,
+    printerId: {
+      type: String,
+      unique: true, // Make the printerId field unique
+      required: true,
+    },
     location: {
       campus: { type: String },
       building: { type: String },

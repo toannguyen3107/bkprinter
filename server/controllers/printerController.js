@@ -17,10 +17,20 @@ export const getPrinter = async (req, res) => {
 };
 
 export const updatePrinter = async (req, res) => {
-  const printer = await Printer.findByIdAndUpdate(req.params.id, req.body, {
-    new: true,
-  });
-  res.status(StatusCodes.OK).json({ message: "printer updated", printer });
+  try {
+    const printer = await Printer.findOneAndUpdate({ printerId: req.params.id }, req.body, {
+      new: true,
+    });
+
+    if (!printer) {
+      return res.status(StatusCodes.NOT_FOUND).json({ message: 'Printer not found' });
+    }
+
+    res.status(StatusCodes.OK).json({ message: 'Printer updated', printer });
+  } catch (error) {
+    console.error('Error updating printer:', error);
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).send('Internal Server Error');
+  }
 };
 
 export const deletePrinter = async (req, res) => {
