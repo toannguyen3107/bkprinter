@@ -1,5 +1,5 @@
 ### BKPRINTER
---> The token is stored in local storage. accessToken
+--> The token is stored in sessionStorage. accessToken
 ```
     user
     email: toan.nguyenminh@hcmut.edu.vn
