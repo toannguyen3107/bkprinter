@@ -135,7 +135,7 @@ export default function Dashboard() {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem('accessToken');
+    sessionStorage.removeItem('accessToken');
     // setMessage('Logged out');
     
     // Redirect to the login page
