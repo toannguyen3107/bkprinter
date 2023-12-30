@@ -1,4 +1,4 @@
-import { Box, Button, Divider, Grid, Stack } from "@mui/material";
+import { Box, Divider, Grid, Stack } from "@mui/material";
 import { NavLink } from "react-router-dom";
 
 const ReportNav = ({ option, reportDate, startDate, endDate}) => {
@@ -50,13 +50,6 @@ const ReportNav = ({ option, reportDate, startDate, endDate}) => {
               Chi tiết
             </NavLink>
           )}
-          <Button
-            variant="contained"
-            disableElevation
-            sx={{ m: 0, p: 0, textTransform: "none" }}
-          >
-            Lưu
-          </Button>
         </Stack>
         <p style={{ marginLeft: "auto", color: "#636363", fontSize: "13px" }}>
           Thời gian tạo: {reportDate.toLocaleString("en-GB")}
