@@ -32,7 +32,12 @@ export default function DropzoneWithoutClick(props) {
 
     const [next, setNext] = useState(false);
     const handleNext = () => { setNext(true); }
-    const { getRootProps, getInputProps, acceptedFiles, open } = useDropzone({ noClick: true, noKeyboard: true });
+    const { getRootProps, getInputProps, acceptedFiles, open } = useDropzone({
+        noClick: true, noKeyboard: true, accept: {
+            'application/pdf': ['.pdf'],
+        }
+    });
+
     const files = acceptedFiles.map(file => <li key={file.path}>{file.path} - {file.size}</li>);
 
     return (

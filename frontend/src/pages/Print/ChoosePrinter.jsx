@@ -187,7 +187,7 @@ function handleSizePage(abc){
                 </Typography>
               </DialogContent>
               <DialogActions sx={{ justifyContent: 'center', gap: 3 }}>
-                <Button component={Link} variant="contained" color="error" to="/" sx={styleBtn}>
+                <Button component={Link} variant="contained" color="error" to="/app" sx={styleBtn}>
                   Hủy
                 </Button>
                 <Button variant="contained" color="success" sx={styleBtn} onClick={handleSend}>

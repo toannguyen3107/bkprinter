@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     Select,
     Button,
@@ -45,6 +45,7 @@ const sytleBtn = {
     borderRadius: '2rem',
 }
 const Config = ({ file }) => {
+    console.log(file);
     const [open, setOpen] = useState(true);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
@@ -94,11 +95,11 @@ const Config = ({ file }) => {
                             sx={{
                                 padding: 0,
                                 color: blue[600],
-                                 textShadow: '3px 0px 3px black',
-                                  textAlign: 'center'
+                                textShadow: '3px 0px 3px black',
+                                textAlign: 'center'
                             }}
                         >
-                                Thiết Lập Thông Số In
+                            Thiết Lập Thông Số In
                         </DialogTitle>
                         <DialogContent>
                             <Container>
@@ -110,9 +111,9 @@ const Config = ({ file }) => {
                                         },
                                     }}>
                                     {/* layout */}
+                                    {/* layout */}
                                     <FormControl
                                         sx={{
-
                                             display: {
                                                 xs: 'block',
                                                 md: 'flex'
@@ -133,7 +134,7 @@ const Config = ({ file }) => {
                                         <RadioGroup
                                             row
                                             aria-labelledby='layoutPage'
-                                            defaultValue={selectedLayout}
+                                            value={selectedLayout}
                                             onChange={e => setSelectedLayout(e.target.value)}
                                             name='radio-button-group'
                                         >
@@ -141,6 +142,7 @@ const Config = ({ file }) => {
                                             <FormControlLabel value='vertical' control={<Radio />} label='In Dọc' />
                                         </RadioGroup>
                                     </FormControl>
+
                                     {/* pages */}
                                     <FormControl
                                         sx={{
@@ -163,7 +165,7 @@ const Config = ({ file }) => {
                                         }}>Pages:</FormLabel>
                                         <RadioGroup
                                             aria-labelledby='pages'
-                                            defaultValue={selectedPages}
+                                            value={selectedPages}
                                             onChange={(e) => setSelectedPages(e.target.value)}
                                             name='radio-buttons-group'
                                         >
@@ -185,13 +187,12 @@ const Config = ({ file }) => {
                                                     />
                                                 }
                                             />
-
                                         </RadioGroup>
                                     </FormControl>
+
                                     {/* color */}
                                     <FormControl
                                         sx={{
-
                                             display: {
                                                 xs: 'block',
                                                 md: 'flex'
@@ -212,7 +213,7 @@ const Config = ({ file }) => {
                                         <RadioGroup
                                             row
                                             aria-labelledby='colorPage'
-                                            defaultValue={selectedColor}
+                                            value={selectedColor}
                                             onChange={e => setSelectedCorlor(e.target.value)}
                                             name='radio-button-group'
                                         >
@@ -220,6 +221,7 @@ const Config = ({ file }) => {
                                             <FormControlLabel value='no' control={<Radio />} label='Trắng & đen' />
                                         </RadioGroup>
                                     </FormControl>
+
                                     {/* page per sheet */}
                                     <FormControl
                                         sx={{
@@ -260,6 +262,7 @@ const Config = ({ file }) => {
                                             <MenuItem value='four' sx={styleSize}>4</MenuItem>
                                         </Select>
                                     </FormControl>
+
 
                                 </Container>
                             </Container>
