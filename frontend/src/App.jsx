@@ -35,13 +35,13 @@ import { useState, useEffect } from "react";
 
 function App() {
   const [isAdmin,setIsAdmin] = useState(false);
-
   useEffect(() => {
     const fetchUserRole = async () => {
+      const token = sessionStorage.getItem('accessToken');
       try {
         const response = await axios.get('http://localhost:5001/api/login/checkrole', {
           headers: {
-            Authorization: sessionStorage.getItem('accessToken')
+            Authorization: token,
           }
         });
 

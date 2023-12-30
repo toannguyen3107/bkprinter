@@ -19,7 +19,7 @@ const swaggerDocument = require('./swagger-output.json');
 // const swaggerDocument = swaggerJsdoc(options);
 
 
-console.log(swaggerDocument);
+// console.log(swaggerDocument);
 //swagger: end config
 const app = express();
 //swagger: config
