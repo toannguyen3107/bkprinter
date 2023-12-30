@@ -9,8 +9,23 @@ import activityRouter from "./routes/activityRouter.js";
 import cors from 'cors';
 // login route
 import loginRouter from './routes/loginRouter.js';
+//swagger: config
+import swaggerUi from 'swagger-ui-express';
 
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
+const swaggerDocument = require('./swagger-output.json');
+
+// const swaggerDocument = swaggerJsdoc(options);
+
+
+console.log(swaggerDocument);
+//swagger: end config
 const app = express();
+//swagger: config
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+//swagger: end config
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());

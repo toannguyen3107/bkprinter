@@ -76,11 +76,16 @@ export const getAllActivities = async (req, res) => {
 };
 
 export const createActivity = async (req, res) => {
+  //#swagger.tags = ['Activities']
+
   const activity = await Activity.create(req.body);
   res.status(StatusCodes.CREATED).json({ activity });
 };
 
 export const getAllActivitiesByDate = async (req, res) => {
+  //#swagger.tags = ['Activities']
+
+
   const startDate = new Date(req.query.startDate);
   const endDate = new Date(req.query.endDate);
   if (req.query.timestamp == "false") {
