@@ -5,6 +5,9 @@ import { StatusCodes } from 'http-status-codes';
 const accessTokenSecret = 'secret';
 
 const login = async (req, res) => {
+    //#swagger.tags = ['Login']
+
+    
     // Read email and password from the request body
     const { email, password } = req.body;
 
@@ -29,6 +32,8 @@ const login = async (req, res) => {
 };
 
 const checkRole = (req, res) => {
+    //#swagger.tags = ['Login']
+    
     try {
         // Extract the user's role from the decoded token
         const { role } = req.user;

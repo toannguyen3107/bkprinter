@@ -1,3 +1,9 @@
+/**
+ * @swagger
+ * tags:
+ *   - name: Users
+ *     description: Operations related to users
+ */
 import Router from "express";
 import {
   createUser,
@@ -7,7 +13,6 @@ import {
   updateUser,
 } from "../controllers/userController.js";
 import  authenticateToken  from "../middleware/authMiddleware.js";
-
 
 const router = Router();
 
