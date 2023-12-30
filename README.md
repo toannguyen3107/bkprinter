@@ -19,6 +19,6 @@ jwt format: header.payload.signature
 middleware for auth at: /server/middleware/authMiddleware.js
 
 To run both server and front end at the same time, in root folder
-```
+```bash
 npm run dev
 ```
