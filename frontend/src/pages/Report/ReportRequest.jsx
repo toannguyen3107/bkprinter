@@ -45,22 +45,41 @@ const ReportRequest = () => {
   const [data, setData] = useState([]);
   const [freq, setFreq] = useState([]);
   const [printer, setPrinter] = useState(0);
-  const [location,setLocation]=useState([])
+  const [location, setLocation] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const fetchData = async (start, end) => {
-    const response = await customFetch(
-      `/activities?startDate=${start.toISOString()}&endDate=${end.toISOString()}&timestamp=false`
-    );
-    setData(response.data.activities);
-    setPrinter(response.data.totalPrinter);
-    setLocation(response.data.location)
+    try {
+      setIsLoading(true);
+      const response = await customFetch(
+        `/activities?startDate=${start.toISOString()}&endDate=${end.toISOString()}&timestamp=false`
+      );
+      setData(response.data.activities);
+      setPrinter(response.data.totalPrinter);
+      setLocation(response.data.location);
+    }
+    catch (err){
+      console.log(err);
+    }
+    finally {
+      setIsLoading(false);
+    }
   };
 
   const fetchFreq = async (start, end) => {
-    const response = await customFetch(
-      `/activities?startDate=${start.toISOString()}&endDate=${end.toISOString()}&timestamp=true`
-    );
-    setFreq(response.data.activities);
+    try {
+      setIsLoading(true);
+      const response = await customFetch(
+        `/activities?startDate=${start.toISOString()}&endDate=${end.toISOString()}&timestamp=true`
+      );
+      setFreq(response.data.activities);
+    }
+    catch (err) {
+      console.log(err);
+    }
+    finally {
+      setIsLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -245,7 +264,9 @@ const ReportRequest = () => {
         </DialogContent>
       </Dialog>
       {reportDate &&
-        (data.length > 0 ? (
+        (isLoading ? (
+          <Box>Đang tải...</Box>
+        ) : data.length > 0 ? (
           <Box
             sx={{
               backgroundColor: "#fff",
@@ -260,7 +281,7 @@ const ReportRequest = () => {
               startDate={startDate.$d}
               endDate={endDate.$d}
             />
-            <Outlet context={{data,freq,printer,location}} />
+            <Outlet context={{ data, freq, printer, location }} />
           </Box>
         ) : (
           <Box>Không tồn tại dữ liệu để báo cáo</Box>
