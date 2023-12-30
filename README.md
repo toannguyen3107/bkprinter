@@ -1,8 +1,8 @@
-### BKPRINTER
-# Swagger
+# BKPRINTER
+### Swagger
 - swagger ui: <host_server>/docs 
 - link document swagger-autogen: [swagger-autogen](https://swagger-autogen.github.io/docs)
-# Token jwt - login
+### Token jwt - login
 --> The token is stored in sessionStorage. accessToken
 ```
 jwt format: header.payload.signature
@@ -20,7 +20,7 @@ jwt format: header.payload.signature
     email: admin@example.com
     pass: 12345
 ```
-# Other
+### Other
 middleware for auth at: /server/middleware/authMiddleware.js
 
 To run both server and front end at the same time, in root folder
