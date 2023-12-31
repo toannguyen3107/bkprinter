@@ -16,7 +16,8 @@ export const print = async(req, res) => {
         console.log('Color:', color);
         console.log('PPS:', pps);
         console.log('Printer:', printer);
-        console.log('Filename', req.filename)
+        console.log('Filename', req.filename);
+        console.log('adfas', req.user.id);
         // console.log('File:', file);
 
         res.status(StatusCodes.OK).json({message: 'Data received successfully.' });
