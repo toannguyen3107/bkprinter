@@ -314,16 +314,47 @@
       }
     },
     "/api/printing/": {
-      "get": {
+      "post": {
         "tags": [
           "Printing"
         ],
         "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "layout": {
+                  "example": "any"
+                },
+                "pages": {
+                  "example": "any"
+                },
+                "color": {
+                  "example": "any"
+                },
+                "pps": {
+                  "example": "any"
+                },
+                "printer": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
         "responses": {
           "default": {
             "description": ""
           }
-        }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
       }
     }
   }

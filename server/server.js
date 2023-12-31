@@ -19,12 +19,10 @@ import { createRequire } from 'module';
 const require = createRequire(import.meta.url);
 const swaggerDocument = require('./swagger-output.json');
 
-// const swaggerDocument = swaggerJsdoc(options);
-
-
-// console.log(swaggerDocument);
 //swagger: end config
+
 const app = express();
+
 //swagger: config
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 //swagger: end config

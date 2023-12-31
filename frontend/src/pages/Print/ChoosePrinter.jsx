@@ -151,7 +151,23 @@ const ChoosePrinter = ({ form }) => {
     formData.append('file', fullForm.file);
     formData.append('printer', fullForm.printer);
 
-    axios.post()
+    
+    axios({
+      method: 'post',
+      url: 'http://localhost:5001/api/printing',
+      data: formData,
+      headers: {
+        Authorization: sessionStorage.getItem('accessToken'),
+        'Content-Type': 'multipart/form-data',
+      },
+      responseType: 'json',
+    })
+      .then(function (response) {
+        console.log(response.data);
+      })
+      .catch(function (e) {
+        console.error(e);
+      });
 
     // Virtual send data to server
     // console.log(fullForm);
