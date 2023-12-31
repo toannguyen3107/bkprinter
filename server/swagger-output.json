@@ -315,9 +315,6 @@
     },
     "/api/printing/": {
       "post": {
-        "tags": [
-          "Printing"
-        ],
         "description": "",
         "parameters": [
           {
@@ -349,12 +346,7 @@
           "default": {
             "description": ""
           }
-        },
-        "security": [
-          {
-            "apiKeyAuth": []
-          }
-        ]
+        }
       }
     }
   }
