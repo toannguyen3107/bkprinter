@@ -33,6 +33,7 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 });
 
 const ChoosePrinter = ({ form }) => {
+  const [isSend, setIsSend] = useState(false);
   // snackbar
   const [statusSnackBar, setStatusSnackBar] = useState("warning");
   const [message, setMassage] = useState('Bạn chưa chọn máy in!');
@@ -137,6 +138,7 @@ const ChoosePrinter = ({ form }) => {
   };
 
   const handleSend = () => {
+    setIsSend(true);
     const fullForm = {
       layout: form.layout,
       pages: form.pages,
@@ -148,9 +150,10 @@ const ChoosePrinter = ({ form }) => {
 
     if (!fullForm.printer) {
       setStatusSnackBar('warning');
-      setMassage('Bạn chưa chọn máy in!');  // Fix the typo here
-      handleSnackbarOpen(); // Show the Snackbar
-      return; // Stop further execution
+      setMassage('Bạn chưa chọn máy in!');
+      setIsSend(false);
+      handleSnackbarOpen();
+      return;
     }
 
     let formData = new FormData();
@@ -173,13 +176,26 @@ const ChoosePrinter = ({ form }) => {
     })
       .then(function (response) {
         console.log(response.data);
+        // Set isSend to true if the request is successful
+        // dont need
+
+        // Show success Snackbar
+        setStatusSnackBar('success');
+        setMassage('Gửi in thành công!');
+        handleSnackbarOpen();
+
+        // Redirect to /app after 2000 milliseconds (2 seconds)
+        setTimeout(() => {
+          window.location.reload();
+        }, 2000);
       })
       .catch(function (error) {
         if (error.response && error.response.status === 403) {
-          // Display a Snackbar with a specific message for 403 error
-          setStatusSnackBar("error");
-          setMassage("Máy in bạn chọn Không đủ giấy!");  // Fix the typo here
+          setStatusSnackBar('error');
+          setMassage('Máy in bạn chọn không đủ giấy!');
           handleSnackbarOpen();
+          // Set isSend to false if there's a 403 Forbidden error
+          setIsSend(false);
         }
       });
   };
@@ -250,7 +266,8 @@ const ChoosePrinter = ({ form }) => {
                 <Button component={Link} variant="contained" color="error" to="/app" sx={styleBtn}>
                   Hủy
                 </Button>
-                <Button variant="contained" color="success" sx={styleBtn} onClick={handleSend}>
+                <Button variant="contained" color="success" sx={styleBtn} onClick={handleSend}
+                 disabled={isSend}>
                   In
                 </Button>
               </DialogActions>
