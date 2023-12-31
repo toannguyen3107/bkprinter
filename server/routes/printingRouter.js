@@ -2,7 +2,7 @@ import Router from 'express';
 import { print } from '../controllers/printingController.js';
 import authenticateToken from '../middleware/authMiddleware.js';
 import multer from 'multer';
-//import pdf from 'pdf-parse';
+import pdf from 'pdf-page-counter';
 
 const router = Router();
 
@@ -26,15 +26,13 @@ const storage = multer.diskStorage({
     // Rename the file: userID__originalname__HH_DD_SS__YY.pdf
     const formattedDate = getFormattedDate();
     const uniqueFilename = `${req.user.id}__${formattedDate}__${file.originalname}`;
+    req.filename=uniqueFilename;
     cb(null, uniqueFilename);
   },
 });
-const checkFile = (file) => {
-  return false;
-} 
+
 const upload = multer({
-  storage: storage,
-  fileFilter: (req, file, cb) => cb(null, checkFile(file)), // Use fileFilter instead of checkFile
+  storage: storage
 });
 
 router.route('/').post(authenticateToken, upload.single('file'), print);

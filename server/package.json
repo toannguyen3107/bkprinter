@@ -23,7 +23,7 @@
     "morgan": "^1.10.0",
     "nodemon": "^3.0.2",
     "path": "^0.12.7",
-    "pdf-parse": "^1.1.1",
+    "pdf-page-counter": "^1.0.3",
     "swagger-autogen": "^2.23.7",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.0"
