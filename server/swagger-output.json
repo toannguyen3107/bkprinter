@@ -318,17 +318,6 @@
       }
     },
     "/api/printing/": {
-      "get": {
-        "tags": [
-          "History"
-        ],
-        "description": "",
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      },
       "post": {
         "tags": [
           "Printing"
@@ -360,24 +349,6 @@
             }
           }
         ],
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        },
-        "security": [
-          {
-            "apiKeyAuth": []
-          }
-        ]
-      }
-    },
-    "/api/printing/deleteAll": {
-      "post": {
-        "tags": [
-          "History"
-        ],
-        "description": "",
         "responses": {
           "default": {
             "description": ""
