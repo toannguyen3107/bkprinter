@@ -15,9 +15,9 @@ const authenticateToken = (req, res, next) => {
     if (err) {
       return res.status(StatusCodes.FORBIDDEN).json({ message: 'Forbidden - Invalid token' });
     }
-    
+    console.log(user);
     req.role = {role: user.role},
-    req.user = {user: user.userID}
+    req.user = {id: user.username}
     next();
   });
 };

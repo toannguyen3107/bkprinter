@@ -76,6 +76,7 @@ const ChoosePrinter = ({ form }) => {
     const fetchData = async () => {
       try {
         const response = await axios.get('http://localhost:5001/api/printers');
+        console.log(response.data);
         setPrinterInfo(response.data.printers);
       } catch (error) {
         console.error(error);
