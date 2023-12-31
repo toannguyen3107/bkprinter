@@ -17,6 +17,7 @@ import { blue, green, grey, red } from '@mui/material/colors';
 import LocalPrintshopIcon from '@mui/icons-material/LocalPrintshop';
 import axios from 'axios';
 import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
 
 const styleBtn = {
   fontSize: {
@@ -27,9 +28,14 @@ const styleBtn = {
   },
   borderRadius: '2rem',
 };
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 const ChoosePrinter = ({ form }) => {
   // snackbar
+  const [statusSnackBar, setStatusSnackBar] = useState("warning");
+  const [message, setMassage] = useState('Bạn chưa chọn máy in!');
   const [snackbarOpen, setSnackbarOpen] = useState(false);
 
   const handleSnackbarOpen = () => {
@@ -141,9 +147,12 @@ const ChoosePrinter = ({ form }) => {
     };
 
     if (!fullForm.printer) {
+      setStatusSnackBar('warning');
+      setMassage('Bạn chưa chọn máy in!');  // Fix the typo here
       handleSnackbarOpen(); // Show the Snackbar
       return; // Stop further execution
     }
+
     let formData = new FormData();
     formData.append('layout', fullForm.layout);
     formData.append('pages', fullForm.pages);
@@ -152,7 +161,6 @@ const ChoosePrinter = ({ form }) => {
     formData.append('file', fullForm.file);
     formData.append('printer', fullForm.printer);
 
-    
     axios({
       method: 'post',
       url: 'http://localhost:5001/api/printing',
@@ -166,12 +174,14 @@ const ChoosePrinter = ({ form }) => {
       .then(function (response) {
         console.log(response.data);
       })
-      .catch(function (e) {
-        console.error(e);
+      .catch(function (error) {
+        if (error.response && error.response.status === 403) {
+          // Display a Snackbar with a specific message for 403 error
+          setStatusSnackBar("error");
+          setMassage("Máy in bạn chọn Không đủ giấy!");  // Fix the typo here
+          handleSnackbarOpen();
+        }
       });
-
-    // Virtual send data to server
-    // console.log(fullForm);
   };
 
 
@@ -250,9 +260,11 @@ const ChoosePrinter = ({ form }) => {
             open={snackbarOpen}
             autoHideDuration={3000} // Adjust the duration as needed
             onClose={handleSnackbarClose}
-            message="Bạn chưa chọn máy in!"
-          />
-
+          >
+            <Alert onClose={handleClose} severity={statusSnackBar} sx={{ width: '100%' }}>
+              {message}
+            </Alert>
+          </Snackbar>
         </div>
       ) : (
         <CircularProgress />

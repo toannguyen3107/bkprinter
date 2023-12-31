@@ -32,5 +32,5 @@ const doc = {
 };
 const swaggerauto = swaggerAutogen();
 swaggerauto(outputFile, endpointsFiles, doc).then(() => {
-  require('./swagger-output.json');
+    require('./swagger-output.json');
 });

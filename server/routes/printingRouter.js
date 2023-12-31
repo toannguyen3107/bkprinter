@@ -25,7 +25,7 @@ const storage = multer.diskStorage({
   filename: (req, file, cb) => {
     // Rename the file: userID__originalname__HH_DD_SS__YY.pdf
     const formattedDate = getFormattedDate();
-    const uniqueFilename = `${req.user.id}__${formattedDate}__${file.originalname}`;
+    const uniqueFilename = `${req.user.id}__${formattedDate}.pdf`;
     req.filename=uniqueFilename;
     cb(null, uniqueFilename);
   },
