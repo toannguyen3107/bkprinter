@@ -38,7 +38,7 @@ const checkRole = (req, res) => {
     }] */
     try {
         // Extract the user's role from the decoded token
-        const { role } = req.user;
+        const { role } = req.role;
 
         res.status(StatusCodes.OK).json({ role }); // Send the role as a JSON response
     } catch (error) {
