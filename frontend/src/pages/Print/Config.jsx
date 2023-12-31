@@ -45,7 +45,7 @@ const sytleBtn = {
     borderRadius: '2rem',
 }
 const Config = ({ file }) => {
-    console.log(file);
+    // console.log(file);
     const [open, setOpen] = useState(true);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
