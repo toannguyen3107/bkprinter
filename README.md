@@ -22,7 +22,7 @@ jwt format: header.payload.signature
 ```
 ### authMidlleware
 - it create req.user = {id: user.username} (userId)
--             req.role = {role: user.role}
+-  .........req.role = {role: user.role}
 ### Other
 middleware for auth at: /server/middleware/authMiddleware.js
 
