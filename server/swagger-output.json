@@ -23,6 +23,10 @@
     {
       "name": "Login",
       "description": "Operations related to login"
+    },
+    {
+      "name": "Printing",
+      "description": "Operations related to Printing"
     }
   ],
   "schemes": [
@@ -32,7 +36,7 @@
     "apiKeyAuth": {
       "type": "apiKey",
       "in": "header",
-      "name": "X-API-KEY",
+      "name": "Authorization",
       "description": "Some description..."
     }
   },
@@ -295,6 +299,24 @@
       "get": {
         "tags": [
           "Login"
+        ],
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/api/printing/": {
+      "get": {
+        "tags": [
+          "Printing"
         ],
         "description": "",
         "responses": {

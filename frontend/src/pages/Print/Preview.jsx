@@ -5,13 +5,12 @@ import { blue, grey } from '@mui/material/colors'
 import Divider from '@mui/material/Divider'
 import Config from './Config'
 const Preview = ({ file }) => {
-    const doc = [
+    const [doc, setDoc] = useState([
         {
             uri: URL.createObjectURL(file),
             fileType: file.type,
-
         }
-    ];
+    ]);
     const [config, setConfig] = useState(false)
     return (
         config === false ? (

@@ -5,7 +5,7 @@ import  authenticateToken from '../middleware/authMiddleware.js';
 const router = Router();
 
 router.route('/').post(login).get((req, res) => {
-    //#swagger.tags = ['Login']
+    /*#swagger.tags = ['Login'] */
     res.send('It is working...');
 });
 
