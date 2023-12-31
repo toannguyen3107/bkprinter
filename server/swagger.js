@@ -27,7 +27,8 @@ const doc = {
     { name: 'Printers', description: 'Operations related to printers' },
     { name: 'Activities', description: 'Operations related to activities' },
     { name: 'Login', description: 'Operations related to login' },
-    {name: 'Printing', description: 'Operations related to Printing'}
+    {name: 'Printing', description: 'Operations related to Printing'},
+    {name: 'History', description: 'Operations related to History'}
   ],
 };
 const swaggerauto = swaggerAutogen();

@@ -27,6 +27,10 @@
     {
       "name": "Printing",
       "description": "Operations related to Printing"
+    },
+    {
+      "name": "History",
+      "description": "Operations related to History"
     }
   ],
   "schemes": [
@@ -314,7 +318,21 @@
       }
     },
     "/api/printing/": {
+      "get": {
+        "tags": [
+          "History"
+        ],
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
       "post": {
+        "tags": [
+          "Printing"
+        ],
         "description": "",
         "parameters": [
           {
@@ -346,7 +364,61 @@
           "default": {
             "description": ""
           }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/api/printing/deleteAll": {
+      "post": {
+        "tags": [
+          "History"
+        ],
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/api/history/": {
+      "get": {
+        "tags": [
+          "History"
+        ],
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
         }
+      }
+    },
+    "/api/history/deleteAll": {
+      "delete": {
+        "tags": [
+          "History"
+        ],
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
       }
     }
   }

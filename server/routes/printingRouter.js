@@ -1,8 +1,7 @@
 import Router from 'express';
-import { print } from '../controllers/printingController.js';
+import { deleteAllHistory, getAllHistory, print } from '../controllers/printingController.js';
 import authenticateToken from '../middleware/authMiddleware.js';
 import multer from 'multer';
-import pdf from 'pdf-page-counter';
 
 const router = Router();
 
