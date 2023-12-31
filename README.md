@@ -25,7 +25,7 @@ jwt format: header.payload.signature
 -  .........req.role = {role: user.role}
 ### Other
 middleware for auth at: /server/middleware/authMiddleware.js
-
+### How to run
 To run both server and front end at the same time, in root folder
 ```shell
 npm run dev
