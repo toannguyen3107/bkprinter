@@ -18,7 +18,7 @@ const doc = {
     apiKeyAuth: {
       type: 'apiKey',
       in: 'header', // can be 'header', 'query' or 'cookie'
-      name: 'X-API-KEY', // name of the header, query parameter or cookie
+      name: 'Authorization', // name of the header, query parameter or cookie
       description: 'Some description...'
     }
   },
@@ -27,6 +27,7 @@ const doc = {
     { name: 'Printers', description: 'Operations related to printers' },
     { name: 'Activities', description: 'Operations related to activities' },
     { name: 'Login', description: 'Operations related to login' },
+    {name: 'Printing', description: 'Operations related to Printing'}
   ],
 };
 const swaggerauto = swaggerAutogen();

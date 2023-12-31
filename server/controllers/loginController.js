@@ -32,8 +32,10 @@ const login = async (req, res) => {
 };
 
 const checkRole = (req, res) => {
-    //#swagger.tags = ['Login']
-    
+    /*#swagger.tags = ['Login']
+    #swagger.security = [{
+            "apiKeyAuth": []
+    }] */
     try {
         // Extract the user's role from the decoded token
         const { role } = req.user;

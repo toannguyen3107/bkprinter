@@ -16,6 +16,7 @@ import { Link } from 'react-router-dom';
 import { blue, green, grey, red } from '@mui/material/colors';
 import LocalPrintshopIcon from '@mui/icons-material/LocalPrintshop';
 import axios from 'axios';
+import Snackbar from '@mui/material/Snackbar';
 
 const styleBtn = {
   fontSize: {
@@ -28,6 +29,22 @@ const styleBtn = {
 };
 
 const ChoosePrinter = ({ form }) => {
+  // snackbar
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+
+  const handleSnackbarOpen = () => {
+    setSnackbarOpen(true);
+  };
+
+  const handleSnackbarClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setSnackbarOpen(false);
+  };
+
+  // snackbar: end
   const [printerInfo, setPrinterInfo] = useState(null);
   const [sizeItem, setSizeItem] = useState(4);
   const [currPage, setCurrPage] = useState(1);
@@ -90,8 +107,8 @@ const ChoosePrinter = ({ form }) => {
     setCurrPage(currPage);
   };
 
-function handleSizePage(abc){
-    console.log(abc);
+  function handleSizePage(abc) {
+    // console.log(abc);
     switch (abc) {
       case 1:
         return 12;
@@ -121,9 +138,25 @@ function handleSizePage(abc){
       file: form.file,
       printer: selectedPrinter,
     };
+
+    if (!fullForm.printer) {
+      handleSnackbarOpen(); // Show the Snackbar
+      return; // Stop further execution
+    }
+    let formData = new FormData();
+    formData.append('layout', fullForm.layout);
+    formData.append('pages', fullForm.pages);
+    formData.append('color', fullForm.color);
+    formData.append('pps', fullForm.pps);
+    formData.append('file', fullForm.file);
+    formData.append('printer', fullForm.printer);
+
+    axios.post()
+
     // Virtual send data to server
-    console.log(fullForm);
+    // console.log(fullForm);
   };
+
 
   return (
     <div>
@@ -196,6 +229,13 @@ function handleSizePage(abc){
               </DialogActions>
             </Container>
           </Dialog>
+          <Snackbar
+            open={snackbarOpen}
+            autoHideDuration={3000} // Adjust the duration as needed
+            onClose={handleSnackbarClose}
+            message="Bạn chưa chọn máy in!"
+          />
+
         </div>
       ) : (
         <CircularProgress />

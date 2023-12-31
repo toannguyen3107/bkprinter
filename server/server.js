@@ -9,6 +9,9 @@ import activityRouter from "./routes/activityRouter.js";
 import cors from 'cors';
 // login route
 import loginRouter from './routes/loginRouter.js';
+// printing route
+import printingRouter from './routes/printingRouter.js';
+
 //swagger: config
 import swaggerUi from 'swagger-ui-express';
 
@@ -38,6 +41,7 @@ app.use("/api/users", userRouter);
 app.use("/api/printers", printerRouter);
 app.use("/api/activities", activityRouter);
 app.use("/api/login", loginRouter);
+app.use('/api/printing', printingRouter);
 
 app.use("*", (req, res) => {
   res.status(404).json({ message: "not found" });
