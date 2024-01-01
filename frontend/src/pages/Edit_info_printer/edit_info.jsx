@@ -61,6 +61,7 @@ const EditInfoPrinter = ({mayin_1}) => {
                   room: room,
                   },
         pagesRemaining: pagesRemaining,
+        status: "Sẵn sàng",
       };
     }
 
@@ -124,7 +125,7 @@ const EditInfoPrinter = ({mayin_1}) => {
               <PrintIcon
               className="info-icon"
               />
-              <span className="info-text"> {mayin_1.printerId}. {mayin_1.make}.{mayin_1.model} </span>
+              <span className="info-text"> {mayin_1.printerId}. {mayin_1.make} </span>
             </div>
             <span className="info" style={{fontSize: '1rem'}}>THÔNG TIN MÁY IN</span>
             <table cellSpacing={2} cellPadding={2}> 
