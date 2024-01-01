@@ -1,0 +1,235 @@
+{
+  "Printers": [
+    {
+      "id": 4,
+      "name": "MAY-IN-4",
+      "location": "H3 - Tang 1",
+      "state": "Off",
+      "remainingPage": 0
+    },
+    {
+      "id": 6,
+      "name": "MAY-IN-6",
+      "location": "H6 - Tang 2",
+      "state": "On",
+      "remainingPage": 1000
+    },
+    {
+      "id": 7,
+      "name": "MAY-IN-1",
+      "location": "H1 - Tang 1",
+      "state": "On",
+      "remainingPage": 1000
+    },
+    {
+      "id": 8,
+      "name": "MAY-IN-2",
+      "location": "H1 - Tang 2",
+      "state": "On",
+      "remainingPage": 900
+    },
+    {
+      "id": 9,
+      "name": "MAY-IN-3",
+      "location": "H6 - Tang 1",
+      "state": "Off",
+      "remainingPage": 500
+    },
+    {
+      "id": 10,
+      "name": "MAY-IN-4",
+      "location": "H3 - Tang 1",
+      "state": "Off",
+      "remainingPage": 0
+    },
+    {
+      "id": 11,
+      "name": "MAY-IN-5",
+      "location": "H2 - Tang 1",
+      "state": "On",
+      "remainingPage": 1000
+    },
+    {
+      "id": 12,
+      "name": "MAY-IN-6",
+      "location": "H6 - Tang 2",
+      "state": "On",
+      "remainingPage": 1000
+    },
+    {
+      "id": 13,
+      "name": "MAY-IN-1",
+      "location": "H1 - Tang 1",
+      "state": "On",
+      "remainingPage": 1000
+    },
+    {
+      "id": 14,
+      "name": "MAY-IN-2",
+      "location": "H1 - Tang 2",
+      "state": "On",
+      "remainingPage": 900
+    },
+    {
+      "id": 15,
+      "name": "MAY-IN-3",
+      "location": "H6 - Tang 1",
+      "state": "Off",
+      "remainingPage": 500
+    },
+    {
+      "id": 16,
+      "name": "MAY-IN-4",
+      "location": "H3 - Tang 1",
+      "state": "Off",
+      "remainingPage": 0
+    },
+    {
+      "id": 17,
+      "name": "MAY-IN-5",
+      "location": "H2 - Tang 1",
+      "state": "On",
+      "remainingPage": 1000
+    },
+    {
+      "id": 18,
+      "name": "MAY-IN-6",
+      "location": "H6 - Tang 2",
+      "state": "On",
+      "remainingPage": 1000
+    },
+    {
+      "id": 19,
+      "name": "MAY-IN-1",
+      "location": "H1 - Tang 1",
+      "state": "On",
+      "remainingPage": 1000
+    },
+    {
+      "id": 20,
+      "name": "MAY-IN-2",
+      "location": "H1 - Tang 2",
+      "state": "On",
+      "remainingPage": 900
+    },
+    {
+      "id": 21,
+      "name": "MAY-IN-3",
+      "location": "H6 - Tang 1",
+      "state": "Off",
+      "remainingPage": 500
+    },
+    {
+      "id": 22,
+      "name": "MAY-IN-4",
+      "location": "H3 - Tang 1",
+      "state": "Off",
+      "remainingPage": 0
+    },
+    {
+      "id": 23,
+      "name": "MAY-IN-5",
+      "location": "H2 - Tang 1",
+      "state": "On",
+      "remainingPage": 1000
+    },
+    {
+      "id": 24,
+      "name": "MAY-IN-6",
+      "location": "H6 - Tang 2",
+      "state": "On",
+      "remainingPage": 1000
+    },
+    {
+      "id": "25",
+      "name": "Thang",
+      "location": "H1",
+      "state": "On",
+      "remainingPage": "30"
+    },
+    {
+      "id": "26",
+      "name": "Thang",
+      "location": "H1",
+      "state": "Off",
+      "remainingPage": "30"
+    },
+    {
+      "id": "gfdcdXt",
+      "name": "",
+      "location": "",
+      "state": "Off",
+      "remainingPage": ""
+    },
+    {
+      "id": "snSJ7wj",
+      "name": "",
+      "location": "",
+      "state": "Off",
+      "remainingPage": ""
+    },
+    {
+      "id": "dl3UuWJ",
+      "name": "",
+      "location": "",
+      "state": "Off",
+      "remainingPage": ""
+    },
+    {
+      "id": "ErcZyHB",
+      "name": "",
+      "location": "",
+      "state": "Off",
+      "remainingPage": ""
+    },
+    {
+      "id": "oFUb2Dh",
+      "name": "",
+      "location": "",
+      "state": "Off",
+      "remainingPage": ""
+    },
+    {
+      "id": "4gBMLak",
+      "name": "",
+      "location": "",
+      "state": "Off",
+      "remainingPage": ""
+    },
+    {
+      "id": "30",
+      "name": "Thang",
+      "location": "H1",
+      "state": "On",
+      "remainingPage": "300"
+    },
+    {
+      "id": "50",
+      "name": "",
+      "location": "",
+      "state": "Off",
+      "remainingPage": ""
+    },
+    {
+      "id": "1",
+      "name": "Máy in 1",
+      "location": "H3",
+      "state": "Off",
+      "remainingPage": "1000"
+    },
+    {
+      "id": "cniFS9e",
+      "name": "",
+      "location": "",
+      "state": "Off",
+      "remainingPage": ""
+    },
+    {
+      "id": "-9MpyqH",
+      "name": "",
+      "location": "",
+      "state": "Off",
+      "remainingPage": ""
+    }
+  ]
+}

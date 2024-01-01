@@ -1,0 +1,48 @@
+version: "3"
+
+services:
+  # backend:
+  #   container_name: backend-bookstore
+  #   build:
+  #     context: ./backend
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - 8000:8000
+  #   volumes: 
+  #   - ./backend/src:/usr/app/src
+  #   depends_on:
+  #     - db
+  #   networks:
+  #     - mern
+  #   command: npm run start
+  frontend: 
+    container_name: fontend-bkprinter
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - 8888:8888
+    volumes:
+      - ./frontend/src:/usr/app/src
+      - ./frontend/public:/app/public
+    # depends_on:
+    #   - backend
+    # networks:
+    #   - mern
+    command: npm run dev
+  # db:
+  #   image: mongo:6.0
+  #   ports: 
+  #     - 27017:27017
+  #   volumes:
+  #     - mongo-db:/data/db
+  #   networks:
+  #     - mern
+
+# networks:
+#   mern:
+#     driver: bridge
+  
+# volumes:
+#   mongo-db:
+#     driver: local
