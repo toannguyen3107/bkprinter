@@ -25,6 +25,8 @@ import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import { grey, blue, } from "@mui/material/colors";
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import axios from 'axios';
+
 // function Copyright(props) {
 //   return (
 //     <Typography
@@ -109,6 +111,27 @@ const item = [{
 ]
 
 export default function Dashboard() {
+  const [name, setName] = React.useState("Ho va Ten");
+  React.useEffect(() => {
+    async function fetchData() {
+       await axios({
+        method: 'post',
+        url: 'http://localhost:5001/api/users/name',
+        responseType: 'json',
+        data: {
+        },
+        headers: {
+          Authorization: sessionStorage.getItem('accessToken')
+        }
+      }).then(function (res) {
+        console.log(res.data.username);
+        setName(res.data.username);
+      }).then(error => {
+        console.error(error);
+      });
+    }
+    fetchData();
+  }, []);
   // location page
   const navigate = useNavigate();
   const location = useLocation();
@@ -221,7 +244,7 @@ export default function Dashboard() {
               maxWidth: 200,
             }}
           >
-            <Avatar alt="Profile" src="/static/images/avatar/2.jpg" />
+            <Avatar alt="Profile" src="/public/Elon_Musk.jpg" />
             <Typography
               variant="p"
               noWrap
@@ -236,7 +259,7 @@ export default function Dashboard() {
                 overflow: "hidden",
               }}
             >
-              HO VA TEN
+              {name}
             </Typography>
           </Box>
         </Toolbar>
@@ -339,11 +362,11 @@ export default function Dashboard() {
                 alignItems: "center",
               }}>
                 <ListItemIcon >
-                  <Avatar alt="Profile" src="/static/images/avatar/2.jpg" sx={{
+                  <Avatar alt="Profile" src="/public/Elon_Musk.jpg" sx={{
                     margin: 'auto'
                   }} />
                 </ListItemIcon>
-                <ListItemText primary={'HO VA TEN'} />
+                <ListItemText primary={name} />
               </ListItemButton>
             </ListItem>
             {item.map((obj, idx) => (
