@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useEffect, useState } from "react";
 import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -6,7 +6,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
-import data from "./data.json";
+// import data from "./data.json";
 import { PrinterTable } from "./Table";
 
 const Search = styled('div')(({ theme }) => ({
@@ -53,26 +53,45 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export const SearchBar = () => {
-  const [rows, setRows] = React.useState(data);
-  const [searched, setSearched] = React.useState("");
+  const [rows, setRows] = useState([]);
+  const [searched, setSearched] = useState('');
+
+  useEffect(() => {
+    // Fetch data from the server
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    try {
+      const response = await fetch('http://localhost:5001/api/printers/');
+      const data = await response.json();
+      setRows(data.printers);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+    console.log(rows);
+  };
 
   const handleInput = (e) => {
-    console.log(e.target.value);
     setSearched(e.target.value.toLowerCase());
-  }
+  };
 
-  // React.useEffect(() => {
-  //   data()
-  //     .then(res => setList(res))
-  // }, [])
+  useEffect(() => {
+    // Fetch data from the server when the search term changes
+    fetchData();
+  }, [searched]);
 
   return (
     <Box sx={{ 
-        flexGrow: 1
+        flexGrow: 1,
     }}>
-      <AppBar position="static">
+      <AppBar position="static" sx={{
+        backgroundColor: 'white',
+        borderRadius: '1rem',
+      }}>
         <Toolbar sx={{
-            backgroundColor: "white"
+            backgroundColor: "white",
+            borderRadius: '1rem',
         }}>
           <Typography
             variant="h6"
@@ -81,7 +100,7 @@ export const SearchBar = () => {
             sx={{ 
                 flexGrow: 1, 
                 display: { xs: 'none', sm: 'block' },
-                color: "black"
+                color: "black",
             }}
           >
             DANH SÁCH MÁY IN
