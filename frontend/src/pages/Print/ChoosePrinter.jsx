@@ -17,6 +17,7 @@ import { blue, green, grey, red } from '@mui/material/colors';
 import LocalPrintshopIcon from '@mui/icons-material/LocalPrintshop';
 import axios from 'axios';
 import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
 
 const styleBtn = {
   fontSize: {
@@ -27,9 +28,15 @@ const styleBtn = {
   },
   borderRadius: '2rem',
 };
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 const ChoosePrinter = ({ form }) => {
+  const [isSend, setIsSend] = useState(false);
   // snackbar
+  const [statusSnackBar, setStatusSnackBar] = useState("warning");
+  const [message, setMassage] = useState('Bạn chưa chọn máy in!');
   const [snackbarOpen, setSnackbarOpen] = useState(false);
 
   const handleSnackbarOpen = () => {
@@ -131,6 +138,7 @@ const ChoosePrinter = ({ form }) => {
   };
 
   const handleSend = () => {
+    setIsSend(true);
     const fullForm = {
       layout: form.layout,
       pages: form.pages,
@@ -141,9 +149,13 @@ const ChoosePrinter = ({ form }) => {
     };
 
     if (!fullForm.printer) {
-      handleSnackbarOpen(); // Show the Snackbar
-      return; // Stop further execution
+      setStatusSnackBar('warning');
+      setMassage('Bạn chưa chọn máy in!');
+      setIsSend(false);
+      handleSnackbarOpen();
+      return;
     }
+
     let formData = new FormData();
     formData.append('layout', fullForm.layout);
     formData.append('pages', fullForm.pages);
@@ -152,7 +164,6 @@ const ChoosePrinter = ({ form }) => {
     formData.append('file', fullForm.file);
     formData.append('printer', fullForm.printer);
 
-    
     axios({
       method: 'post',
       url: 'http://localhost:5001/api/printing',
@@ -165,13 +176,28 @@ const ChoosePrinter = ({ form }) => {
     })
       .then(function (response) {
         console.log(response.data);
-      })
-      .catch(function (e) {
-        console.error(e);
-      });
+        // Set isSend to true if the request is successful
+        // dont need
 
-    // Virtual send data to server
-    // console.log(fullForm);
+        // Show success Snackbar
+        setStatusSnackBar('success');
+        setMassage('Gửi in thành công!');
+        handleSnackbarOpen();
+
+        // Redirect to /app after 2000 milliseconds (2 seconds)
+        setTimeout(() => {
+          window.location.reload();
+        }, 2000);
+      })
+      .catch(function (error) {
+        if (error.response && error.response.status === 403) {
+          setStatusSnackBar('error');
+          setMassage('Máy in bạn chọn không đủ giấy!');
+          handleSnackbarOpen();
+          // Set isSend to false if there's a 403 Forbidden error
+          setIsSend(false);
+        }
+      });
   };
 
 
@@ -240,7 +266,8 @@ const ChoosePrinter = ({ form }) => {
                 <Button component={Link} variant="contained" color="error" to="/app" sx={styleBtn}>
                   Hủy
                 </Button>
-                <Button variant="contained" color="success" sx={styleBtn} onClick={handleSend}>
+                <Button variant="contained" color="success" sx={styleBtn} onClick={handleSend}
+                 disabled={isSend}>
                   In
                 </Button>
               </DialogActions>
@@ -250,9 +277,11 @@ const ChoosePrinter = ({ form }) => {
             open={snackbarOpen}
             autoHideDuration={3000} // Adjust the duration as needed
             onClose={handleSnackbarClose}
-            message="Bạn chưa chọn máy in!"
-          />
-
+          >
+            <Alert onClose={handleClose} severity={statusSnackBar} sx={{ width: '100%' }}>
+              {message}
+            </Alert>
+          </Snackbar>
         </div>
       ) : (
         <CircularProgress />
