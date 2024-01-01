@@ -3,7 +3,7 @@ import { DatePicker, Space, Button, Table } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import dayjs from 'dayjs';
-import {datas} from './datas'
+import axios from 'axios'
 
 const { RangePicker } = DatePicker;
 
@@ -34,17 +34,17 @@ const styleTable = {
 
 const columns = [{
     title: "ID Máy in",
-    dataIndex: 'idPrinter',
+    dataIndex: 'printerId',
     key: '1',
     width: '15%',
 },{
     title: "Vị trí",
-    dataIndex: 'position',
+    dataIndex: 'location',
     key: '2',
     width: '10%',
 },{
     title: "Tên tài liệu",
-    dataIndex: 'nameBook',
+    dataIndex: 'bookName',
     key: '3',
     width: '30%',
 },{
@@ -58,7 +58,7 @@ const columns = [{
     dataIndex: 'time',
     key: '5',
     width: '30%',
-    render: (_, {time}) => (<p>{time.format("HH:mm DD/MM/YYYY")}</p>),
+    render: (_, {time}) => (<p>{time}</p>),
 }]
 
 
@@ -68,14 +68,18 @@ export const UserViewLog = () => {
     const dateFormat = "DD-MM-YYYY";
     const [startDate, setStartDate] = useState(dayjs("28-08-2023", dateFormat));
     const [endDate, setEndDate] = useState(dayjs());
-    const [dataTable, setDataTable] = useState(datas);
+    const [dataTable, setDataTable] = useState([]);
 
-    // useEffect(() => {
-
-    // }, []);
+    useEffect(() => {
+        axios.get('http://localhost:5001/api/userLog?page=1', {
+            headers: {
+                Authorization: sessionStorage.getItem('accessToken')
+              }
+        }).then(res => setDataTable(res.data.data))
+    }, []);
     const handleFilter = () => {
-        setDataTable(datas.filter(data => {
-            return (data.time.isBefore(endDate)) && (data.time.isAfter(startDate))
+        setDataTable(dataTable.filter(data => {
+            return (dayjs(data.time, "HH:mm DD/MM/YYYY").isBefore(endDate)) && (dayjs(data.time, "HH:mm DD/MM/YYYY").isAfter(startDate))
         }));
     }
 
