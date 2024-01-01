@@ -1,8 +1,8 @@
 import {Input, Space, Button, Table} from 'antd';
 import {React, useState, useEffect} from 'react'
 import { SearchOutlined } from '@ant-design/icons';
-import {datas} from '../datas'
 import dayjs from 'dayjs';
+import axios from 'axios'
 
 const styleInput = {
     height: '7vh',
@@ -25,23 +25,23 @@ const styleTable = {
 
 const columns = [{
     title: "Tên",
-    dataIndex: 'name',
-    key: 'name',
+    dataIndex: 'userName',
+    key: 'userName',
     width: '20%',
 },{
     title: "Vị trí",
-    dataIndex: 'position',
-    key: 'position',
+    dataIndex: 'location',
+    key: 'location',
     width: '10%',
 },{
     title: "Tên tài liệu",
-    dataIndex: 'nameBook',
-    key: 'nameBook',
+    dataIndex: 'bookName',
+    key: 'bookName',
     width: '25%',
 },{
     title : "ID Máy in",
-    dataIndex: 'idPrinter',
-    key: 'idPrinter',
+    dataIndex: 'printerId',
+    key: 'printerId',
     width: '15%',
 },{
     title: "Giá tiền",
@@ -54,14 +54,14 @@ const columns = [{
     dataIndex: 'time',
     key: 'time',
     width: '15%',
-    render: (_, {time}) => (<p>{time.format("HH:mm DD/MM/YYYY")}</p>),
+    render: (_, {time}) => (<p>{time}</p>),
 }]
 
 
 export const FilterByName = () => {
 
     const [name, setName] = useState("")
-    const [dataTable, setDataTable] = useState();
+    const [dataTable, setDataTable] = useState([]);
 
     useEffect(() => {
         console.log(name);
@@ -72,7 +72,10 @@ export const FilterByName = () => {
     }
 
     const handleFilter = () => {
-        setDataTable(datas.filter(data => data.name === name));
+        // setDataTable(datas.filter(data => data.name === name));
+        axios.get(`http://localhost:5001/api/adminLog/getByUser/${name}?page=1`).then((res) => {
+            setDataTable(res.data.data)
+        })
     }
 
     return (<>

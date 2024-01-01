@@ -1,9 +1,9 @@
 import {Input, Space, Button, Table} from 'antd';
 import {React, useState, useEffect} from 'react'
 import { SearchOutlined } from '@ant-design/icons';
-import {datas} from '../datas'
+// import {datas} from '../datas'
 import dayjs from 'dayjs';
-
+import axios from 'axios'
 const styleInput = {
     height: '7vh',
     width: '20vw',
@@ -25,43 +25,43 @@ const styleTable = {
 
 const columns = [{
     title: "Tên",
-    dataIndex: 'name',
-    key: 'name',
+    dataIndex: 'userName',
+    key: 'userName',
     width: '20%',
 },{
     title: "Vị trí",
-    dataIndex: 'position',
-    key: 'position',
+    dataIndex: 'location',
+    key: 'location',
     width: '10%',
 },{
     title: "Tên tài liệu",
-    dataIndex: 'nameBook',
-    key: 'nameBook',
+    dataIndex: 'bookName',
+    key: 'bookName',
     width: '25%',
 },{
     title : "ID Máy in",
-    dataIndex: 'idPrinter',
-    key: 'idPrinter',
+    dataIndex: 'printerId',
+    key: 'printerID',
     width: '15%',
 },{
     title: "Giá tiền",
     dataIndex: 'price',
     key: 'price',
     width: '15%',
-    render: (_, {price}) => (<p>{price}.000 VND</p>),
+    render: (_, {price}) => {price !== 0?(<p>{price}</p>):(<p></p>)},
 },{
     title: "Thời gian",
     dataIndex: 'time',
     key: 'time',
     width: '15%',
-    render: (_, {time}) => (<p>{time.format("HH:mm DD/MM/YYYY")}</p>),
+    render: (_, {time}) => (<p>{time?time:""}</p>),
 }]
 
 
 export const FilterByPrinter = () => {
 
     const [name, setName] = useState("")
-    const [dataTable, setDataTable] = useState();
+    const [dataTable, setDataTable] = useState([])
 
     useEffect(() => {
         console.log(name);
@@ -72,7 +72,14 @@ export const FilterByPrinter = () => {
     }
 
     const handleFilter = () => {
-        setDataTable(datas.filter(data => data.idPrinter === name));
+        // setDataTable(datas.filter(data => data.idPrinter === name));
+        axios.get(`http://localhost:5001/api/adminLog/getByPrinter/${name}?page=1`).then(function (res) {
+            // console.log(res.data.data)
+            setDataTable(res.data.data)
+        })
+        // setDataTable(axios.get(`localhost:5001/api/adminLog/getByPrinter/${name}?page=1`).then( res => {
+        //     console.log(res)
+        // }))
     }
 
     return (<>
