@@ -9,7 +9,8 @@ import SearchIcon from '@mui/icons-material/Search';
 import { Button, Modal, Grid } from '@mui/material';
 import ToggleOnIcon from '@mui/icons-material/ToggleOn';
 import ToggleOffIcon from '@mui/icons-material/ToggleOff';
-import data from "./data.json";
+import axios from 'axios';
+import {CircularProgress} from '@mui/material';
 import { PrinterTable } from "./Table";
 
 const Search = styled('div')(({ theme }) => ({
@@ -67,124 +68,135 @@ const style = {
   textAlign: 'center'
 };
 
-const printerApi = "http://localhost:3001/Printers"
-
 export const SearchBar = () => {
-  const [rows, setRows] = React.useState(data["Printers"]);
+  const [printersInfo, setPrintersInfo] = React.useState(null)
+  
+  React.useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('http://localhost:5001/api/printers');
+        console.log(response.data);
+        setPrintersInfo(response.data.printers);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        console.log('End load - printers!');
+      }
+    };
+  
+    fetchData();
+  }, []);
+  // const [rows, setRows] = React.useState(data["Printers"]);
   const [searched, setSearched] = React.useState("");
-  const [status, setStatus] = React.useState("Off")
+  // const [status, setStatus] = React.useState("Off")
 
-  function getPrinters(callback) {
-    fetch(printerApi)
-      .then(response => response.json())
-      .then(callback)
-  }
+  // function getPrinters(callback) {
+  //   fetch(printerApi)
+  //     .then(response => response.json())
+  //     .then(callback)
+  // }
 
-  getPrinters(function(printers) {
-    console.log(printers)
-  }) 
+  // getPrinters(function(printers) {
+  //   console.log(printers)
+  // }) 
 
-  function handleAdd() {
-    var id = document.querySelector("input[name='id']").value
-    var name = document.querySelector("input[name='name']").value
-    var location = document.querySelector("input[name='location']").value
-    var remainingPage = document.querySelector("input[name='remainingPage']").value
-    var state = status
+  // function createPrinter(data, callback) {
+  //   var options = {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify(data)
+  //   }
+  //   fetch(printerApi, options)
+  //     .then(response => response.json())
+  //     .then(callback)
+  // } 
 
-    var printerData = {
-      id: id,
-      name: name,
-      location: location,
-      state: state,
-      remainingPage: remainingPage
-    }  
-    createPrinter(printerData)
-    openFirstModal()
-  }
+  // function PrinterStatus() {
+  //   if (status === "On") {
+  //     return (
+  //       <ToggleOnIcon 
+  //         sx={{
+  //           width: 50,
+  //           height: 50
+  //         }}
+  //         color='success' 
+  //         onClick={() => {
+  //           setStatus("Off")
+  //         }}
+  //       />
+  //     )
+  //   } else {
+  //     return (
+  //       <ToggleOffIcon
+  //         sx={{
+  //           height: 50, 
+  //           width: 50,
+  //         }} 
+  //         color='error' 
+  //         onClick={() => {
+  //           setStatus("On")
+  //         }}/>
+  //     )  
+  //   }
+  // }
 
-  function createPrinter(data, callback) {
-    var options = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data)
-    }
-    fetch(printerApi, options)
-      .then(response => response.json())
-      .then(callback)
-  } 
+  // const handleInput = (e) => {
+  //   console.log(e.target.value);
+  //   setSearched(e.target.value.toLowerCase());
+  // }
 
-  function PrinterStatus() {
-    if (status === "On") {
-      return (
-        <ToggleOnIcon 
-          sx={{
-            width: 50,
-            height: 50
-          }}
-          color='success' 
-          onClick={() => {
-            setStatus("Off")
-          }}
-        />
-      )
-    } else {
-      return (
-        <ToggleOffIcon
-          sx={{
-            height: 50, 
-            width: 50,
-          }} 
-          color='error' 
-          onClick={() => {
-            setStatus("On")
-          }}/>
-      )  
-    }
-  }
+  // const [openModal, setOpenModal] = React.useState(false)
+  // const handleOpenModal = () => {
+  //   setOpenModal(true);
+  // }
+  // const handleCloseModal = () => {
+  //   setOpenModal(false)
+  // }
 
-  const handleInput = (e) => {
-    console.log(e.target.value);
-    setSearched(e.target.value.toLowerCase());
-  }
+  // const [firstModal, setFirstModal] = React.useState(false);
+  // const [secondModal, setSecondModal] = React.useState(false);
+  // const openFirstModal = () => {
+  //   setFirstModal(true);
+  // };
 
-  const [openModal, setOpenModal] = React.useState(false)
-  const handleOpenModal = () => {
-    setOpenModal(true);
-  }
-  const handleCloseModal = () => {
-    setOpenModal(false)
-  }
+  // const closeFirstModal = () => {
+  //   setFirstModal(false);
+  // };
 
-  const [firstModal, setFirstModal] = React.useState(false);
-  const [secondModal, setSecondModal] = React.useState(false);
-  const openFirstModal = () => {
-    setFirstModal(true);
-  };
+  // const openSecondModal = () => {
+  //   setSecondModal(true);
+  // };
 
-  const closeFirstModal = () => {
-    setFirstModal(false);
-  };
+  // const closeSecondModal = () => {
+  //   setSecondModal(false);
+  // };
 
-  const openSecondModal = () => {
-    setSecondModal(true);
-  };
+  // const handleAddPrinter = () => {
+  //   var id = document.querySelector("input[name='id']").value
+  //   var name = document.querySelector("input[name='name']").value
+  //   var location = document.querySelector("input[name='location']").value
+  //   var remainingPage = document.querySelector("input[name='remainingPage']").value
+  //   var state = status
 
-  const closeSecondModal = () => {
-    setSecondModal(false);
-  };
-
-  const handleAddPrinter = () => {
-    closeFirstModal()
-    openSecondModal()
-  }
+  //   var printerData = {
+  //     id: id,
+  //     name: name,
+  //     location: location,
+  //     state: state,
+  //     remainingPage: remainingPage
+  //   }  
+  //   createPrinter(printerData)
+  //   closeFirstModal()
+  //   openSecondModal()
+  // }
 
   return (
     <Box sx={{ 
         flexGrow: 1
     }}>
-      <AppBar position="static">
+      {/* <AppBar position="static">
         <Toolbar sx={{
             backgroundColor: "white"
         }}>
@@ -264,7 +276,7 @@ export const SearchBar = () => {
                     Hủy
                   </Button>
                   <Button
-                    onClick={handleAdd}
+                    onClick={openFirstModal}
                     variant="contained"
                     sx={{ mt: 3, mb: 2, ml: 5, width: 100 }}
                   >
@@ -330,8 +342,8 @@ export const SearchBar = () => {
             />
           </Search>
         </Toolbar>
-      </AppBar>
-      <PrinterTable searchstring={searched} rows={rows}/>
+      </AppBar> */}
+      {printersInfo ? (<PrinterTable searchstring={searched} rows={printersInfo}/>) : (<CircularProgress />)}
     </Box>
   );
 }

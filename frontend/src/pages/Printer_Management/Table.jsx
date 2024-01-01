@@ -19,11 +19,12 @@ import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import { Modal, Typography, Button } from '@mui/material';
 import EditInfoPrinter from '../Edit_info_printer/edit_info'
-import data from "./data.json";
 import { Link } from 'react-router-dom'
 import EditInfoPrinterrr from '../Edit_info_printer/homeHeader';
+import axios from 'axios';
+import {CircularProgress} from '@mui/material';
+
 const maxRows = 10;
-const printerApi = "http://localhost:3001/Printers"
 
 function TablePaginationActions(props) {
     const theme = useTheme();
@@ -70,43 +71,44 @@ const style = {
   textAlign: 'center'
 };
 
-function PrinterStatus(status) {
-  const [state, setState] = React.useState(status)
-  if (state === "On") {
+
+
+
+
+function PrinterStatus(props) {
+  const [state, setState] = React.useState(props.status)
+  const handleReadyPrinter = () => {
+    setState("Sẵn sàng")
+  }
+  const handleNoPagePrinter = () => {
+    setState("Hết giấy")
+  }
+  const handleEnablePrinter = () => {
+    if (props.remainingPage === 0) handleNoPagePrinter()
+    else handleReadyPrinter()
+  }
+  const handleDisablePrinter = () => {
+    setState("Đang tắt")
+  }
+  if (state === "Đang tắt") {
     return (
-      <ToggleOnIcon color='success' onClick={() => {
-        setState("Off")
-      }}/>
+      <ToggleOffIcon color='error' onClick={handleEnablePrinter}/>
     )
   } else {
     return (
-      <ToggleOffIcon color='error' onClick={() => {
-        setState("On")
-      }}/>
+      <ToggleOnIcon color='success' onClick={handleDisablePrinter}/>
     )  
   }
 }
-function editPrinter(id){
-  console.log(data.Printers[id]);
-  // return (
-    
-  //   <Link
-  //     to={{
-  //       pathname: '/app/edit_printer',
-  //       state: { mayin_1: data.Printers[id] },
-  //     }}
-      
-  //   >
-  //     <EditIcon />
-  //   </Link>
-  // );
+function EditPrinter(props){
+  //console.log(data.Printers[id]);
   return (
-    <EditIcon onClick={() => window.location.href = `/app/edit_printer?id=${id}`} />
+    <EditIcon onClick={() => window.location.href = `/app/edit_printer?id=${props.id}`} />
   );
   
   
 }
-function deletePrinter(id) {
+function DeletePrinter(props) {
     const [firstModal, setFirstModal] = React.useState(false);
     const [secondModal, setSecondModal] = React.useState(false);
     const openFirstModal = () => {
@@ -126,15 +128,13 @@ function deletePrinter(id) {
     };
     
     const handleDeletePrinter = () => {
-      var options = {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        }
-      }
-      fetch(printerApi + '/' + id, options)
-        .then(response => response.json())
-        .then(function() {})
+      axios.delete(`http://localhost:5001/api/printers/${props.id}`)
+      .then(response => {
+        console.log(`Deleted printer with ID ${props.id}`);
+      })
+      .catch(error => {
+        console.error(error);
+      });
     }
 
     const handleDelete = () => {
@@ -153,7 +153,7 @@ function deletePrinter(id) {
             >
                 <Box sx={style}>
                     <Typography sx={{ mt: 2 }}>
-                        Bạn muốn xóa máy in số {id} chứ?
+                        Bạn muốn xóa máy in số {props.id} chứ?
                     </Typography>
                     <Button
                       onClick={closeFirstModal}
@@ -179,7 +179,7 @@ function deletePrinter(id) {
             >
               <Box sx={{ ...style, width: 400 }}>
                 <p id="child-modal-description">
-                  Máy in số {id} đã được xóa.
+                  Máy in số {props.id} đã được xóa.
                 </p>
                 <Button
                   onClick={closeSecondModal}
@@ -195,6 +195,8 @@ function deletePrinter(id) {
 }
 export const PrinterTable = ({searchstring, rows}) => {
     const [page, setPage] = React.useState(0);
+    const [printerInfo, setPrinterInfo] = React.useState(null);
+
     // const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
     // Avoid a layout jump when reaching the last page with empty rows.
@@ -209,8 +211,22 @@ export const PrinterTable = ({searchstring, rows}) => {
       else return row.location.toLowerCase().includes(searchstring);
     })
 
-
-
+    React.useEffect(() => {
+      const fetchData = async () => {
+        try {
+          const response = await axios.get('http://localhost:5001/api/printers');
+          console.log(response.data);
+          setPrinterInfo(response.data.printers);
+        } catch (error) {
+          console.error(error);
+        } finally {
+          console.log('End load - printers!');
+        }
+      };
+    
+      fetchData();
+    }, []);
+    
     const emptyRows =
         page > 0 ? Math.max(0, (1 + page) - filteredRows.length) : 0;
     if (filteredRows.length < maxRows*(page - 1))
@@ -235,26 +251,24 @@ export const PrinterTable = ({searchstring, rows}) => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                {(filteredRows.slice(page * maxRows, page * maxRows + maxRows)
-                ).map((row) => (
+                { printerInfo ? (printerInfo.map((printer) => (
                     <TableRow
-                    key={row.id}
+                    key={printer.printerId}
                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                     >
                         <TableCell component="th" scope="rows">
-                            {row.id}
+                            {printer.printerId}
                         </TableCell>
-                        <TableCell align="left">{row.name}</TableCell>
-                        <TableCell align="left">{row.location}</TableCell>
-                        <TableCell align="left">{row.remainingPage}</TableCell>
-                        <TableCell align="left">{PrinterStatus(row.state)}</TableCell>
-                        <TableCell align="left">
-                          {editPrinter(row.id)}
-                        
-                        </TableCell>
-                        <TableCell align="left">{deletePrinter(row.id)}</TableCell>
+                        <TableCell align="left">Máy in {printer.printerId}</TableCell>
+                        <TableCell align="left">{printer.location.room} - {printer.location.building} - {printer.location.campus}</TableCell>
+                        <TableCell align="left">{printer.pagesRemaining}</TableCell>
+                        <TableCell align="left"><PrinterStatus status={printer.status} remainingPage={printer.pagesRemaining} /></TableCell>
+                        <TableCell align="left"><EditPrinter id={printer.printerId} /></TableCell>
+                        <TableCell align="left"><DeletePrinter id={printer.printerId} /></TableCell>
                     </TableRow>
-                ))}
+                ))) : (
+                  <CircularProgress />
+                )} 
                  {emptyRows > 0 && (
                     <TableRow style={{ height: 53 * emptyRows }}>
                         <TableCell colSpan={6} />

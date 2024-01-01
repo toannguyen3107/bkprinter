@@ -158,7 +158,7 @@
         }
       }
     },
-    "/api/printers/{id}": {
+    "/api/printers/{printerId}": {
       "get": {
         "tags": [
           "Printers"
@@ -166,7 +166,7 @@
         "description": "",
         "parameters": [
           {
-            "name": "id",
+            "name": "printerId",
             "in": "path",
             "required": true,
             "type": "string"
@@ -185,7 +185,7 @@
         "description": "",
         "parameters": [
           {
-            "name": "id",
+            "name": "printerId",
             "in": "path",
             "required": true,
             "type": "string"
@@ -204,7 +204,7 @@
         "description": "",
         "parameters": [
           {
-            "name": "id",
+            "name": "printerId",
             "in": "path",
             "required": true,
             "type": "string"
