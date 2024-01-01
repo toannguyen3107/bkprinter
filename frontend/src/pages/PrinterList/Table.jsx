@@ -11,11 +11,11 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import IconButton from '@mui/material/IconButton';
-import PrintIcon from '@mui/icons-material/Print';
-import PrintDisabledIcon from '@mui/icons-material/PrintDisabled';
+// import PrintIcon from '@mui/icons-material/Print';
+// import PrintDisabledIcon from '@mui/icons-material/PrintDisabled';
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 
 const maxRows = 10;
 
@@ -52,14 +52,33 @@ function TablePaginationActions(props) {
   }
   
 
-function isPrintable (pages, state) {
-    if (pages === 0 || state === "Disabling") return <PrintDisabledIcon />;
-    else return (
-        <Link to="/app/print">
-            <PrintIcon />
-        </Link>
-    );
+// function isPrintable (pages, state) {
+//     if (pages === 0 || state === "Disabling") return <PrintDisabledIcon />;
+//     else return (
+//         <Link to="/app/print">
+//             <PrintIcon />
+//         </Link>
+//     );
+// }
+
+function displayStatus (status){
+  if (status == 'Sẵn sàng'){
+    return (
+      <TableCell align="center" sx={{color: 'green'}}>{status}</TableCell>
+    )
+  }
+  else if (status == 'Đang in'){
+    return (
+      <TableCell align="center" sx={{color: '#8B8000'}}>{status}</TableCell>
+    )
+  }
+  else if (status == 'Hết giấy'){
+    return (
+      <TableCell align="center" sx={{color: 'red'}}>{status}</TableCell>
+    )
+  }
 }
+
 export const PrinterTable = ({searchstring, rows}) => {
     const [page, setPage] = React.useState(0);
     // const [rowsPerPage, setRowsPerPage] = React.useState(5);
@@ -73,7 +92,10 @@ export const PrinterTable = ({searchstring, rows}) => {
       if (searchstring === ''){
         return row;
       }
-      else return row.location.toLowerCase().includes(searchstring);
+      else{
+        const targetString = row.location.campus + ' - ' + row.location.building + ' - ' + row.location.room;
+        return targetString.toLowerCase().includes(searchstring);
+      } 
     })
     const emptyRows =
         page > 0 ? Math.max(0, (1 + page) - filteredRows.length) : 0;
@@ -82,37 +104,40 @@ export const PrinterTable = ({searchstring, rows}) => {
     return (
       <Paper sx={{
         marginTop: 1,
-        backgroundColor: 'transparent'
+        backgroundColor: 'white',
+        borderRadius: '1rem'
       }}>
-        <TableContainer component={Paper} sx={{borderRadius: '20px', border: '1px solid black', boxShadow: 'none'}}>
+        <TableContainer component={Paper} sx={{borderRadius: '1rem', border: '1px solid black', boxShadow: 'none'}}>
             <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
                 <TableHead sx={{
                   borderBottom: "5px solid #D9D9D9"
                 }}>
                 <TableRow>
-                    <TableCell>ID</TableCell>
+                    <TableCell style={{width: '10%'}}>ID</TableCell>
                     <TableCell align="left" style={{width: 200}}>Name</TableCell>
-                    <TableCell align="left" style={{width: 200}}>Location</TableCell>
-                    <TableCell align="left" style={{width: 200}}>State</TableCell>
-                    <TableCell align="left" style={{width: 200}}>Remaining Page</TableCell>
-                    <TableCell align="left"></TableCell>
+                    <TableCell align="center" style={{width: 200}}>Location</TableCell>
+                    <TableCell align="center" style={{width: 200}}>State</TableCell>
+                    <TableCell align="center" style={{width: 200}}>Remaining Page</TableCell>
+                    {/* <TableCell align="left"></TableCell> */}
                 </TableRow>
                 </TableHead>
                 <TableBody>
                 {(filteredRows.slice(page * maxRows, page * maxRows + maxRows)
                 ).map((row) => (
                     <TableRow
-                    key={row.id}
-                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                    key={row.printerId}
+                    sx={{ '&:last-child td, &:last-child th': { border: 0 },
+                    '&:hover' : {backgroundColor: '#e6e6e6'},
+                    }}
                     >
                     <TableCell component="th" scope="rows">
-                        {row.id}
+                        {row.printerId}
                     </TableCell>
-                    <TableCell align="left">{row.name}</TableCell>
-                    <TableCell align="left">{row.location}</TableCell>
-                    <TableCell align="left">{row.state}</TableCell>
-                    <TableCell align="left">{row.remainingPage}</TableCell>
-                    <TableCell align="left">{isPrintable(row.remainingPage, row.state)}</TableCell>
+                    <TableCell align="left">{row.model}</TableCell>
+                    <TableCell align="center">{row.location.campus} - {row.location.building} - {row.location.room}</TableCell>
+                    {displayStatus(row.status)}
+                    <TableCell align="center">{row.pagesRemaining}</TableCell>
+                    {/* <TableCell align="left">{isPrintable(row.pagesRemaining, row.status)}</TableCell> */}
                     </TableRow>
                 ))}
                  {emptyRows > 0 && (

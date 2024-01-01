@@ -134,6 +134,24 @@
         }
       }
     },
+    "/api/users/name": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    },
     "/api/printers/": {
       "get": {
         "tags": [
