@@ -86,9 +86,8 @@ export const SearchBar = () => {
   
     fetchData();
   }, []);
-  // const [rows, setRows] = React.useState(data["Printers"]);
   const [searched, setSearched] = React.useState("");
-  // const [status, setStatus] = React.useState("Off")
+  const [status, setStatus] = React.useState("Off")
 
   // function getPrinters(callback) {
   //   fetch(printerApi)
@@ -113,90 +112,90 @@ export const SearchBar = () => {
   //     .then(callback)
   // } 
 
-  // function PrinterStatus() {
-  //   if (status === "On") {
-  //     return (
-  //       <ToggleOnIcon 
-  //         sx={{
-  //           width: 50,
-  //           height: 50
-  //         }}
-  //         color='success' 
-  //         onClick={() => {
-  //           setStatus("Off")
-  //         }}
-  //       />
-  //     )
-  //   } else {
-  //     return (
-  //       <ToggleOffIcon
-  //         sx={{
-  //           height: 50, 
-  //           width: 50,
-  //         }} 
-  //         color='error' 
-  //         onClick={() => {
-  //           setStatus("On")
-  //         }}/>
-  //     )  
-  //   }
-  // }
+  function PrinterStatus() {
+    if (status === "On") {
+      return (
+        <ToggleOnIcon 
+          sx={{
+            width: 50,
+            height: 50
+          }}
+          color='success' 
+          onClick={() => {
+            setStatus("Off")
+          }}
+        />
+      )
+    } else {
+      return (
+        <ToggleOffIcon
+          sx={{
+            height: 50, 
+            width: 50,
+          }} 
+          color='error' 
+          onClick={() => {
+            setStatus("On")
+          }}/>
+      )  
+    }
+  }
 
-  // const handleInput = (e) => {
-  //   console.log(e.target.value);
-  //   setSearched(e.target.value.toLowerCase());
-  // }
+  const handleInput = (e) => {
+    console.log(e.target.value);
+    setSearched(e.target.value.toLowerCase());
+  }
 
-  // const [openModal, setOpenModal] = React.useState(false)
-  // const handleOpenModal = () => {
-  //   setOpenModal(true);
-  // }
-  // const handleCloseModal = () => {
-  //   setOpenModal(false)
-  // }
+  const [openModal, setOpenModal] = React.useState(false)
+  const handleOpenModal = () => {
+    setOpenModal(true);
+  }
+  const handleCloseModal = () => {
+    setOpenModal(false)
+  }
 
-  // const [firstModal, setFirstModal] = React.useState(false);
-  // const [secondModal, setSecondModal] = React.useState(false);
-  // const openFirstModal = () => {
-  //   setFirstModal(true);
-  // };
+  const [firstModal, setFirstModal] = React.useState(false);
+  const [secondModal, setSecondModal] = React.useState(false);
+  const openFirstModal = () => {
+    setFirstModal(true);
+  };
 
-  // const closeFirstModal = () => {
-  //   setFirstModal(false);
-  // };
+  const closeFirstModal = () => {
+    setFirstModal(false);
+  };
 
-  // const openSecondModal = () => {
-  //   setSecondModal(true);
-  // };
+  const openSecondModal = () => {
+    setSecondModal(true);
+  };
 
-  // const closeSecondModal = () => {
-  //   setSecondModal(false);
-  // };
+  const closeSecondModal = () => {
+    setSecondModal(false);
+  };
 
-  // const handleAddPrinter = () => {
-  //   var id = document.querySelector("input[name='id']").value
-  //   var name = document.querySelector("input[name='name']").value
-  //   var location = document.querySelector("input[name='location']").value
-  //   var remainingPage = document.querySelector("input[name='remainingPage']").value
-  //   var state = status
+  const handleAddPrinter = () => {
+    var id = document.querySelector("input[name='id']").value
+    var name = document.querySelector("input[name='name']").value
+    var location = document.querySelector("input[name='location']").value
+    var remainingPage = document.querySelector("input[name='remainingPage']").value
+    var state = status
 
-  //   var printerData = {
-  //     id: id,
-  //     name: name,
-  //     location: location,
-  //     state: state,
-  //     remainingPage: remainingPage
-  //   }  
-  //   createPrinter(printerData)
-  //   closeFirstModal()
-  //   openSecondModal()
-  // }
+    var printerData = {
+      id: id,
+      name: name,
+      location: location,
+      state: state,
+      remainingPage: remainingPage
+    }  
+    createPrinter(printerData)
+    closeFirstModal()
+    openSecondModal()
+  }
 
   return (
     <Box sx={{ 
         flexGrow: 1
     }}>
-      {/* <AppBar position="static">
+      <AppBar position="static">
         <Toolbar sx={{
             backgroundColor: "white"
         }}>
@@ -342,7 +341,7 @@ export const SearchBar = () => {
             />
           </Search>
         </Toolbar>
-      </AppBar> */}
+      </AppBar>
       {printersInfo ? (<PrinterTable searchstring={searched} rows={printersInfo}/>) : (<CircularProgress />)}
     </Box>
   );

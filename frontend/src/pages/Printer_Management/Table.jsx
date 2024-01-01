@@ -128,13 +128,14 @@ function DeletePrinter(props) {
     };
     
     const handleDeletePrinter = () => {
-      axios.delete(`http://localhost:5001/api/printers/${props.id}`)
-      .then(response => {
-        console.log(`Deleted printer with ID ${props.id}`);
-      })
-      .catch(error => {
-        console.error(error);
-      });
+      axios
+        .delete(`http://localhost:5001/api/printers/${props.id}`)
+        .then(response => {
+          console.log(`Deleted printer with ID ${props.id}`);
+        })
+        .catch(error => {
+          console.error(error);
+        });
     }
 
     const handleDelete = () => {

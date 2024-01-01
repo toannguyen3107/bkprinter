@@ -9,6 +9,6 @@ import {
 const router = Router();
 
 router.route("/").get(getAllPrinters).post(createPrinter);
-router.route("/:printerId").get(getPrinter).patch(updatePrinter).delete(deletePrinter);
+router.route("/:id").get(getPrinter).patch(updatePrinter).delete(deletePrinter);
 
 export default router;

@@ -22,7 +22,7 @@ export const getPrinter = async (req, res) => {
  
   const printer = await Printer.findOne({printerId: req.params.id});
   if(!printer){
-    return res.status(StatusCodes.BAD_REQUEST).json({message: "Dont have printer"});
+    return res.status(StatusCodes.BAD_REQUEST).json({message: "Don't have printer"});
   }
   res.status(StatusCodes.OK).json({ printer });
 };
