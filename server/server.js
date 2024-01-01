@@ -12,10 +12,8 @@ import cors from 'cors';
 import loginRouter from './routes/loginRouter.js';
 // printing route
 import printingRouter from './routes/printingRouter.js';
-
 //swagger: config
 import swaggerUi from 'swagger-ui-express';
-
 import { createRequire } from 'module';
 const require = createRequire(import.meta.url);
 const swaggerDocument = require('./swagger-output.json');
@@ -23,14 +21,14 @@ const swaggerDocument = require('./swagger-output.json');
 //swagger: end config
 
 const app = express();
-
+app.use(cors());
 //swagger: config
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 //swagger: end config
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors());
+
 
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));

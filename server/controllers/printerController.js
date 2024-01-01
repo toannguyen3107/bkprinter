@@ -20,7 +20,10 @@ export const createPrinter = async (req, res) => {
 export const getPrinter = async (req, res) => {
   // #swagger.tags = ['Printers']
  
-  const printer = await Printer.findById(req.params.id);
+  const printer = await Printer.findOne({printerId: req.params.id});
+  if(!printer){
+    return res.status(StatusCodes.BAD_REQUEST).json({message: "Dont have printer"});
+  }
   res.status(StatusCodes.OK).json({ printer });
 };
 
@@ -50,3 +53,4 @@ export const deletePrinter = async (req, res) => {
   const printer = await Printer.findByIdAndDelete(req.params.id);
   res.status(StatusCodes.OK).json({ message: "printer deleted" });
 };
+
