@@ -3,51 +3,67 @@ import { Box } from '@mui/material'
 import data from './data.json'
 import PrintIcon from '@mui/icons-material/Print';
 import CloseIcon from '@mui/icons-material/Close';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import axios from 'axios';
 // import HomeHeader from './homeHeader';
 const EditInfoPrinter = ({mayin_1}) => {
   console.log( mayin_1);
   
-  // useEffect(()=>{
-  //   // stateButtonChange();
-  //   document.title = `${mayin_1.name} Edit Information Printer | BKPRINTER `  ;
+  useEffect(()=>{
+    // stateButtonChange();
+    document.title = ` Edit Information Printer | BKPRINTER `  ;
     
-  // },[mayin_1.id]);
-  
-  // Lưu trạng thái ban đầu
-// var originalState = JSON.stringify(mayin_1);
-
-// // Hàm để lưu trạng thái vào Local Storage
-// function saveState() {
-//     localStorage.setItem('mayin_1', JSON.stringify(mayin_1));
-// }
-
-// // Hàm để khôi phục trạng thái từ Local Storage
-// function restoreState() {
-//     var savedState = localStorage.getItem('mayin_1');
-//     if (savedState) {
-//         mayin_1 = JSON.parse(savedState);
-//         updateDisplay();
-//     }
-// }
+  },[]);
 
     function confirmExchange() {
         var confirmed = confirm("Bạn có chắc chắn muốn thay đổi?");
         
         if (confirmed) {
-            var propertyKey = Object.keys(mayin_1);
-            for (var i = 0; i < propertyKey.length - 1; i++) {
-                var key = propertyKey[i];
-                if (document.myForm[key].value != "")
-                    {mayin_1[key] = document.myForm[key].value;
-                      }
-            }
-            console.log(mayin_1);
+            // thưcj hiện việc thay đổi
+            // Gọi hàm updatePrinter để cập nhật thông tin máy in và truyền tham số từ form
+            // updatePrinter(getFormData()); 
+            axios({
+              method: 'patch',
+              url: `http://localhost:5001/api/printers/${mayin_1.printerId}`,
+              data: getFormData(),
+              responseType: 'json',
+            })
+
+            console.log(mayin_1 + '-----------');
             alert("Thay đổi đã được thực hiện!");
         } else {
             alert("Thay đổi không được thực hiện.");
         }
     }
+    // Hàm lấy dữ liệu từ form
+    function getFormData() {
+      // Lấy giá trị từ form
+      
+      var make = document.myForm.make.value;
+      var campus = document.myForm.campus.value;
+      var building = document.myForm.building.value;
+      var room = document.myForm.room.value;
+      var pagesRemaining = document.myForm.pagesRemaining.value;
+
+      
+      if(!make) make = mayin_1.make;
+      if(!campus) campus = mayin_1.location.campus;
+      if(!building) building = mayin_1.location.building;
+      if(!room) room = mayin_1.location.room;
+      if(!pagesRemaining) pagesRemaining = mayin_1.pagesRemaining;
+
+      return {
+        printerId: document.myForm.printerId.value,
+        make: make,
+        location: {
+                  campus: campus,
+                  building: building,
+                  room: room,
+                  },
+        pagesRemaining: pagesRemaining,
+      };
+    }
+
 
     // Gọi hàm restoreState() để khôi phục trạng thái đã lưu khi trang được tải
     window.onload = function () {
@@ -56,8 +72,13 @@ const EditInfoPrinter = ({mayin_1}) => {
     };
 
     function confirmCancel() {
-        // Thực hiện hành động hủy ở đây
-        alert("Hủy đã được thực hiện!");
+
+       document.myForm.make.value = "";
+       document.myForm.campus.value = "";
+       document.myForm.building.value = "";
+       document.myForm.room.value = "";
+       document.myForm.pagesRemaining.value = "";
+
     }
     function closeMain() {
       // var mainElement = document.querySelector('.body-main');
@@ -69,8 +90,9 @@ const EditInfoPrinter = ({mayin_1}) => {
             
         </Link>);
     }
+    mayin_1.state = "Off";
     function changeButton(){
-      if (mayin_1.state === "On") {
+      if (mayin_1.state == "On") {
         mayin_1.state = "Off";
       } else {
         mayin_1.state = "On";
@@ -102,27 +124,35 @@ const EditInfoPrinter = ({mayin_1}) => {
               <PrintIcon
               className="info-icon"
               />
-              <span className="info-text"> {mayin_1.id}. {mayin_1.name} </span>
+              <span className="info-text"> {mayin_1.printerId}. {mayin_1.make}.{mayin_1.model} </span>
             </div>
             <span className="info" style={{fontSize: '1rem'}}>THÔNG TIN MÁY IN</span>
             <table cellSpacing={2} cellPadding={2}> 
               {/* border="1" */}
               <tbody>
                 <tr className="tbflex">
-              <td id="id-may-in" style={{fontSize: '1rem'}}>ID: {mayin_1.id} </td>
-                  <td><input className="input-change" type="text" name="id" placeholder="ID mới" style={{height: '2rem', fontSize: '1rem'}} /></td>
+              <td id="id-may-in" style={{fontSize: '1rem'}}>ID: {mayin_1.printerId} </td>
+                  <td><input readOnly className="input-change" type="text" name="printerId" placeholder="ID mới" style={{height: '2rem', fontSize: '1rem'}} value={`${mayin_1.printerId}`}/></td>
                 </tr> 
                 <tr className="tbflex">
-                <td id="ten-may-in" style={{fontSize: '1rem'}}>Tên máy: {mayin_1.name}</td>
-                  <td><input className="input-change" type="text" name="name" placeholder="Tên mới" style={{height: '2rem', fontSize: '1rem'}} /></td>
+                <td id="ten-may-in" style={{fontSize: '1rem'}}>Tên máy: {mayin_1.make}</td>
+                  <td><input className="input-change" type="text" name="make" placeholder="Tên mới" style={{height: '2rem', fontSize: '1rem'}} /></td>
                 </tr>
                 <tr className="tbflex">
-                <td id="vi-tri-may-in" style={{fontSize: '1rem'}}>Vị trí: {mayin_1.location}</td>
-                  <td><input className="input-change" type="text" name="location" placeholder="Vị trí mới" style={{height: '2rem', fontSize: '1rem'}} /></td>
+                <td id="vi-tri-may-in" style={{fontSize: '1rem'}}>Vị trí: {mayin_1.location.campus}</td>
+                  <td><input className="input-change" type="text" name="campus" placeholder="Cs mới" style={{height: '2rem', fontSize: '1rem'}} /></td>
                 </tr>
                 <tr className="tbflex">
-                <td id="so-giay" style={{fontSize: '1rem'}}>Số giấy: {mayin_1.remainingPage}</td>
-                  <td><input className="input-change" type="text" name="remainingPage" placeholder="Số giấy mới" style={{height: '2rem', fontSize: '1rem'}} /></td>
+                <td id="vi-tri-may-in" style={{fontSize: '1rem'}}>Vị trí: {mayin_1.location.building}</td>
+                  <td><input className="input-change" type="text" name="building" placeholder="Tòa mới" style={{height: '2rem', fontSize: '1rem'}} /></td>
+                </tr>
+                <tr className="tbflex">
+                <td id="vi-tri-may-in" style={{fontSize: '1rem'}}>Vị trí: {mayin_1.location.room}</td>
+                  <td><input className="input-change" type="text" name="room" placeholder="Phòng mới" style={{height: '2rem', fontSize: '1rem'}} /></td>
+                </tr>
+                <tr className="tbflex">
+                <td id="so-giay" style={{fontSize: '1rem'}}>Số giấy: {mayin_1.pagesRemaining}</td>
+                  <td><input className="input-change" type="number" name="pagesRemaining" placeholder="Số giấy mới" style={{height: '2rem', fontSize: '1rem'}} /></td>
                 </tr>
                 <tr className="tbflex" >
                   <td >

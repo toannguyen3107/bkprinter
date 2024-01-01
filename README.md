@@ -20,9 +20,12 @@ jwt format: header.payload.signature
     email: admin@example.com
     pass: 12345
 ```
+### authMidlleware
+- it create req.user = {id: user.username} (userId)
+-  .........req.role = {role: user.role}
 ### Other
 middleware for auth at: /server/middleware/authMiddleware.js
-
+### How to run
 To run both server and front end at the same time, in root folder
 ```shell
 npm run dev

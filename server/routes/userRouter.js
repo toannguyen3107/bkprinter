@@ -7,6 +7,7 @@
 import Router from "express";
 import {
   createUser,
+  dashboardName,
   deleteUser,
   getAllUsers,
   getUser,
@@ -20,5 +21,5 @@ const router = Router();
 
 router.route("/").get(getAllUsers).post(createUser);
 router.route("/:id").get(getUser).patch(updateUser).delete(deleteUser);
-
+router.route("/name").post(authenticateToken, dashboardName); // getname of user
 export default router;
