@@ -99,18 +99,26 @@ export const SearchBar = () => {
   //   console.log(printers)
   // }) 
 
-  // function createPrinter(data, callback) {
-  //   var options = {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify(data)
-  //   }
-  //   fetch(printerApi, options)
-  //     .then(response => response.json())
-  //     .then(callback)
-  // } 
+  function createPrinter(data) {
+    // var options = {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify(data)
+    // }
+    // fetch(printerApi, options)
+    //   .then(response => response.json())
+    //   .then(callback)
+    axios
+      .post("http://localhost:5001/api/printers/", data)
+      .then((response) => {
+          console.log(response.data)
+      })
+      .catch((err) => {
+          console.error(err);
+      });
+  } 
 
   function PrinterStatus() {
     if (status === "On") {
@@ -173,18 +181,26 @@ export const SearchBar = () => {
   };
 
   const handleAddPrinter = () => {
-    var id = document.querySelector("input[name='id']").value
-    var name = document.querySelector("input[name='name']").value
-    var location = document.querySelector("input[name='location']").value
+    var id = String(document.querySelector("input[name='id']").value)
+    var make = document.querySelector("input[name='make']").value
+    var model = document.querySelector("input[name='model']").value
+    var campus = document.querySelector("select[name='campus']").value
+    var building = document.querySelector("input[name='building']").value
+    var room = document.querySelector("input[name='room']").value
     var remainingPage = document.querySelector("input[name='remainingPage']").value
-    var state = status
+    var state = (status === "On") ? ((remainingPage == 0) ? "Hết giấy" : "Sẵn sàng") : "Đang tắt"
 
     var printerData = {
-      id: id,
-      name: name,
-      location: location,
-      state: state,
-      remainingPage: remainingPage
+      printerId: id,
+      make: make,
+      model: model,
+      location: {
+        "campus": campus,
+        "building": building,
+        "room": room  
+      },
+      status: state,
+      pagesRemaining: remainingPage
     }  
     createPrinter(printerData)
     closeFirstModal()
@@ -239,7 +255,7 @@ export const SearchBar = () => {
                     Nhà sản xuất:
                   </Grid>
                   <Grid item xs={8} sx={{display: 'flex'}}>
-                    <input type="text" style={{width: '100%'}} name='name'/>
+                    <input type="text" style={{width: '100%'}} name='make'/>
                   </Grid>
                 </Grid>
                 <Grid container spacing={2} sx={{mt: 1}}>
@@ -247,7 +263,7 @@ export const SearchBar = () => {
                     Kiểu máy in:
                   </Grid>
                   <Grid item xs={8} sx={{display: 'flex'}}>
-                    <input type="text" style={{width: '100%'}} name='name'/>
+                    <input type="text" style={{width: '100%'}} name='model'/>
                   </Grid>
                 </Grid>
                 <Grid container spacing={2} sx={{mt: 1}}>
@@ -268,13 +284,13 @@ export const SearchBar = () => {
                       <div style={{textAlign: 'left'}}>
                         Tòa:
                       </div> 
-                      <input type="text" style={{width: '100px', display: "flex"}}/>
+                      <input type="text" style={{width: '100px', display: "flex"}} name="building"/>
                     </Grid>
                     <Grid item xs={4}>
                       <div style={{textAlign: 'left'}}>
                         Phòng:
                       </div>
-                      <input type="text" style={{width: '100px', display: 'flex'}}/>
+                      <input type="text" style={{width: '100px', display: 'flex'}} name="room"/>
                     </Grid>
                   </Grid>
                 </Grid>
