@@ -19,6 +19,7 @@ import swaggerUi from 'swagger-ui-express';
 import { createRequire } from 'module';
 const require = createRequire(import.meta.url);
 const swaggerDocument = require('./swagger-output.json');
+import cron from "node-cron";
 
 //swagger: end config
 
@@ -52,10 +53,41 @@ const port = process.env.PORT || 5001;
 
 try {
   await mongoose.connect(process.env.MONGO_URL);
+
+  // Define the cron job to run every 30 seconds
+  cron.schedule('*/30 * * * * *', async () => {
+    // Call the function to update printer statuses
+    await updatePrinterStatus();
+  });
+
   app.listen(5001, () => {
     console.log(`server listening on port ${port}`);
   });
 } catch (error) {
   console.log(error);
   process.exit(1);
+}
+
+// Function to update printer statuses
+async function updatePrinterStatus() {
+  try {
+    // Query for printers with status "Đang in"
+    const printersToUpdate = await mongoose.model("Printer").find({ status: "Đang in" });
+
+    // Update the status based on conditions
+    for (const printer of printersToUpdate) {
+      if (printer.pagesRemaining === 0) {
+        printer.status = "Hết giấy";
+      } else {
+        printer.status = "Sẵn sàng";
+      }
+
+      // Save the updated printer status
+      await printer.save();
+    }
+
+    console.log(`Updated ${printersToUpdate.length} printers.`);
+  } catch (error) {
+    console.error("Error updating printer statuses:", error);
+  }
 }
