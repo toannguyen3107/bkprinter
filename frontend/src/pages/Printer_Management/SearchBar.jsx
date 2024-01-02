@@ -259,18 +259,22 @@ export const SearchBar = () => {
                       <div style={{textAlign: 'left'}}>
                         Cơ sở:
                       </div> 
-                      <select name="campus" id="campus" >
+                      <select name="campus" id="campus" style={{width: '100px', textAlign: 'left'}}>
                           <option value="1">1</option>
                           <option value="2">2</option>
                       </select>
                     </Grid>
                     <Grid item xs={4}>
-                      Tòa: 
-                      <input type="text" style={{width: '100%', display: "flex"}}/>
+                      <div style={{textAlign: 'left'}}>
+                        Tòa:
+                      </div> 
+                      <input type="text" style={{width: '100px', display: "flex"}}/>
                     </Grid>
                     <Grid item xs={4}>
-                      Phòng: 
-                      <input type="text" style={{width: '100%', display: 'flex'}}/>
+                      <div style={{textAlign: 'left'}}>
+                        Phòng:
+                      </div>
+                      <input type="text" style={{width: '100px', display: 'flex'}}/>
                     </Grid>
                   </Grid>
                 </Grid>
