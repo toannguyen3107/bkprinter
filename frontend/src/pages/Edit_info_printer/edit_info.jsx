@@ -61,7 +61,7 @@ const EditInfoPrinter = ({mayin_1}) => {
                   room: room,
                   },
         pagesRemaining: pagesRemaining,
-        status: "Sẳn sàng",
+        status: "Sẵn sàng",
       };
     }
 
