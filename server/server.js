@@ -74,9 +74,15 @@ async function updatePrinterStatus() {
     // Query for printers with status "Đang in"
     const printersToUpdate = await mongoose.model("Printer").find({ status: "Đang in" });
 
-    // Update the status to "Sẵn sàng"
+    // Update the status based on conditions
     for (const printer of printersToUpdate) {
-      printer.status = "Sẵn sàng";
+      if (printer.pagesRemaining === 0) {
+        printer.status = "Hết giấy";
+      } else {
+        printer.status = "Sẵn sàng";
+      }
+
+      // Save the updated printer status
       await printer.save();
     }
 
