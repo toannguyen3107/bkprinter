@@ -9,7 +9,8 @@ import SearchIcon from '@mui/icons-material/Search';
 import { Button, Modal, Grid } from '@mui/material';
 import ToggleOnIcon from '@mui/icons-material/ToggleOn';
 import ToggleOffIcon from '@mui/icons-material/ToggleOff';
-import data from "./data.json";
+import axios from 'axios';
+import {CircularProgress} from '@mui/material';
 import { PrinterTable } from "./Table";
 
 const Search = styled('div')(({ theme }) => ({
@@ -67,53 +68,49 @@ const style = {
   textAlign: 'center'
 };
 
-const printerApi = "http://localhost:3001/Printers"
-
 export const SearchBar = () => {
-  const [rows, setRows] = React.useState(data["Printers"]);
+  const [printersInfo, setPrintersInfo] = React.useState(null)
+  
+  React.useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('http://localhost:5001/api/printers');
+        console.log(response.data);
+        setPrintersInfo(response.data.printers);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        console.log('End load - printers!');
+      }
+    };
+  
+    fetchData();
+  }, []);
   const [searched, setSearched] = React.useState("");
   const [status, setStatus] = React.useState("Off")
 
-  function getPrinters(callback) {
-    fetch(printerApi)
-      .then(response => response.json())
-      .then(callback)
-  }
+  // function getPrinters(callback) {
+  //   fetch(printerApi)
+  //     .then(response => response.json())
+  //     .then(callback)
+  // }
 
-  getPrinters(function(printers) {
-    console.log(printers)
-  }) 
+  // getPrinters(function(printers) {
+  //   console.log(printers)
+  // }) 
 
-  function handleAdd() {
-    var id = document.querySelector("input[name='id']").value
-    var name = document.querySelector("input[name='name']").value
-    var location = document.querySelector("input[name='location']").value
-    var remainingPage = document.querySelector("input[name='remainingPage']").value
-    var state = status
-
-    var printerData = {
-      id: id,
-      name: name,
-      location: location,
-      state: state,
-      remainingPage: remainingPage
-    }  
-    createPrinter(printerData)
-    openFirstModal()
-  }
-
-  function createPrinter(data, callback) {
-    var options = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data)
-    }
-    fetch(printerApi, options)
-      .then(response => response.json())
-      .then(callback)
-  } 
+  // function createPrinter(data, callback) {
+  //   var options = {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify(data)
+  //   }
+  //   fetch(printerApi, options)
+  //     .then(response => response.json())
+  //     .then(callback)
+  // } 
 
   function PrinterStatus() {
     if (status === "On") {
@@ -176,6 +173,20 @@ export const SearchBar = () => {
   };
 
   const handleAddPrinter = () => {
+    var id = document.querySelector("input[name='id']").value
+    var name = document.querySelector("input[name='name']").value
+    var location = document.querySelector("input[name='location']").value
+    var remainingPage = document.querySelector("input[name='remainingPage']").value
+    var state = status
+
+    var printerData = {
+      id: id,
+      name: name,
+      location: location,
+      state: state,
+      remainingPage: remainingPage
+    }  
+    createPrinter(printerData)
     closeFirstModal()
     openSecondModal()
   }
@@ -225,7 +236,7 @@ export const SearchBar = () => {
                 </Grid>
                 <Grid container spacing={2} sx={{mt: 1}}>
                   <Grid item xs={4} sx={{display: 'flex', fontWeight: 'Bold'}}>
-                    Tên máy in:
+                    Nhà sản xuất:
                   </Grid>
                   <Grid item xs={8} sx={{display: 'flex'}}>
                     <input type="text" style={{width: '100%'}} name='name'/>
@@ -233,10 +244,38 @@ export const SearchBar = () => {
                 </Grid>
                 <Grid container spacing={2} sx={{mt: 1}}>
                   <Grid item xs={4} sx={{display: 'flex', fontWeight: 'Bold'}}>
-                    Vị trí:
+                    Kiểu máy in:
                   </Grid>
                   <Grid item xs={8} sx={{display: 'flex'}}>
-                    <input type="text" style={{width: '100%'}} name='location'/>
+                    <input type="text" style={{width: '100%'}} name='name'/>
+                  </Grid>
+                </Grid>
+                <Grid container spacing={2} sx={{mt: 1}}>
+                  <Grid item xs={2} sx={{display: 'flex', fontWeight: 'Bold'}}>
+                    Vị trí:
+                  </Grid>
+                  <Grid item xs={10} sx={{display: 'flex'}}>
+                    <Grid item xs={4}>
+                      <div style={{textAlign: 'left'}}>
+                        Cơ sở:
+                      </div> 
+                      <select name="campus" id="campus" style={{width: '100px', textAlign: 'left'}}>
+                          <option value="1">1</option>
+                          <option value="2">2</option>
+                      </select>
+                    </Grid>
+                    <Grid item xs={4}>
+                      <div style={{textAlign: 'left'}}>
+                        Tòa:
+                      </div> 
+                      <input type="text" style={{width: '100px', display: "flex"}}/>
+                    </Grid>
+                    <Grid item xs={4}>
+                      <div style={{textAlign: 'left'}}>
+                        Phòng:
+                      </div>
+                      <input type="text" style={{width: '100px', display: 'flex'}}/>
+                    </Grid>
                   </Grid>
                 </Grid>
                 <Grid container spacing={2} sx={{mt: 1}}>
@@ -264,7 +303,7 @@ export const SearchBar = () => {
                     Hủy
                   </Button>
                   <Button
-                    onClick={handleAdd}
+                    onClick={openFirstModal}
                     variant="contained"
                     sx={{ mt: 3, mb: 2, ml: 5, width: 100 }}
                   >
@@ -331,7 +370,7 @@ export const SearchBar = () => {
           </Search>
         </Toolbar>
       </AppBar>
-      <PrinterTable searchstring={searched} rows={rows}/>
+      {printersInfo ? (<PrinterTable searchstring={searched} rows={printersInfo}/>) : (<CircularProgress />)}
     </Box>
   );
 }

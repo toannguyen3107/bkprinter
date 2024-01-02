@@ -18,7 +18,7 @@ const printerSchema = new mongoose.Schema(
     make: String,
     status: {
       type: String,
-      enum: ["Sẵn sàng", "Đang in", "Hết giấy"],
+      enum: ["Sẵn sàng", "Đang in", "Hết giấy", "Đang tắt"],
     },
   },
   { timestamps: true }

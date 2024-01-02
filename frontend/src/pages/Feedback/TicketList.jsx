@@ -26,7 +26,6 @@ import axios from 'axios';
 function TablePaginationActions(props) {
     const theme = useTheme();
     const { count, page, rowsPerPage, onPageChange } = props;
-    const [loading, setLoading] = useState(true)
   
     const handleFirstPageButtonClick = (event) => {
       onPageChange(event, 0);
