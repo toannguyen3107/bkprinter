@@ -9,6 +9,7 @@ import activityRouter from "./routes/activityRouter.js";
 import historyRouter from "./routes/historyRouter.js";
 import userLogRouter from './routes/userLogRouter.js'
 import adminLogRouter from './routes/adminLogRouter.js'
+import feedbackRouter from './routes/feedbackRouter.js'
 import cors from 'cors';
 // login route
 import loginRouter from './routes/loginRouter.js';
@@ -45,6 +46,8 @@ app.use('/api/printing', printingRouter);
 app.use('/api/history', historyRouter)
 app.use('/api/userLog', userLogRouter)
 app.use('/api/adminLog', adminLogRouter)
+app.use('/api/feedback', feedbackRouter)
+
 app.use("*", (req, res) => {
   res.status(404).json({ message: "not found" });
 });

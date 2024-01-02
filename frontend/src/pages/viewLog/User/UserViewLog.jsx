@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { DatePicker, Space, Button, Table } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
@@ -75,7 +75,10 @@ export const UserViewLog = () => {
             headers: {
                 Authorization: sessionStorage.getItem('accessToken')
               }
-        }).then(res => setDataTable(res.data.data))
+        }).then((res) => {
+            console.log('hello: ', res.data.data)
+            setDataTable(res.data.data)
+        })
     }, []);
     const handleFilter = () => {
         setDataTable(dataTable.filter(data => {

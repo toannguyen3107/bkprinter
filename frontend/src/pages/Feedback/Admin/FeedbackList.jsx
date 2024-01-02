@@ -2,31 +2,30 @@ import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { AppBarHeader } from ".";
 import Box from '@mui/material/Box';
-import { Link } from "react-router-dom";
-import Button from '@mui/material/Button';
-import ButtonGroup from '@mui/material/ButtonGroup';
-import {useEffect, useState} from 'react'
+// import {useState} from 'react'
 
 import PropTypes from 'prop-types';
 import { useTheme } from '@mui/material/styles';
-import TableFooter from '@mui/material/TableFooter';
-import TablePagination from '@mui/material/TablePagination';
+// import TableFooter from '@mui/material/TableFooter';
+// import TablePagination from '@mui/material/TablePagination';
 import IconButton from '@mui/material/IconButton';
 import FirstPageIcon from '@mui/icons-material/FirstPage';
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import LastPageIcon from '@mui/icons-material/LastPage';
-import axios from 'axios';
+import parse from 'html-react-parser';
+import { useEffect, useState } from 'react';
+import axios from 'axios'
+import TableHead from '@mui/material/TableHead';
+
+
 
 function TablePaginationActions(props) {
     const theme = useTheme();
     const { count, page, rowsPerPage, onPageChange } = props;
-    const [loading, setLoading] = useState(true)
   
     const handleFirstPageButtonClick = (event) => {
       onPageChange(event, 0);
@@ -85,64 +84,54 @@ function TablePaginationActions(props) {
     rowsPerPage: PropTypes.number.isRequired,
   };
   
-  function createData(name, calories, fat) {
-    return { name, calories, fat };
-  }
+  // function createData(name, calories, fat) {
+  //   return { name, calories, fat };
+  // }
   
-  const rows = [
-    createData('Cupcake', 305, 3.7),
-    createData('Donut', 452, 25.0),
-    createData('Eclair', 262, 16.0),
-    createData('Frozen yoghurt', 159, 6.0),
-    createData('Gingerbread', 356, 16.0),
-    createData('Honeycomb', 408, 3.2),
-    createData('Ice cream sandwich', 237, 9.0),
-    createData('Jelly Bean', 375, 0.0),
-    createData('KitKat', 518, 26.0),
-    createData('Lollipop', 392, 0.2),
-    createData('Marshmallow', 318, 0),
-    createData('Nougat', 360, 19.0),
-    createData('Oreo', 437, 18.0),
-  ].sort((a, b) => (a.calories < b.calories ? -1 : 1));
+  // const rows = [
+  //   createData('Cupcake', 305, 3.7),
+  //   createData('Donut', 452, 25.0),
+  //   createData('Eclair', 262, 16.0),
+  //   createData('Frozen yoghurt', 159, 6.0),
+  //   createData('Gingerbread', 356, 16.0),
+  //   createData('Honeycomb', 408, 3.2),
+  //   createData('Ice cream sandwich', 237, 9.0),
+  //   createData('Jelly Bean', 375, 0.0),
+  //   createData('KitKat', 518, 26.0),
+  //   createData('Lollipop', 392, 0.2),
+  //   createData('Marshmallow', 318, 0),
+  //   createData('Nougat', 360, 19.0),
+  //   createData('Oreo', 437, 18.0),
+  // ].sort((a, b) => (a.calories < b.calories ? -1 : 1));
 
-export const Ticket = () => {
+export const FeedbackListShow = () => {
 
-    const [page, setPage] = useState(0);
-    const [rowsPerPage, setRowsPerPage] = useState(5);
-    const [feedbackList, setFeedbackList] = useState(null)
+    // const [page, setPage] = useState(0);
+    // const [rowsPerPage, setRowsPerPage] = useState(5);
+  
+    // const emptyRows =
+    //   page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
+  
+    // const handleChangePage = (event, newPage) => {
+    //   setPage(newPage);
+    // };
+  
+    // const handleChangeRowsPerPage = (event) => {
+    //   setRowsPerPage(parseInt(event.target.value, 10));
+    //   setPage(0);
+    // };
+
+    const [feedbacks, setFeedbacks] = useState(null)
+
     const [loading, setLoading] = useState(true)
-  
-    const emptyRows =
-      page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
-  
-    const handleChangePage = (event, newPage) => {
-      setPage(newPage);
-    };
-  
-    const handleChangeRowsPerPage = (event) => {
-      setRowsPerPage(parseInt(event.target.value, 10));
-      setPage(0);
-    };
 
-    useEffect(() => {
-      axios({
-        method: 'get',
-        url: 'http://localhost:5001/api/feedback/',
-        headers: {
-          Authorization: sessionStorage.getItem('accessToken'),
-          'Content-Type': 'application/json',
-        },
-        responseType: 'json',
-      })
-        .then(function (response) {
-          setFeedbackList(response.data.feedbacks)
-          console.log(response.data)
-          setLoading(false)
-        })
-        .catch(function () {
-          console.log('false')
-        });
-    }, [])
+    const cleanString = (input) => {
+      console.log(input)
+      const step1 = input.replace(/<p><br><\/p>/g, '');
+      const step2 = step1.replace(/<\/p><p>/g, ' ');
+    
+      return step2;
+    };
 
     const options = {
       day: '2-digit',
@@ -157,6 +146,27 @@ export const Ticket = () => {
 
     }
 
+    useEffect(() => {
+      axios({
+        method: 'get',
+        url: 'http://localhost:5001/api/feedback/all',
+        headers: {
+          Authorization: sessionStorage.getItem('accessToken'),
+          'Content-Type': 'application/json',
+        },
+        responseType: 'json',
+      })
+        .then(function (response) {
+          setFeedbacks(response.data.feedbacks)
+          setLoading(false)
+
+        })
+        .catch(function () {
+          console.log('false')
+        });
+      
+    }, [])
+
     return (
         <Box
             component="form"
@@ -169,10 +179,6 @@ export const Ticket = () => {
             display={'flex'}
             flexDirection={'column'}
       >
-        <ButtonGroup variant="text" aria-label="outlined primary button group" style={{margin: '12px 0'}}>
-            <Button><Link to={'/app/create-ticket'}>{"Quay lại"}</Link></Button>
-        </ButtonGroup>
-        <AppBarHeader title='Câu hỏi trước đây' />
         {
           loading ? 
                     <div style={{
@@ -185,38 +191,73 @@ export const Ticket = () => {
                     }}>
                       Hiện tại chưa có câu hỏi nào
                     </div>
-                  :<TableContainer component={Paper}>
+                  :
+        
+        <TableContainer component={Paper}>
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
                 <TableHead>
                     <TableRow>
                         <TableCell>Id</TableCell>
-                        <TableCell align="left">Chủ đề</TableCell>
-                        <TableCell align="left">Tình trạng</TableCell>
+                        <TableCell align="left">Người gửi</TableCell>
+                        <TableCell align="left">Tiêu đề</TableCell>
+                        <TableCell align="left">Nội dung</TableCell>
                         <TableCell align="left">Thời gian</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                {feedbackList && feedbackList.map((row) => (
-                    <TableRow
-                    key={row.name}
-                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                    >
-                    <TableCell component="th" scope="row">
-                        {row._id}
-                    </TableCell>
-                        <TableCell align="left"><Link to={`/app/ticket-view/${row._id}`}>{row.title}</Link></TableCell>
-                        <TableCell align="left"><Link to={`/app/ticket-view/${row._id}`}>{row.comments.length === 0 ? 'Chưa phản hồi' : 'Đã trả lời'}</Link></TableCell>
-                        <TableCell align="left"><Link to={`/app/ticket-view/${row._id}`}>{getDay(row.createdAt)}</Link></TableCell>
-                    </TableRow>
+                {
+                  feedbacks && feedbacks.map((row) => (
+                      
+                        <TableRow
+                            key={row.name}
+                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                            component='a'
+                            href={`adminFeedback/${row._id}`}
+                        >
+                        
+                            <TableCell component="th" scope="row" sx={{width: '20px'}}>
+                                {row._id}
+                            </TableCell>
+                            <TableCell align="left"  sx={{width: '200px'}}>{row.user.firstName + ' ' + row.user.lastName}</TableCell>
+                            <TableCell align="left"  sx={{width: '200px'}}>
+                              <span                               
+                                  style={{
+                                  display: '-webkit-box',
+                                  WebkitBoxOrient: 'vertical',
+                                  overflow: 'hidden',
+                                  WebkitLineClamp: 1,
+                                  }} 
+                                >
+                                    {
+                                      parse(cleanString(row.title)) 
+                                    }
+                              </span>
+                            </TableCell>
+                            <TableCell align="left" >
+                              <span                               
+                                style={{
+                                display: '-webkit-box',
+                                WebkitBoxOrient: 'vertical',
+                                overflow: 'hidden',
+                                WebkitLineClamp: 1,
+                                }} 
+                              >
+                                  {
+                                    parse(cleanString(row.value)) 
+                                  }
+                            </span>
+                            </TableCell>
+                            <TableCell align="right">{getDay(row.createdAt)}</TableCell>
+                        </TableRow>
                 ))}
-                {emptyRows > 0 && (
+                {/* {emptyRows > 0 && (
                     <TableRow style={{ height: 53 * emptyRows }}>
                     <TableCell colSpan={6} />
                     </TableRow>
-                )}
+                )} */}
                 </TableBody>
             </Table>
-            <TableFooter style={{flex: '1', display: 'flex', justifyContent: 'flex-end'}}>
+            {/* <TableFooter style={{flex: '1', display: 'flex', justifyContent: 'flex-end'}}>
                     <TableRow >
                         <TablePagination
                         rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
@@ -235,10 +276,9 @@ export const Ticket = () => {
                         ActionsComponent={TablePaginationActions}
                         />
                     </TableRow>
-                </TableFooter>
+                </TableFooter> */}
         </TableContainer>
         }
-        
       </Box>
     )
 }

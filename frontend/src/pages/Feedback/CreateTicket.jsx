@@ -3,38 +3,23 @@ import FormControl from '@mui/material/FormControl';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import CloudUploadIcon from '@mui/icons-material/CloudUpload';
-import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
-import Chip from '@mui/material/Chip';
-import Stack from '@mui/material/Stack';
 
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { AppBarHeader } from ".";
-
-const VisuallyHiddenInput = styled('input')({
-    clip: 'rect(0 0 0 0)',
-    clipPath: 'inset(50%)',
-    height: 1,
-    overflow: 'hidden',
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    whiteSpace: 'nowrap',
-    width: 1,
-  });
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css'
+import axios from 'axios';
 
 export const CreateTicket = () => {
     
     const [title, setTitle] = useState('')
-    const [content, setContent] = useState('')
     const [errorList, setErrorList] = useState([])
-    const [selectedFile, setSelectedFile] = useState([]);
+    const [value, setValue] = useState('')
 
     const checkValue = (value, id) => {
-        console.log(value)
         if (value === '') {
             if (!errorList.includes(id)) {
                 setErrorList([...errorList, id])
@@ -49,26 +34,38 @@ export const CreateTicket = () => {
         return true
     }
 
-    const changeHandler = (event) => {
-        const files = event.target.files ? [...event.target.files] : [];
-        setSelectedFile(files);
-    };
 
-    const handleDelete = (name) => {
-        console.log(name)
-        setSelectedFile(selectedFile.filter(file => file.name !== name))
-    };
-
-    const handleSubmit = () => {
-        const valuecheck = checkValue(content, 'outlined-content')
+    const handleSubmit = async () => {
+        const valuecheck = checkValue(value, 'outlined-content')
         const contentcheck = checkValue(title, 'outlined-title')
-        console.log(valuecheck, contentcheck)
         if (!valuecheck && !contentcheck) {
             if (errorList.length === 0) {
-                alert('submit')
-                setContent('')
-                setTitle('')
-                setSelectedFile([])
+                // await axios.post('http://localhost:5001/api/feedback', {
+                //     title, value
+                // });
+                // setValue('')
+                // setTitle('')
+                axios({
+                    method: 'post',
+                    url: 'http://localhost:5001/api/feedback',
+                    data: {title, value},
+                    headers: {
+                      Authorization: sessionStorage.getItem('accessToken'),
+                      'Content-Type': 'application/json',
+                    },
+                    responseType: 'json',
+                  })
+                    .then(function (response) {
+                      console.log(response.data);
+              
+                      // Redirect to /app after 2000 milliseconds (2 seconds)
+                      setTimeout(() => {
+                        window.location.reload();
+                      }, 2000);
+                    })
+                    .catch(function () {
+                      console.log('false')
+                    });
             }
         }
     }
@@ -85,12 +82,12 @@ export const CreateTicket = () => {
             display={'flex'}
             flexDirection={'column'}
       >
-        <ButtonGroup variant="text" aria-label="outlined primary button group" style={{margin: '12px 0'}}>
+        <ButtonGroup variant="text" aria-label="outlined primary button group" style={{margin: '0px 0'}}>
             <Button><Link to={'/app/contact'}>{"Quay lại"}</Link></Button>
             <Button><Link to={'/app/ticket'}>{'Câu hỏi đã tạo'}</Link></Button>
         </ButtonGroup>
         <AppBarHeader title='Tạo câu hỏi'/>
-        <FormControl sx={{ width: '50%' }}>
+        <FormControl sx={{ width: '100%' }}>
             <TextField
                 id="outlined-title"
                 label="Chủ đề"
@@ -103,31 +100,13 @@ export const CreateTicket = () => {
                 onBlur={() => checkValue(title, 'outlined-title')}
                 value={title}
             />
-            <TextField
-                id="outlined-content"
-                label="Nội dung"
-                placeholder="Nhập nội dung..."
-                multiline
-                onChange={e => setContent(e.target.value)}
-                error={errorList.includes('outlined-content')}
-                helperText={errorList.includes('outlined-content') && "Nội dung không được trống"}
-                rows={8}
-                onBlur={() => checkValue(content, 'outlined-content')}
-                value={content}
-            />
-            <Stack direction="row" spacing={1} flexWrap={'wrap'} maxWidth={'50%'}>
-                {
-                    selectedFile && selectedFile.map((item, index) => (
-                        <Chip label={item.name} variant="outlined" onDelete={()=>handleDelete(item.name)} key={index} style={{margin: '6px 6px'}}/>
-                    ))
-                }
-            </Stack>
-            <Box>
-                <Button component="label" variant="outlined" startIcon={<CloudUploadIcon />} style={{marginTop: '12px'}}>
-                    Upload file
-                    <VisuallyHiddenInput type="file" onChange={changeHandler} multiple/>
-                </Button>
-            </Box>
+            <div style={{margin: '8px'}}>
+                <ReactQuill
+                    theme='snow'
+                    value={value}
+                    onChange={(e) => setValue(e)}
+                />
+            </div>
             <Box sx={{
                 marginTop: '20px'
             }}>
