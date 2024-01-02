@@ -236,7 +236,15 @@ export const SearchBar = () => {
                 </Grid>
                 <Grid container spacing={2} sx={{mt: 1}}>
                   <Grid item xs={4} sx={{display: 'flex', fontWeight: 'Bold'}}>
-                    Tên máy in:
+                    Nhà sản xuất:
+                  </Grid>
+                  <Grid item xs={8} sx={{display: 'flex'}}>
+                    <input type="text" style={{width: '100%'}} name='name'/>
+                  </Grid>
+                </Grid>
+                <Grid container spacing={2} sx={{mt: 1}}>
+                  <Grid item xs={4} sx={{display: 'flex', fontWeight: 'Bold'}}>
+                    Kiểu máy in:
                   </Grid>
                   <Grid item xs={8} sx={{display: 'flex'}}>
                     <input type="text" style={{width: '100%'}} name='name'/>

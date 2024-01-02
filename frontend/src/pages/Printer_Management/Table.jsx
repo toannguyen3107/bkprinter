@@ -183,7 +183,10 @@ function DeletePrinter(props) {
                   Máy in số {props.id} đã được xóa.
                 </p>
                 <Button
-                  onClick={closeSecondModal}
+                  onClick={() => {
+                    closeSecondModal()
+                    window.location.reload()
+                  }}
                   variant="contained"
                   sx={{ mt: 3, mb: 2, width: 150 }}
                 >
