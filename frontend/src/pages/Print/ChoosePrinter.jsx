@@ -234,14 +234,14 @@ const ChoosePrinter = ({ form }) => {
                           width: '100%',
                           textAlign: 'center',
                         }}
-                        disabled={printer.status !== 'Sẳn sàng'}
+                        disabled={printer.status !== 'Sẵn sàng'}
                       >
                         <Stack spacing={1} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                           <LocalPrintshopIcon sx={{ color: blue[300] }} />
                           <Typography variant="h5">Máy in {printer.printerId}</Typography>
                           <Stack direction="row" spacing={1}>
-                            <Typography variant="span" color={printer.status === 'Sẳn sàng' ? green[500] : red[500]} fontSize="0.5rem">
-                              {printer.status === 'Sẳn sàng' ? 'Sẳn sàng' : printer.status}
+                            <Typography variant="span" color={printer.status === 'Sẵn sàng' ? green[500] : red[500]} fontSize="0.5rem">
+                              {printer.status === 'Sẵn sàng' ? 'Sẵn sàng' : printer.status}
                             </Typography>
                             <Typography variant="span" color={grey[800]}>
                               Còn {printer.pagesRemaining} trang
