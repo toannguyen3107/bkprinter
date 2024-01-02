@@ -106,7 +106,7 @@ const item = [{
 }, {
   icon: <ChangeHistoryIcon />,
   name: 'Xem Phản Hồi',
-  link: '#'
+  link: 'adminFeedback'
 }
 ]
 

@@ -30,6 +30,8 @@ import EditInfoPrinterrr from "./pages/Edit_info_printer/homeHeader";
 import DashboardAdmin from "./pages/Dashboard/DashboardAdmin";
 import axios from 'axios';
 import { useState, useEffect } from "react";
+import { AdminFeedback } from "./pages/Feedback/Admin";
+import { FeedbackDetail } from "./pages/Feedback/Admin/FeedbackDetail";
 
 
 
@@ -79,6 +81,14 @@ const router = createBrowserRouter([
     path: "/app",
     element: isAdmin? <DashboardAdmin /> : <Dashboard />,
     children: isAdmin? [
+      {
+        path: 'adminFeedback',
+        element: <AdminFeedback />,
+      },
+      {
+        path: "adminFeedback/:id",
+        element: <FeedbackDetail />,
+      },
       {
         path: "AdminViewLog",
         element: <AdminViewLog />,

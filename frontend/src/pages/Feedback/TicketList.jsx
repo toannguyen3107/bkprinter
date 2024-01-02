@@ -7,11 +7,10 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { AppBarHeader } from ".";
 import Box from '@mui/material/Box';
-import { ticket } from './ticket';
 import { Link } from "react-router-dom";
 import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 
 import PropTypes from 'prop-types';
 import { useTheme } from '@mui/material/styles';
@@ -22,6 +21,7 @@ import FirstPageIcon from '@mui/icons-material/FirstPage';
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import LastPageIcon from '@mui/icons-material/LastPage';
+import axios from 'axios';
 
 function TablePaginationActions(props) {
     const theme = useTheme();
@@ -108,6 +108,8 @@ export const Ticket = () => {
 
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(5);
+    const [feedbackList, setFeedbackList] = useState(null)
+    const [loading, setLoading] = useState(true)
   
     const emptyRows =
       page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
@@ -120,6 +122,39 @@ export const Ticket = () => {
       setRowsPerPage(parseInt(event.target.value, 10));
       setPage(0);
     };
+
+    useEffect(() => {
+      axios({
+        method: 'get',
+        url: 'http://localhost:5001/api/feedback/',
+        headers: {
+          Authorization: sessionStorage.getItem('accessToken'),
+          'Content-Type': 'application/json',
+        },
+        responseType: 'json',
+      })
+        .then(function (response) {
+          setFeedbackList(response.data.feedbacks)
+          console.log(response.data)
+          setLoading(false)
+        })
+        .catch(function () {
+          console.log('false')
+        });
+    }, [])
+
+    const options = {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric',
+    };
+
+    const getDay = (date) => {
+
+      console.log(date)
+      return new Date(date).toLocaleDateString('en-US', options);
+
+    }
 
     return (
         <Box
@@ -137,7 +172,19 @@ export const Ticket = () => {
             <Button><Link to={'/app/create-ticket'}>{"Quay lại"}</Link></Button>
         </ButtonGroup>
         <AppBarHeader title='Câu hỏi trước đây' />
-        <TableContainer component={Paper}>
+        {
+          loading ? 
+                    <div style={{
+                      width: '100%',
+                      height: '100%',
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      fontSize: 20
+                    }}>
+                      Hiện tại chưa có câu hỏi nào
+                    </div>
+                  :<TableContainer component={Paper}>
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
                 <TableHead>
                     <TableRow>
@@ -148,17 +195,17 @@ export const Ticket = () => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                {ticket.map((row) => (
+                {feedbackList && feedbackList.map((row) => (
                     <TableRow
                     key={row.name}
                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                     >
                     <TableCell component="th" scope="row">
-                        {row.id}
+                        {row._id}
                     </TableCell>
-                        <TableCell align="left"><Link to={`/app/ticket-view/${row.id}`}>{row.title}</Link></TableCell>
-                        <TableCell align="left"><Link to={`/app/ticket-view/${row.id}`}>{row.status}</Link></TableCell>
-                        <TableCell align="left"><Link to={`/app/ticket-view/${row.id}`}>{row.date}</Link></TableCell>
+                        <TableCell align="left"><Link to={`/app/ticket-view/${row._id}`}>{row.title}</Link></TableCell>
+                        <TableCell align="left"><Link to={`/app/ticket-view/${row._id}`}>{row.comments.length === 0 ? 'Chưa phản hồi' : 'Đã trả lời'}</Link></TableCell>
+                        <TableCell align="left"><Link to={`/app/ticket-view/${row._id}`}>{getDay(row.createdAt)}</Link></TableCell>
                     </TableRow>
                 ))}
                 {emptyRows > 0 && (
@@ -189,6 +236,8 @@ export const Ticket = () => {
                     </TableRow>
                 </TableFooter>
         </TableContainer>
+        }
+        
       </Box>
     )
 }

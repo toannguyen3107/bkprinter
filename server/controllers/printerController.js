@@ -22,7 +22,7 @@ export const getPrinter = async (req, res) => {
  
   const printer = await Printer.findOne({printerId: req.params.id});
   if(!printer){
-    return res.status(StatusCodes.BAD_REQUEST).json({message: "Don't have printer"});
+    return res.status(StatusCodes.BAD_REQUEST).json({message: "Dont have printer"});
   }
   res.status(StatusCodes.OK).json({ printer });
 };
@@ -49,17 +49,8 @@ export const updatePrinter = async (req, res) => {
 
 export const deletePrinter = async (req, res) => {
   // #swagger.tags = ['Printers']
-  try {
-    const printer = await Printer.findOneAndDelete({ printerId: req.params.id });
-
-    if (!printer) {
-      return res.status(StatusCodes.NOT_FOUND).json({ message: 'Printer not found' });
-    }
-
-    res.status(StatusCodes.OK).json({ message: 'Printer deleted', printer });
-  } catch (error) {
-    console.error('Error deleting printer:', error);
-    res.status(StatusCodes.INTERNAL_SERVER_ERROR).send('Internal Server Error');
-  }
+  
+  const printer = await Printer.findByIdAndDelete(req.params.id);
+  res.status(StatusCodes.OK).json({ message: "printer deleted" });
 };
 

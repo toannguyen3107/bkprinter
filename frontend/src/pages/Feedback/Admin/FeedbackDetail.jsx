@@ -279,10 +279,7 @@ export const FeedbackDetail = () => {
                                         value={value}
                                         onChange={(e) => setValue(e)}
                                     />
-                                    <div>{value}</div>
                                 </div>
-                                
-
                             </div>
                         </div>
                     }
