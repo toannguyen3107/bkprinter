@@ -251,11 +251,27 @@ export const SearchBar = () => {
                   </Grid>
                 </Grid>
                 <Grid container spacing={2} sx={{mt: 1}}>
-                  <Grid item xs={4} sx={{display: 'flex', fontWeight: 'Bold'}}>
+                  <Grid item xs={2} sx={{display: 'flex', fontWeight: 'Bold'}}>
                     Vị trí:
                   </Grid>
-                  <Grid item xs={8} sx={{display: 'flex'}}>
-                    <input type="text" style={{width: '100%'}} name='location'/>
+                  <Grid item xs={10} sx={{display: 'flex'}}>
+                    <Grid item xs={4}>
+                      <div style={{textAlign: 'left'}}>
+                        Cơ sở:
+                      </div> 
+                      <select name="campus" id="campus" >
+                          <option value="1">1</option>
+                          <option value="2">2</option>
+                      </select>
+                    </Grid>
+                    <Grid item xs={4}>
+                      Tòa: 
+                      <input type="text" style={{width: '100%', display: "flex"}}/>
+                    </Grid>
+                    <Grid item xs={4}>
+                      Phòng: 
+                      <input type="text" style={{width: '100%', display: 'flex'}}/>
+                    </Grid>
                   </Grid>
                 </Grid>
                 <Grid container spacing={2} sx={{mt: 1}}>
